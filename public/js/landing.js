@@ -1,12 +1,5 @@
-/* ══════════════════════════════════════════════════════════
-   landing.js  –  Restowi Landing Page
-   ══════════════════════════════════════════════════════════ */
 
 document.addEventListener('DOMContentLoaded', () => {
-
-    /* ────────────────────────────────────────────────────────
-       DASHBOARD LATERAL (slide-in desde la derecha)
-    ──────────────────────────────────────────────────────── */
     const menuBtn         = document.getElementById('menuBtn');
     const dashboard       = document.getElementById('dashboard');
     const dashboardClose  = document.getElementById('dashboardClose');
@@ -152,12 +145,11 @@ document.addEventListener('DOMContentLoaded', () => {
             track.addEventListener('touchend',   () => setTimeout(startAuto, 3000));
         }
 
-        // ── Init ─────────────────────────────────────────────
+        
         buildDots();
         update();
         startAuto();
 
-        // ── Recalcular al redimensionar ventana ──────────────
         let resizeTimer;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimer);
@@ -171,10 +163,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-
-    /* ────────────────────────────────────────────────────────
-       BOTÓN PLAY (demo video)
-    ──────────────────────────────────────────────────────── */
     const playBtn = document.getElementById('playBtn');
     if (playBtn) {
         playBtn.addEventListener('click', () => {
@@ -183,10 +171,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-
-    /* ────────────────────────────────────────────────────────
-       FADE OVERLAY (transición suave al cambiar de página)
-    ──────────────────────────────────────────────────────── */
     const fadeOverlay = document.getElementById('fadeOverlay');
     if (fadeOverlay) {
         document.querySelectorAll('a[href]:not([href="#"])').forEach(link => {

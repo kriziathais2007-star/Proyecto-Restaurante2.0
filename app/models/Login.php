@@ -24,7 +24,7 @@ Class Login{
         // El signo ? en la consulta SQL es un parámetro preparado.
         // Nunca pongas el valor directo en el SQL (ej: "... = '$nombreUsuario'")
         // porque eso abre la puerta a ataques de SQL Injection.
-        $sql = "SELECT * FROM usuario WHERE nombre_usuario = ?";
+        $sql = "SELECT * FROM usuario WHERE nombre = ?";
 
         //statement-declaración
         // prepare() le dice a la base de datos que prepare la consulta con el parámetro.
@@ -39,7 +39,7 @@ Class Login{
 
         //Verificamos que si exista el usuario y que la contraseña sea correcta
         //if($usuario && password_verify($clave,$usuario['clave'])){ //con hash
-        if($usuario && $clave === $usuario['clave']){ //sin hash
+        if($usuario && $contrasena === $usuario['contrasena']){ //sin hash
             return $usuario; //Login correcto
         }
 
