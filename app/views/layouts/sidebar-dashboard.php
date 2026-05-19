@@ -43,19 +43,19 @@ $rutaActual = explode('/', trim($_GET['url'] ?? 'dashboard', '/'))[0] ?: 'dashbo
         <li class="<?php echo $rutaActual === 'empleados' ? 'dropdown show' : 'dropdown'; ?>">
             <a href="#" class="dropbtn <?php echo $rutaActual === 'empleados' ? 'activo' : ''; ?>">
                 <i class="fa-solid fa-clipboard-list"></i>
-                <span>Empleados</span>
+                <span>Pedidos</span>
                 <i class="fa-solid fa-chevron-down arrow"></i>
             </a>
             <div class="dropdown-content">
                 <a href="<?php echo BASE_URL; ?>/empleados"
                     class="<?php echo $rutaActual === 'empleados' ? 'activo' : ''; ?>">
                     <i class="fa-solid fa-users"></i>
-                    Reporte
+                    Historial 
                 </a>
                 <a href="<?php echo BASE_URL; ?>/empleados/registro">
                     <i class="fa-solid fa-edit"></i>
-                    Registrar
-                </a>
+                    Nuevo Pedido
+                </a>  
             </div>
         </li>
         <!-- ================ END EMPLEADOS ================ -->
@@ -64,15 +64,19 @@ $rutaActual = explode('/', trim($_GET['url'] ?? 'dashboard', '/'))[0] ?: 'dashbo
         <li class="<?php echo $rutaActual === 'cargos' ? 'dropdown show' : 'dropdown'; ?>">
             <a href="#" class="dropbtn <?php echo $rutaActual === 'cargos' ? 'activo' : ''; ?>">
                 <i class="fa-solid fa-briefcase"></i>
-                <span>Cargos</span>
+                <span>Platos</span>
                 <i class="fa-solid fa-chevron-down arrow"></i>
             </a>
             <div class="dropdown-content">
                 <a href="<?php echo BASE_URL; ?>/cargos/reportes"
                     class="<?php echo $rutaActual === '/cargos/reportes' ? 'activo' : ''; ?>">
                     <i class="fa-solid fa-clipboard-list"></i>
-                    Reporte
+                    Gestión de Platos
                 </a>
+                <a href="<?php echo BASE_URL; ?>/empleados/registro">
+                    <i class="fa-solid fa-edit"></i>
+                    Registrar Plato
+                </a> 
             </div>
         </li>
         <!-- ================ END CARGOS ================ -->
@@ -85,6 +89,11 @@ $rutaActual = explode('/', trim($_GET['url'] ?? 'dashboard', '/'))[0] ?: 'dashbo
                 <i class="fa-solid fa-chevron-down arrow"></i>
             </a>
             <div class="dropdown-content">
+                <a href="<?php echo BASE_URL; ?>/asistencias"
+                    class="<?php echo $rutaActual === 'asistencias' ? 'activo' : ''; ?>">
+                    <i class="fa-solid fa-edit "></i>
+                    Registrar Asistencia
+                </a>
                 <a href="<?php echo BASE_URL; ?>/asistencias"
                     class="<?php echo $rutaActual === 'asistencias' ? 'activo' : ''; ?>">
                     <i class="fa-solid fa-clock"></i>
