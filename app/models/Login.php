@@ -39,7 +39,7 @@ Class Login{
 
         //Verificamos que si exista el usuario y que la contraseña sea correcta
         //if($usuario && password_verify($clave,$usuario['clave'])){ //con hash
-        if($usuario && $contrasena === $usuario['contrasena']){ //sin hash
+        if($usuario && $clave === $usuario['contrasena']){ //sin hash
             return $usuario; //Login correcto
         }
 

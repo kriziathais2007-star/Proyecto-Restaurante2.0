@@ -149,3 +149,55 @@ html, body {
   margin-top: 10px;
   min-height: 18px;
 }
+/* FORMULARIO */
+
+form {
+    width: 100%;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* LABELS */
+
+form label {
+    margin-bottom: 8px;
+    color: #334155;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* INPUTS */
+
+form input {
+    padding: 13px;
+    margin-bottom: 20px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    outline: none;
+    transition: 0.3s;
+    font-size: 14px;
+}
+
+form input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 5px rgba(37, 99, 235, 0.3);
+}
+
+/* BOTÓN */
+
+form button {
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background: #f41515;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+form button:hover {
+    background: #37d91a;
+}
