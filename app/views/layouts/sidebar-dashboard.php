@@ -40,40 +40,43 @@ $rutaActual = explode('/', trim($_GET['url'] ?? 'dashboard', '/'))[0] ?: 'dashbo
                para mantener abierto el menú y `activo` para el enlace.
                 - Si no, solo añadimos `dropdown` sin `show` ni `activo`.
         -->
-        <li class="<?php echo $rutaActual === 'empleados' ? 'dropdown show' : 'dropdown'; ?>">
-            <a href="#" class="dropbtn <?php echo $rutaActual === 'empleados' ? 'activo' : ''; ?>">
+        <li class="<?php echo $rutaActual === 'pedidos' ? 'dropdown show' : 'dropdown'; ?>">
+            <a href="#" class="dropbtn <?php echo $rutaActual === 'pedidos' ? 'activo' : ''; ?>">
                 <i class="fa-solid fa-clipboard-list"></i>
                 <span>Pedidos</span>
                 <i class="fa-solid fa-chevron-down arrow"></i>
             </a>
             <div class="dropdown-content">
-                <a href="<?php echo BASE_URL; ?>/empleados"
-                    class="<?php echo $rutaActual === 'empleados' ? 'activo' : ''; ?>">
-                    <i class="fa-solid fa-users"></i>
-                    Historial 
-                </a>
-                <a href="<?php echo BASE_URL; ?>/empleados/registro">
+                <a href="<?php echo BASE_URL; ?>/pedidos">
                     <i class="fa-solid fa-edit"></i>
-                    Nuevo Pedido
+                    <span class="<?php echo $rutaActual === 'pedidos' ? 'activo' : ''; ?>">
+                        Nuevo Pedido
+                    </span>
+                </a>
+                <a href="<?php echo BASE_URL; ?>/pedidos/reportes">
+                    <i class="fa-solid fa-users"></i>
+                    Historial
                 </a>  
+                
+    
             </div>
         </li>
         <!-- ================ END EMPLEADOS ================ -->
 
         <!-- ================ START CARGOS ================ -->
-        <li class="<?php echo $rutaActual === 'cargos' ? 'dropdown show' : 'dropdown'; ?>">
-            <a href="#" class="dropbtn <?php echo $rutaActual === 'cargos' ? 'activo' : ''; ?>">
+        <li class="<?php echo $rutaActual === 'platos' ? 'dropdown show' : 'dropdown'; ?>">
+            <a href="#" class="dropbtn <?php echo $rutaActual === 'platos' ? 'activo' : ''; ?>">
                 <i class="fa-solid fa-briefcase"></i>
                 <span>Platos</span>
                 <i class="fa-solid fa-chevron-down arrow"></i>
             </a>
             <div class="dropdown-content">
-                <a href="<?php echo BASE_URL; ?>/cargos/reportes"
-                    class="<?php echo $rutaActual === '/cargos/reportes' ? 'activo' : ''; ?>">
+                <a href="<?php echo BASE_URL; ?>/platos"
+                    class="<?php echo $rutaActual === 'platos' ? 'activo' : ''; ?>">
                     <i class="fa-solid fa-clipboard-list"></i>
                     Gestión de Platos
                 </a>
-                <a href="<?php echo BASE_URL; ?>/empleados/registro">
+                <a href="<?php echo BASE_URL; ?>/platos/reportes">
                     <i class="fa-solid fa-edit"></i>
                     Registrar Plato
                 </a> 
@@ -82,20 +85,20 @@ $rutaActual = explode('/', trim($_GET['url'] ?? 'dashboard', '/'))[0] ?: 'dashbo
         <!-- ================ END CARGOS ================ -->
 
         <!-- ================ START ASISTENCIA ================ -->
-        <li class="<?php echo $rutaActual === 'asistencias' ? 'dropdown show' : 'dropdown'; ?>">
-            <a href="#" class="dropbtn <?php echo $rutaActual === 'asistencias' ? 'activo' : ''; ?>">
+        <li class="<?php echo $rutaActual === 'asistencia' ? 'dropdown show' : 'dropdown'; ?>">
+            <a href="#" class="dropbtn <?php echo $rutaActual === 'asistencia' ? 'activo' : ''; ?>">
                 <i class="fa-solid fa-calendar-check"></i>
                 <span>Asistencia</span>
                 <i class="fa-solid fa-chevron-down arrow"></i>
             </a>
             <div class="dropdown-content">
-                <a href="<?php echo BASE_URL; ?>/asistencias"
-                    class="<?php echo $rutaActual === 'asistencias' ? 'activo' : ''; ?>">
+                <a href="<?php echo BASE_URL; ?>/asistencia/registro"
+                    class="<?php echo $rutaActual === 'asistencia' ? 'activo' : ''; ?>">
                     <i class="fa-solid fa-edit "></i>
                     Registrar Asistencia
                 </a>
-                <a href="<?php echo BASE_URL; ?>/asistencias"
-                    class="<?php echo $rutaActual === 'asistencias' ? 'activo' : ''; ?>">
+                <a href="<?php echo BASE_URL; ?>/asistencia/reportes"
+                    class="<?php echo $rutaActual === 'asistencia' ? 'activo' : ''; ?>">
                     <i class="fa-solid fa-clock"></i>
                     Reporte
                 </a>
