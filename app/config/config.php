@@ -23,4 +23,4 @@ define("DB_PASS", $_ENV['DB_PASSWORD'] ?? '');
 
 // URL base del proyecto. Se usa para hacer redirecciones correctas con header().
 // Debe coincidir con la variable APP_URL de tu archivo .env
-define("BASE_URL", $_ENV['APP_URL'] ?? 'http://localhost');
+define("BASE_URL", $_ENV['APP_URL'] ?? 'http://localhost/proyecto-restaurante2.0');

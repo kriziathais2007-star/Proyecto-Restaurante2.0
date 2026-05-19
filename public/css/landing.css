@@ -1,8 +1,4 @@
-/* ══════════════════════════════════════════════════════════
-   landing.css  –  Restowi Landing Page
-   ══════════════════════════════════════════════════════════ */
 
-/* ── Reset & Variables ──────────────────────────────────── */
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
@@ -11,14 +7,14 @@
 
 :root {
     --primary:        #e84c4c;
-    --primary-light:  #fff0f0;
+    --primary-light:  #f8d1d1;
     --primary-dark:   #c73a3a;
     --text-dark:      #1a1a1a;
-    --text-mid:       #444;
-    --text-muted:     #888;
-    --bg-page:        #f8f6f3;
-    --bg-white:       #fff;
-    --border:         #ece9e3;
+    --text-mid:       #000000;
+    --text-muted:     #050404;
+    --bg-page:        #fcf3f6;
+    --bg-white:       #debebe6b;
+    --border:         #120e05;
     --radius-sm:      6px;
     --radius-md:      10px;
     --radius-lg:      16px;
@@ -34,10 +30,51 @@ body {
     overflow-x: hidden;
 }
 
-/* ── Shared Buttons ─────────────────────────────────────── */
-.btn-primary,
-.btn-outline,
-.btn-nav {
+/* menu desplegable */
+.dropdown{
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content{
+    position: absolute;
+    top: 100%;
+    left: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    background: white;
+    min-width: 180px;
+
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+
+    transition: 0.3s;
+    z-index: 100;
+}
+
+.dropdown-content a{
+    padding: 12px 15px;
+    text-decoration: none;
+    color: black;
+    transition: 0.3s;
+}
+
+.dropdown-content a:hover{
+    background: #f2f2f2;
+}
+
+.dropdown:hover .dropdown-content{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+.btn-primary, .btn-outline, .btn-nav {
     display: inline-block;
     font-family: 'Poppins', sans-serif;
     font-size: .85rem;
@@ -50,13 +87,21 @@ body {
     border: none;
 }
 
-.btn-primary          { background: var(--primary); color: #fff; }
-.btn-primary:hover    { background: var(--primary-dark); }
+.btn-primary          { 
+    background: var(--primary); color: #fff; 
+}
 
-.btn-outline          { background: transparent; color: var(--text-dark); border: 1.5px solid #ccc; }
-.btn-outline:hover    { border-color: var(--primary); color: var(--primary); }
+.btn-primary:hover    { 
+    background: var(--primary-dark); 
+}
 
-/* ── Fade Overlay ───────────────────────────────────────── */
+.btn-outline          { 
+    background: transparent; color: var(--text-dark); border: 1.5px solid #ccc; 
+}
+.btn-outline:hover    { 
+    border-color: var(--primary); color: var(--primary); 
+}
+
 #fadeOverlay {
     position: fixed;
     inset: 0;
@@ -66,13 +111,10 @@ body {
     z-index: 9999;
     transition: opacity .4s ease;
 }
-#fadeOverlay.active { opacity: 1; pointer-events: all; }
+#fadeOverlay.active { 
+    opacity: 1; pointer-events: all; 
+}
 
-/* ══════════════════════════════════════════════════════════
-   DASHBOARD LATERAL (slide-in desde la derecha)
-══════════════════════════════════════════════════════════ */
-
-/* Overlay oscuro detrás del panel */
 .dashboard-overlay {
     display: none;
     position: fixed;
@@ -107,7 +149,7 @@ body {
 }
 .dashboard.open { transform: translateX(0); }
 
-/* Botón cerrar (X) */
+/* Botón cerrar*/
 .dashboard-close {
     position: absolute;
     top: 1.25rem;
@@ -499,10 +541,9 @@ body {
 
 /* ══ FOOTER ════════════════════════════════════════════════ */
 .footer {
-    background: var(--bg-white);
-    border-top: 1px solid var(--border);
+    background: rgba(117, 14, 140, 0.442);
+    border-top: 0.8px solid var(--border);
     padding: 2.5rem 2.5rem 1.5rem;
-    margin-top: 1rem;
 }
 
 .footer-inner {
@@ -519,7 +560,7 @@ body {
     align-items: center;
     gap: .45rem;
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 1.6rem;
     color: var(--text-dark);
     margin-bottom: .65rem;
 }
@@ -537,18 +578,24 @@ body {
     text-transform: uppercase;
     letter-spacing: .06em;
     color: var(--text-dark);
-    margin-bottom: .75rem;
+    margin-bottom: 0.25rem;
 }
 
-.footer-col ul         { list-style: none; }
-.footer-col ul li      { margin-bottom: .4rem; }
+.footer-col ul         { 
+    list-style: none; 
+}
+.footer-col ul li      { 
+    margin-bottom: .4rem; 
+}
 .footer-col ul li a {
     font-size: .8rem;
     color: var(--text-muted);
     text-decoration: none;
     transition: color var(--transition);
 }
-.footer-col ul li a:hover { color: var(--primary); }
+.footer-col ul li a:hover { 
+    color: var(--primary); 
+}
 
 .footer-cta-col { text-align: right; }
 .footer-desc {
@@ -556,19 +603,6 @@ body {
     color: var(--text-muted);
     margin-bottom: .85rem;
     line-height: 1.55;
-}
-
-/* Copyright pie de página */
-.footer-copy {
-    text-align: center;
-    font-size: .72rem;
-    color: var(--text-muted);
-    margin-top: 2rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--border);
-    max-width: 1100px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 /* ══════════════════════════════════════════════════════════

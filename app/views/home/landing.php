@@ -11,9 +11,7 @@
 <body>
 
 
-<!-- ══════════════════════════════════════════════════════════
-     DASHBOARD LATERAL (menú móvil tipo slide-in)
-════════════════════════════════════════════════════════════ -->
+<!--DASHBOARD para movil -->
 <div class="dashboard-overlay" id="dashboardOverlay"></div>
 
 <aside class="dashboard" id="dashboard">
@@ -22,41 +20,60 @@
         <i class="bi bi-x-lg"></i>
     </button>
 
-    <!-- Links de navegación -->
+    <!-- navegación -->
     <nav class="dashboard-nav">
-        <a href="#" class="dashboard-link">Inicio</a>
-        <a href="#" class="dashboard-link">Funcionalidades</a>
-        <a href="#" class="dashboard-link">Demo</a>
-        <a href="#" class="dashboard-link">Precio</a>
-        <a href="#" class="dashboard-link">Contacto</a>
+        <a href="#inicio" class="dashboard-link">Inicio</a>
+        <a href="#funcionalidades" class="dashboard-link">Funcionalidades</a>
+        <a href="#demo" class="dashboard-link">Demo</a>
+        <a href="#precio" class="dashboard-link">Precio</a>
+        <a href="#contacto" class="dashboard-link">Contacto</a>
+        <div class="dropdown">
+            <a href="#" class="dashboard-link">
+             PROBAR DEMO ▾
+            </a>
+        
+            <div class="dropdown-content">
+                <a href="<?= BASE_URL ?>/login">Iniciar sesión</a>
+                <a href="<?= BASE_URL ?>/registro">Registrarse</a>
+            </div>
+        </div>
     </nav>
 </aside>
 
-<!-- ══ NAVBAR ══════════════════════════════════════════════════ -->
+<!-- navbar -->
 <nav class="navbar" id="navbar">
     <a class="navbar-brand" href="#">
-        <div class="brand-icon"><i class="bi bi-cup-hot-fill"></i></div>
+        <div class="brand-icon"><i class="bi bi-shop" style="color: rgb(255, 255, 255);"></i></div>
         RESTOWI
     </a>
 
-    <!-- Links desktop -->
+    <!-- navegación -->
     <ul class="navbar-links">
-        <li><a href="#">Inicio</a></li>
-        <li><a href="#">Funcionalidades</a></li>
-        <li><a href="#">Demo</a></li>
-        <li><a href="#">Precio</a></li>
-        <li><a href="#">Contacto</a></li>
-        <li><a href="#" class="btn-nav">Probar Demo</a></li>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#funcionalidades">Funcionalidades</a></li>
+        <li><a href="#demo">Demo</a></li>
+        <li><a href="#precio">Precio</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li class="dropdown">
+            <a href="#" class="btn-nav">
+            Probar Demo ▾
+            </a>
+
+             <div class="dropdown-content">
+                <a href="<?= BASE_URL ?>/login">Iniciar sesión</a>
+                <a href="<?= BASE_URL ?>/registro">Registrarse</a>
+            </div>
+        </li>
     </ul>
 
-    <!-- Hamburguesa (móvil / tablet) -->
+    <!-- menu del dashboard-->
     <button class="menu-btn" id="menuBtn" aria-label="Abrir menú">
         <i class="bi bi-list"></i>
     </button>
 </nav>
 
-<!-- ══ HERO ════════════════════════════════════════════════════ -->
-<section class="hero">
+<!-- inicio -->
+<section class="hero" id="inicio">
     <div class="hero-text">
         <span class="hero-badge">Sistema para restaurantes</span>
         <h1 class="hero-title">
@@ -73,12 +90,12 @@
         </div>
     </div>
     <div class="hero-img-wrap">
-        <img src="<?php echo BASE_URL; ?>/public/image/foto_prueba.png" alt="Restaurante">
+        <img src="<?php echo BASE_URL; ?>/public/recursos/imagen-prueba.jpg" alt="Restaurante">
     </div>
 </section>
 
-<!-- ══ FUNCIONALIDADES – CARRUSEL ══════════════════════════════ -->
-<section class="features-section">
+<!-- funcionalidades -->
+<section class="features-section" id="funcionalidades">
     <div class="section-label"><span>Funcionalidades</span></div>
     <h2 class="section-title">Todo lo que tu restaurante necesita<br>en un solo sistema</h2>
 
@@ -137,8 +154,8 @@
     <div class="carousel-dots" id="carouselDots"></div>
 </section>
 
-<!-- ══ DEMO EN ACCIÓN ══════════════════════════════════════════ -->
-<section class="demo-section">
+<!-- demo -->
+<section class="demo-section" id="demo">
     <div class="section-label"><span>¡Pruébalo tú mismo!</span></div>
     <h2 class="section-title">Conoce nuestro sistema en acción</h2>
     <p class="demo-sub">
@@ -147,7 +164,7 @@
     </p>
 
     <div class="demo-video-wrap">
-        <img src="<?php echo BASE_URL; ?>/public/image/foto_prueba.png" alt="Demo del sistema">
+        <img src="<?php echo BASE_URL; ?>/public/recursos/imagen-prueba.jpg" alt="Demo del sistema">
         <button class="play-btn" id="playBtn" aria-label="Reproducir demo">
             <i class="bi bi-play-fill"></i>
         </button>
@@ -158,8 +175,8 @@
     </div>
 </section>
 
-<!-- ══ CTA FINAL ════════════════════════════════════════════════ -->
-<section class="cta-section">
+<!--precio y planes-->
+<section class="cta-section" id="precio">
     <div class="cta-inner">
         <div class="cta-text">
             <span class="cta-badge">¿Listo para llevar tu restaurante al siguiente nivel?</span>
@@ -180,8 +197,8 @@
     </div>
 </section>
 
-<!-- ══ FOOTER ══════════════════════════════════════════════════ -->
-<footer class="footer">
+<!-- contactos -->
+<footer class="footer" id="contacto">
     <div class="footer-inner">
 
         <div class="footer-about">
@@ -199,10 +216,10 @@
         <div class="footer-col">
             <h4>Navegación</h4>
             <ul>
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#">Funcionalidades</a></li>
-                <li><a href="#">Demo</a></li>
-                <li><a href="#">Precio</a></li>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#funcionalidades">Funcionalidades</a></li>
+                <li><a href="#demo">Demo</a></li>
+                <li><a href="#precio">Precio</a></li>
             </ul>
         </div>
 
@@ -211,15 +228,21 @@
             <p class="footer-desc">
                 Descubre por qué somos la mejor opción para tu restaurante.
             </p>
-            <a href="#" class="btn-primary">Probar Demo</a>
+            <div class="dropdown">
+            <a href="#" class="btn-primary">
+             PROBAR DEMO ▾
+            </a>
+
+            <div class="dropdown-content">
+                <a href="<?= BASE_URL ?>/login">Iniciar sesión</a>
+                <a href="<?= BASE_URL ?>/registro">Registrarse</a>
+            </div>
+        </div>
         </div>
 
+
     </div>
-
-    <!-- Copyright móvil -->
-    <p class="footer-copy">© <?php echo date('Y'); ?> Todos los derechos reservados.</p>
 </footer>
-
 <?php include __DIR__ . '/../layouts/footer-home.php'; ?>
 
 <div id="fadeOverlay"></div>
