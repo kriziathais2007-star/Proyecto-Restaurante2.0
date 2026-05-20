@@ -30,5 +30,10 @@ class Pedido {
             ':Id_Usuario'   => $Id_Usuario,
         ]);
     }
+    public function obtenerUsuarios(): array {
+        $sql = "SELECT Id_Usuario, nombre FROM usuario ORDER BY nombre ASC";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
-?>

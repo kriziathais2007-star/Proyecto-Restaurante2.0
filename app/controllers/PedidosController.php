@@ -2,60 +2,92 @@
 require_once __DIR__ . '/../core/Controller.php';
 require_once __DIR__ . '/../models/Pedido.php';
 
-// Controlador para el módulo de pedidos.
 class PedidosController extends Controller {
-    // index() es el método por defecto cuando la URL no especifica acción.
-    // Ejemplo: /pedidos -> PedidosController::index()
+
     public function index(): void {
-        // Reutilizamos la misma lógica que el reporte de pedidos.
         $this->reporte();
     }
 
-    // reportes() muestra el listado completo de pedidos.
-    // Ejemplo: /pedidos/reportes
     public function reporte(): void {
-        // Validación de sesión: si no hay usuario logueado, redirigimos al login.
         if (!isset($_SESSION['usuario'])) {
             header("Location: " . BASE_URL . "/login");
             exit();
         }
 
-        // Cargamos el modelo y obtenemos los datos de pedidos.
         $modelo = new Pedido();
         $variable_pedidos = $modelo->obtenerPedidos();
 
-        // Enviamos los datos a la vista.
         $this->view('pedidos/reportes', [
             'usuario' => $_SESSION['usuario'],
-            'pedidos' => $variable_pedidos          
+            'pedidos' => $variable_pedidos
         ]);
     }
 
-    // reportes() es un alias de reporte() para mayor claridad en la URL.
-    // Explicación para alumnos: el Router convierte la URL /pedidos/reportes
-    // en la llamada a PedidosController::reportes(). Al definir este alias
-    // evitamos duplicar lógica y hacemos que la URL sea más legible.
     public function reportes(): void {
-        // Reutilizamos la implementación de reporte() para mantener DRY.
         $this->reporte();
     }
 
-    // registro() muestra el formulario para crear un nuevo pedido.
-    // Ejemplo: /pedidos/registro
+    // ✅ registro() actualizado con usuarios para el select
     public function registro(): void {
         if (!isset($_SESSION['usuario'])) {
             header("Location: " . BASE_URL . "/login");
             exit();
         }
 
+        $modelo   = new Pedido();
+        $usuarios = $modelo->obtenerUsuarios();
+
         $this->view('pedidos/registro', [
-            'usuario' => $_SESSION['usuario']
+            'usuario'  => $_SESSION['usuario'],
+            'usuarios' => $usuarios
         ]);
     }
 
-    // registrar() es otro alias para la misma vista de registro.
     public function registrar(): void {
         $this->registro();
     }
 
+    // ✅ guardar() procesa el formulario POST
+    public function guardar(): void {
+        if (!isset($_SESSION['usuario'])) {
+            header("Location: " . BASE_URL . "/login");
+            exit();
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header("Location: " . BASE_URL . "/pedidos/registro");
+            exit();
+        }
+
+        $mesa          = (int)($_POST['mesa']         ?? 0);
+        $fecha         = trim($_POST['fecha']         ?? '');
+        $hora_pedido   = trim($_POST['hora_pedido']   ?? '');
+        $estado_pedido = trim($_POST['estado_pedido'] ?? '');
+        $Id_Usuario    = (int)($_POST['Id_Usuario']   ?? 0);
+
+        $modelo   = new Pedido();
+        $usuarios = $modelo->obtenerUsuarios();
+
+        if (!$mesa || !$fecha || !$hora_pedido || !$estado_pedido || !$Id_Usuario) {
+            $this->view('pedidos/registro', [
+                'usuario'  => $_SESSION['usuario'],
+                'usuarios' => $usuarios,
+                'error'    => 'Por favor completa todos los campos.'
+            ]);
+            return;
+        }
+
+        $guardado = $modelo->crearPedido($mesa, $fecha, $hora_pedido, $estado_pedido, $Id_Usuario);
+
+        if ($guardado) {
+            header("Location: " . BASE_URL . "/pedidos/reportes");
+            exit();
+        } else {
+            $this->view('pedidos/registro', [
+                'usuario'  => $_SESSION['usuario'],
+                'usuarios' => $usuarios,
+                'error'    => 'Ocurrió un error al guardar. Intenta de nuevo.'
+            ]);
+        }
+    }
 }

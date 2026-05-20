@@ -2,60 +2,90 @@
 require_once __DIR__ . '/../core/Controller.php';
 require_once __DIR__ . '/../models/Asistencia.php';
 
-// Controlador para el módulo de asistencia.
 class AsistenciaController extends Controller {
-    // index() es el método por defecto cuando la URL no especifica acción.
-    // Ejemplo: /asistencia -> AsistenciaController::index()
+
     public function index(): void {
-        // Reutilizamos la misma lógica que el reporte de asistencia.
         $this->reporte();
     }
 
-    // reportes() muestra el listado completo de asistencia.
-    // Ejemplo: /asistencia/reportes
     public function reporte(): void {
-        // Validación de sesión: si no hay usuario logueado, redirigimos al login.
         if (!isset($_SESSION['usuario'])) {
             header("Location: " . BASE_URL . "/login");
             exit();
         }
 
-        // Cargamos el modelo y obtenemos los datos de asistencia.
         $modelo = new Asistencia();
-        $variable_asistencia = $modelo->obtenerAsistencia();
+        $variable_asistencia = $modelo->obtenerAsistencias();
 
-        // Enviamos los datos a la vista.
         $this->view('asistencia/reportes', [
-            'usuario' => $_SESSION['usuario'],
-            'asistencia' => $variable_asistencia    
+            'usuario'    => $_SESSION['usuario'],
+            'asistencia' => $variable_asistencia
         ]);
     }
 
-    // reportes() es un alias de reporte() para mayor claridad en la URL.
-    // Explicación para alumnos: el Router convierte la URL /asistencia/reportes
-    // en la llamada a AsistenciaController::reportes(). Al definir este alias
-    // evitamos duplicar lógica y hacemos que la URL sea más legible.
     public function reportes(): void {
-        // Reutilizamos la implementación de reporte() para mantener DRY.
         $this->reporte();
     }
 
-    // registro() muestra el formulario para crear un nuevo registro de asistencia.
-    // Ejemplo: /asistencia/registro
     public function registro(): void {
         if (!isset($_SESSION['usuario'])) {
             header("Location: " . BASE_URL . "/login");
             exit();
         }
 
+        $modelo   = new Asistencia();
+        $usuarios = $modelo->obtenerUsuarios();
+
         $this->view('asistencia/registro', [
-            'usuario' => $_SESSION['usuario']
+            'usuario'  => $_SESSION['usuario'],
+            'usuarios' => $usuarios
         ]);
     }
 
-    // registrar() es otro alias para la misma vista de registro.
     public function registrar(): void {
         $this->registro();
     }
 
+    public function guardar(): void {
+        if (!isset($_SESSION['usuario'])) {
+            header("Location: " . BASE_URL . "/login");
+            exit();
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header("Location: " . BASE_URL . "/asistencia/registro");
+            exit();
+        }
+
+        $fecha        = trim($_POST['fecha']        ?? '');
+        $hora_entrada = trim($_POST['hora_entrada'] ?? '');
+        $hora_salida  = trim($_POST['hora_salida']  ?? '') ?: null;
+        $estado       = trim($_POST['estado']       ?? '');
+        $Id_Usuario   = (int)($_POST['Id_Usuario']  ?? 0);
+
+        $modelo   = new Asistencia();
+        $usuarios = $modelo->obtenerUsuarios();
+
+        if (!$fecha || !$hora_entrada || !$estado || !$Id_Usuario) {
+            $this->view('asistencia/registro', [
+                'usuario'  => $_SESSION['usuario'],
+                'usuarios' => $usuarios,
+                'error'    => 'Por favor completa todos los campos obligatorios.'
+            ]);
+            return;
+        }
+
+        $guardado = $modelo->crearAsistencia($fecha, $hora_entrada, $hora_salida, $estado, $Id_Usuario);
+
+        if ($guardado) {
+            header("Location: " . BASE_URL . "/asistencia/reportes");
+            exit();
+        } else {
+            $this->view('asistencia/registro', [
+                'usuario'  => $_SESSION['usuario'],
+                'usuarios' => $usuarios,
+                'error'    => 'Ocurrió un error al guardar. Intenta de nuevo.'
+            ]);
+        }
+    }
 }

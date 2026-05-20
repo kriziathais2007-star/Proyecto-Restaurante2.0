@@ -1,3 +1,4 @@
+```php
 <?php
 require_once __DIR__ . '/../core/Database.php';
 
@@ -15,16 +16,15 @@ class Plato {
         return $stmt->fetchAll();
     }
 
-    public function crearPlato(string $nombre, float $precio, int $disponibilidad, string $descripcion, string $imagen): bool {
-        $sql = "INSERT INTO plato (nombre, precio, disponibilidad, descripcion, imagen)
-                VALUES (:nombre, :precio, :disponibilidad, :descripcion, :imagen)";
+    public function crearPlato(string $nombre, float $precio, int $disponibilidad, string $descripcion): bool {
+        $sql = "INSERT INTO plato (nombre, precio, disponibilidad, descripcion)
+                VALUES (:nombre, :precio, :disponibilidad, :descripcion)";
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([
             ':nombre'         => $nombre,
             ':precio'         => $precio,
             ':disponibilidad' => $disponibilidad,
-            ':descripcion'    => $descripcion,
-            ':imagen'         => $imagen,
+            ':descripcion'    => $descripcion
         ]);
     }
 }
