@@ -45,5 +45,45 @@ class DetallePedido {
             ':Id_Plato'    => $Id_Plato,
         ]);
     }
+    public function contarPedidosHoy(): int {
+    $sql = "SELECT COUNT(*) FROM pedido WHERE fecha = CURDATE()";
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute();
+    return (int) $stmt->fetchColumn();
 }
-?>
+
+public function ingresosTotalesHoy(): float {
+    $sql = "SELECT COALESCE(SUM(dp.cantidad * pl.precio), 0)
+            FROM detalle_pedido dp
+            INNER JOIN pedido p  ON dp.Id_Pedido = p.Id_Pedido
+            INNER JOIN plato  pl ON dp.Id_Plato  = pl.Id_Plato
+            WHERE p.fecha = CURDATE()";
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute();
+    return (float) $stmt->fetchColumn();
+}
+
+public function pedidosPendientes(): int {
+    $sql = "SELECT COUNT(*) FROM pedido WHERE estado_pedido = 'Pendiente'";
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute();
+    return (int) $stmt->fetchColumn();
+}
+
+public function pedidosRecientes(int $limite = 5): array {
+    $sql = "SELECT p.Id_Pedido, p.mesa, p.fecha, p.hora_pedido,
+                   p.estado_pedido,
+                   COUNT(dp.Id_Detalle) AS total_platos,
+                   SUM(dp.cantidad * pl.precio) AS total
+            FROM pedido p
+            LEFT JOIN detalle_pedido dp ON p.Id_Pedido = dp.Id_Pedido
+            LEFT JOIN plato pl          ON dp.Id_Plato = pl.Id_Plato
+            GROUP BY p.Id_Pedido
+            ORDER BY p.hora_pedido DESC
+            LIMIT :limite";
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(':limite', $limite, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+}

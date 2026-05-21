@@ -79,4 +79,5 @@ class Router {
         http_response_code($codigo);
         echo "<h1>Error $codigo - Página no encontrada</h1>";
     }
+    'pedidos/cambiarEstado' => [PedidosController::class, 'cambiarEstado'],
 }

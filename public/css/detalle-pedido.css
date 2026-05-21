@@ -1,0 +1,196 @@
+/* ===== DASHBOARD INICIO ===== */
+
+.dash-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.75rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.dash-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #8b3252;
+  margin: 0;
+}
+
+.dash-sub {
+  font-size: 13px;
+  color: #c47a95;
+  margin: 4px 0 0;
+  text-transform: capitalize;
+}
+
+.btn-nuevo-pedido {
+  background: #d4597e;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 0.65rem 1.25rem;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.btn-nuevo-pedido:hover { background: #bf3f67; }
+
+/* Stats */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  border-radius: 16px;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.stat-pink  { background: #fde0ea; }
+.stat-rose  { background: #fff0f4; border: 1.5px solid #f5c0d0; }
+.stat-mauve { background: #f5e0ec; }
+
+.stat-icon {
+  font-size: 22px;
+  color: #d4597e;
+  background: #fff;
+  border-radius: 12px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #c47a95;
+  margin: 0 0 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: 600;
+  color: #8b3252;
+  margin: 0;
+}
+
+/* Sección pedidos recientes */
+.section-card {
+  background: #fff7f9;
+  border: 1px solid #f0b8cd;
+  border-radius: 20px;
+  padding: 1.5rem;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #8b3252;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.link-ver-todos {
+  font-size: 13px;
+  color: #d4597e;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.link-ver-todos:hover { text-decoration: underline; }
+
+/* Filas de pedidos */
+.pedidos-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pedido-row {
+  background: white;
+  border: 1px solid #f5c0d0;
+  border-radius: 14px;
+  padding: 0.85rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.mesa-badge {
+  background: #fde0ea;
+  color: #8b3252;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.pedido-info {
+  flex: 1;
+  min-width: 80px;
+}
+
+.pedido-platos {
+  font-size: 13px;
+  color: #6b2040;
+  margin: 0;
+  font-weight: 500;
+}
+
+.pedido-hora {
+  font-size: 12px;
+  color: #c47a95;
+  margin: 2px 0 0;
+}
+
+.pedido-total {
+  font-size: 16px;
+  font-weight: 600;
+  color: #8b3252;
+}
+
+/* Badges de estado */
+.estado-badge {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.badge-entregado { background: #d4f7e8; color: #1a7a4a; }
+.badge-pendiente { background: #faeeda; color: #854f0b; }
+.badge-proceso   { background: #e0eafd; color: #1a4a8b; }
+.badge-default   { background: #f0e0f5; color: #6b2a8b; }
+
+.empty-msg {
+  text-align: center;
+  color: #c47a95;
+  font-size: 14px;
+  padding: 2rem 0;
+}

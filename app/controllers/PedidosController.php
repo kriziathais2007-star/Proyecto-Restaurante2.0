@@ -13,13 +13,10 @@ class PedidosController extends Controller {
             header("Location: " . BASE_URL . "/login");
             exit();
         }
-
         $modelo = new Pedido();
-        $variable_pedidos = $modelo->obtenerPedidos();
-
         $this->view('pedidos/reportes', [
             'usuario' => $_SESSION['usuario'],
-            'pedidos' => $variable_pedidos
+            'pedidos' => $modelo->obtenerPedidos()
         ]);
     }
 
@@ -27,19 +24,16 @@ class PedidosController extends Controller {
         $this->reporte();
     }
 
-    // ✅ registro() actualizado con usuarios para el select
     public function registro(): void {
         if (!isset($_SESSION['usuario'])) {
             header("Location: " . BASE_URL . "/login");
             exit();
         }
-
-        $modelo   = new Pedido();
-        $usuarios = $modelo->obtenerUsuarios();
-
+        $modelo = new Pedido();
         $this->view('pedidos/registro', [
             'usuario'  => $_SESSION['usuario'],
-            'usuarios' => $usuarios
+            'usuarios' => $modelo->obtenerUsuarios(),
+            'platos'   => $modelo->obtenerPlatos(),
         ]);
     }
 
@@ -47,37 +41,38 @@ class PedidosController extends Controller {
         $this->registro();
     }
 
-    // ✅ guardar() procesa el formulario POST
     public function guardar(): void {
         if (!isset($_SESSION['usuario'])) {
             header("Location: " . BASE_URL . "/login");
             exit();
         }
-
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             header("Location: " . BASE_URL . "/pedidos/registro");
             exit();
         }
 
-        $mesa          = (int)($_POST['mesa']         ?? 0);
-        $fecha         = trim($_POST['fecha']         ?? '');
-        $hora_pedido   = trim($_POST['hora_pedido']   ?? '');
-        $estado_pedido = trim($_POST['estado_pedido'] ?? '');
-        $Id_Usuario    = (int)($_POST['Id_Usuario']   ?? 0);
+        $mesa          = (int)($_POST['mesa']          ?? 0);
+        $estado_pedido = trim($_POST['estado_pedido']  ?? '');
+        $Id_Usuario    = (int)($_POST['Id_Usuario']    ?? 0);
+        $platos        = $_POST['platos']              ?? [];
 
-        $modelo   = new Pedido();
-        $usuarios = $modelo->obtenerUsuarios();
+        $modelo     = new Pedido();
+        $usuarios   = $modelo->obtenerUsuarios();
+        $platosDisp = $modelo->obtenerPlatos();
 
-        if (!$mesa || !$fecha || !$hora_pedido || !$estado_pedido || !$Id_Usuario) {
+        $platosValidos = array_filter($platos, fn($p) => !empty($p['cantidad']) && (int)$p['cantidad'] > 0);
+
+        if (!$mesa || !$estado_pedido || !$Id_Usuario || empty($platosValidos)) {
             $this->view('pedidos/registro', [
                 'usuario'  => $_SESSION['usuario'],
                 'usuarios' => $usuarios,
-                'error'    => 'Por favor completa todos los campos.'
+                'platos'   => $platosDisp,
+                'error'    => 'Completa todos los campos y selecciona al menos un plato.'
             ]);
             return;
         }
 
-        $guardado = $modelo->crearPedido($mesa, $fecha, $hora_pedido, $estado_pedido, $Id_Usuario);
+        $guardado = $modelo->crearPedidoConPlatos($mesa, $estado_pedido, $Id_Usuario, $platosValidos);
 
         if ($guardado) {
             header("Location: " . BASE_URL . "/pedidos/reportes");
@@ -86,8 +81,24 @@ class PedidosController extends Controller {
             $this->view('pedidos/registro', [
                 'usuario'  => $_SESSION['usuario'],
                 'usuarios' => $usuarios,
-                'error'    => 'Ocurrió un error al guardar. Intenta de nuevo.'
+                'platos'   => $platosDisp,
+                'error'    => 'Error al guardar. Intenta de nuevo.'
             ]);
         }
+    }
+
+    public function cambiarEstado(): void {
+        if (!isset($_SESSION['usuario'])) {
+            http_response_code(403);
+            exit();
+        }
+        $id     = (int)($_POST['Id_Pedido']    ?? 0);
+        $estado = trim($_POST['estado_pedido'] ?? '');
+
+        $modelo = new Pedido();
+        $modelo->cambiarEstado($id, $estado);
+
+        header("Location: " . BASE_URL . "/pedidos/reportes");
+        exit();
     }
 }
