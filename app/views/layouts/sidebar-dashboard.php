@@ -1,4 +1,6 @@
 <!--El archivo .htacces tiene este linea RewriteRule ^(.+)$ app/index.php?url=$1 [QSA,L] -->
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>../public/css/dashboard.css">
+
 <?php
 $segmentos    = explode('/', trim($_GET['url'] ?? 'dashboard', '/'));
 $rutaActual   = $segmentos[0] ?? 'dashboard';

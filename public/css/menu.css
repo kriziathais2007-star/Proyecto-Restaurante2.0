@@ -1,0 +1,198 @@
+/* ===========================
+   HEADER DEL MENÚ
+=========================== */
+.menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+}
+
+.menu-title {
+    font-size: 25px;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.menu-title i {
+    color: #F4C0D1;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+.badge-total {
+    background: #d6a5a5;
+    color: #ffffff;
+    font-size: 1rem;
+    padding: .20rem .40rem;
+    border-radius: 20px;
+    margin-left: .09rem;
+    vertical-align: middle;
+    font-weight: 600;
+}
+
+
+/* BOTÓN AGREGAR PLATO*/
+.btn-agregar-plato {
+    background: #D4537E;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 10px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s ease;
+}
+
+.btn-agregar-plato:hover {
+    background: #993556;
+}
+
+/* ===========================
+   MODAL
+=========================== */
+.modal-plato {
+    border: none;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.modal-plato-header {
+    background: #D4537E;
+    color: #fff;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.modal-plato-header h5 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.modal-body {
+    background: #fff;
+}
+
+.field-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #72243E;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #D4537E;
+    box-shadow: 0 0 0 3px rgba(212, 83, 126, 0.15);
+}
+
+.modal-footer {
+    background: #fff8fa;
+    border-top: 1px solid #F4C0D1 !important;
+}
+
+.btn-guardar-plato {
+    background: #D4537E;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.btn-guardar-plato:hover {
+    background: #993556;
+}
+
+/* ===========================
+   TARJETAS (fix legibilidad)
+=========================== */
+.card {
+    background: rgba(224, 203, 203, 0.95) !important;
+    backdrop-filter: blur(0px);
+    border: 1px solid #F4C0D1 !important;
+    border-radius: 25px !important;
+}
+
+.card-title {
+    color: #72243E;
+    font-weight: 700;
+}
+
+.card-text {
+    color: #333;
+    font-size: 13px;
+}
+
+.card-text strong {
+    color: #993556;
+}
+
+/* ===========================
+   BOTONES EDITAR / ELIMINAR
+=========================== */
+.btn-editar {
+    background: #378ADD;
+    color: #fff9f9;
+    border: none;
+    border-radius: 8px;
+    padding: 7px 14px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.15s;
+}
+
+.btn-editar:hover {
+    background: #185FA5;
+}
+
+.btn-eliminar {
+    background: #E24B4A;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 7px 14px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.15s;
+}
+
+.btn-eliminar:hover {
+    background: #A32D2D;
+}
+
+.card-footer {
+    background: rgba(215, 151, 169, 0.9) !important;
+    border-top: 1px solid #F4C0D1 !important;
+    border-radius: 0 0 25px 25px !important;
+}
+
+.confirm {
+    background: #E24B4A;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.confirm:hover {
+    background: #A32D2D;
+}

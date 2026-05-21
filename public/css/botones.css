@@ -36,3 +36,68 @@
 .btn-eliminar:hover{
     background: #b91c1c;
 }
+
+.btn-agregar-plato {
+    background: #D4537E;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s ease;
+}
+
+.btn-agregar-plato:hover {
+    background: #993556;
+}
+
+.btn-guardar-plato {
+    background: #D4537E;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.btn-guardar-plato:hover {
+    background: #993556;
+}
+
+.btn-editar {
+    background: #378ADD;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 7px 14px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.15s;
+}
+
+.btn-editar:hover {
+    background: #185FA5;
+}
+
+.btn-eliminar {
+    background: #E24B4A;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 7px 14px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.15s;
+}
+
+.btn-eliminar:hover {
+    background: #A32D2D;
+}
