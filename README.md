@@ -106,6 +106,149 @@ Un plato puede estar en muchos pedidos, pero cada detalle tiene un solo plato
 
 ## BASE DE DATOS 
 ``` mysql
+
+CREATE DATABASE restaurante;
+USE restaurante;
+
+-- Usuarios
+CREATE TABLE usuarios (
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    usuario VARCHAR(50) UNIQUE NOT NULL,
+    contraseña VARCHAR(255) NOT NULL,
+    rol VARCHAR(30) NOT NULL
+);
+
+-- Entradas disponibles
+CREATE TABLE entradas (
+    id_entrada INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL
+);
+
+-- Pedidos
+CREATE TABLE pedidos (
+    id_pedido INT AUTO_INCREMENT PRIMARY KEY,
+    tipo ENUM('Mesa','Llevar') NOT NULL,
+    numero_mesa INT NULL,
+    fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
+    total DECIMAL(10,2) DEFAULT 0,
+    estado ENUM('Pendiente','Preparando','Entregado','Pagado') DEFAULT 'Pendiente'
+);
+
+-- Detalle del pedido
+CREATE TABLE detalle_pedido (
+    id_detalle INT AUTO_INCREMENT PRIMARY KEY,
+    id_pedido INT NOT NULL,
+
+    tipo_item ENUM('Plato','Entrada Extra') NOT NULL,
+
+    id_entrada INT NOT NULL,
+
+    cantidad INT NOT NULL DEFAULT 1,
+
+    precio_unitario DECIMAL(10,2) NOT NULL,
+
+    subtotal DECIMAL(10,2) NOT NULL,
+
+    FOREIGN KEY (id_pedido) REFERENCES pedidos(id_pedido),
+    FOREIGN KEY (id_entrada) REFERENCES entradas(id_entrada)
+);
+
+-- Pagos
+CREATE TABLE pagos (
+    id_pago INT AUTO_INCREMENT PRIMARY KEY,
+    id_pedido INT NOT NULL,
+    monto DECIMAL(10,2) NOT NULL,
+    metodo_pago ENUM('Efectivo','Yape','Plin','Tarjeta'),
+    fecha_pago DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (id_pedido) REFERENCES pedidos(id_pedido)
+);
+
+-- Asistencia
+CREATE TABLE asistencias (
+    id_asistencia INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    fecha DATE NOT NULL,
+    hora_entrada TIME,
+    hora_salida TIME,
+
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
+);
+
+
+CREATE DATABASE restaurante;
+USE restaurante;
+
+-- Usuarios
+CREATE TABLE usuarios (
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    usuario VARCHAR(50) UNIQUE NOT NULL,
+    contraseña VARCHAR(255) NOT NULL,
+    rol VARCHAR(30) NOT NULL
+);
+
+-- Entradas disponibles
+CREATE TABLE entradas (
+    id_entrada INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL
+);
+
+-- Pedidos
+CREATE TABLE pedidos (
+    id_pedido INT AUTO_INCREMENT PRIMARY KEY,
+    tipo ENUM('Mesa','Llevar') NOT NULL,
+    numero_mesa INT NULL,
+    fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
+    total DECIMAL(10,2) DEFAULT 0,
+    estado ENUM('Pendiente','Preparando','Entregado','Pagado') DEFAULT 'Pendiente'
+);
+
+-- Detalle del pedido
+CREATE TABLE detalle_pedido (
+    id_detalle INT AUTO_INCREMENT PRIMARY KEY,
+    id_pedido INT NOT NULL,
+
+    tipo_item ENUM('Plato','Entrada Extra') NOT NULL,
+
+    id_entrada INT NOT NULL,
+
+    cantidad INT NOT NULL DEFAULT 1,
+
+    precio_unitario DECIMAL(10,2) NOT NULL,
+
+    subtotal DECIMAL(10,2) NOT NULL,
+
+    FOREIGN KEY (id_pedido) REFERENCES pedidos(id_pedido),
+    FOREIGN KEY (id_entrada) REFERENCES entradas(id_entrada)
+);
+
+-- Pagos
+CREATE TABLE pagos (
+    id_pago INT AUTO_INCREMENT PRIMARY KEY,
+    id_pedido INT NOT NULL,
+    monto DECIMAL(10,2) NOT NULL,
+    metodo_pago ENUM('Efectivo','Yape','Plin','Tarjeta'),
+    fecha_pago DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (id_pedido) REFERENCES pedidos(id_pedido)
+);
+
+-- Asistencia
+CREATE TABLE asistencias (
+    id_asistencia INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    fecha DATE NOT NULL,
+    hora_entrada TIME,
+    hora_salida TIME,
+
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
+);
+
+
+
+
 CREATE DATABASE IF NOT EXISTS restaurante_db;
 USE restaurante_db;
 
