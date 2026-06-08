@@ -77,77 +77,86 @@ ganancias del negocio.
 <summary> BASE DE DATOS </summary>
   
 ``` mysql
-CREATE DATABASE restaurante_db;
-USE restaurante_db;
+CREATE DATABASE restaurante_db_2;
+USE restaurante_db_2;
 
 CREATE TABLE usuarios (
-    id_usuario  INT AUTO_INCREMENT PRIMARY KEY,
-    nombre      VARCHAR(100) NOT NULL,
-    usuario     VARCHAR(50) UNIQUE NOT NULL,
-    clave  VARCHAR(255) NOT NULL,
-    rol         ENUM('admin','mesero','cocina') NOT NULL
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    usuario VARCHAR(50) UNIQUE NOT NULL,
+    clave VARCHAR(255) NOT NULL,
+    rol ENUM('admin','mesero','cocina') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 CREATE TABLE entradas (
-    id_entrada  INT AUTO_INCREMENT PRIMARY KEY,
-    nombre      VARCHAR(100) NOT NULL,
-    precio      DECIMAL(10,2) NOT NULL DEFAULT 0
+    id_entrada INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    precio DECIMAL(10,2) NOT NULL DEFAULT 0,
+    activo BOOLEAN DEFAULT TRUE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 CREATE TABLE platos (
-    id_plato    INT AUTO_INCREMENT PRIMARY KEY,
-    nombre      VARCHAR(100) NOT NULL,
+    id_plato INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
     descripcion TEXT,
-    precio      DECIMAL(10,2) NOT NULL,
-    disponible  ENUM('disponible','no disponible') not null
+    precio DECIMAL(10,2) NOT NULL,
+	activo BOOLEAN DEFAULT TRUE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 CREATE TABLE pedidos (
-    id_pedido    INT AUTO_INCREMENT PRIMARY KEY,
-    id_usuario   INT DEFAULT NULL,               
-    tipo         ENUM('Mesa','Llevar') NOT NULL,
-    numero_mesa  INT NULL,                       
-    fecha        DATETIME DEFAULT CURRENT_TIMESTAMP,
-    total        DECIMAL(10,2) DEFAULT 0,
-    estado       ENUM('Pendiente','Preparando','Entregado','Pagado') DEFAULT 'Pendiente',
+    id_pedido INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT DEFAULT NULL,
+    tipo ENUM('Mesa','Llevar') NOT NULL,
+    numero_mesa INT NULL,
+    fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
+    total DECIMAL(10,2) DEFAULT 0,
+    estado ENUM('Pendiente','Preparando','Entregado','Pagado','Cancelado') DEFAULT 'Pendiente',
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 CREATE TABLE detalle_pedido (
-    id_detalle       INT AUTO_INCREMENT PRIMARY KEY,
-    id_pedido        INT DEFAULT NULL,
-    tipo_item        ENUM('Plato','Entrada Adicional') NOT NULL,
-    id_plato         INT DEFAULT NULL,
-    id_entrada       INT DEFAULT NULL,
-    id_entrada_extra INT DEFAULT NULL,  
-    cantidad         INT NOT NULL DEFAULT 1,
-    precio_unitario  DECIMAL(10,2) NOT NULL,
-    subtotal         DECIMAL(10,2) NOT NULL,
-    FOREIGN KEY (id_pedido)        REFERENCES pedidos(id_pedido)   ON DELETE SET NULL,
-    FOREIGN KEY (id_plato)         REFERENCES platos(id_plato)     ON DELETE SET NULL,
-    FOREIGN KEY (id_entrada)       REFERENCES entradas(id_entrada) ON DELETE SET NULL,
-    FOREIGN KEY (id_entrada_extra) REFERENCES entradas(id_entrada) ON DELETE SET NULL
+    id_detalle INT AUTO_INCREMENT PRIMARY KEY,
+    id_pedido INT NOT NULL,
+    id_plato INT DEFAULT NULL,
+    id_entrada INT DEFAULT NULL,
+    cantidad INT NOT NULL DEFAULT 1,
+    precio_unitario DECIMAL(10,2) NOT NULL,
+    subtotal DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (id_pedido) REFERENCES pedidos(id_pedido) ON DELETE RESTRICT,
+    FOREIGN KEY (id_plato) REFERENCES platos(id_plato) ON DELETE SET NULL,
+    FOREIGN KEY (id_entrada) REFERENCES entradas(id_entrada) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+CREATE TABLE detalle_entrada_extra (
+    id_detalle_extra INT AUTO_INCREMENT PRIMARY KEY,
+    id_pedido INT NOT NULL,
+    id_entrada INT DEFAULT NULL,
+    cantidad INT NOT NULL DEFAULT 1,
+    precio_unitario DECIMAL(10,2) NOT NULL,
+    subtotal DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (id_pedido)REFERENCES pedidos(id_pedido) ON DELETE RESTRICT,
+    FOREIGN KEY (id_entrada) REFERENCES entradas(id_entrada) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 CREATE TABLE pagos (
-    id_pago      INT AUTO_INCREMENT PRIMARY KEY,
-    id_pedido    INT DEFAULT NULL,
-    id_usuario   INT DEFAULT NULL,
-    monto        DECIMAL(10,2) NOT NULL,
-    metodo_pago  ENUM('Efectivo','Yape'),
-    foto_yape    VARCHAR(255) DEFAULT NULL,
-    fecha_pago   DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (id_pedido)  REFERENCES pedidos(id_pedido)   ON DELETE SET NULL,
-    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE SET NULL
+    id_pago INT AUTO_INCREMENT PRIMARY KEY,
+    id_pedido INT NOT NULL,
+    id_usuario INT DEFAULT NULL,
+    monto DECIMAL(10,2) NOT NULL,
+    metodo_pago ENUM('Efectivo','Yape') NOT NULL,
+    foto_yape VARCHAR(255) DEFAULT NULL,
+    fecha_pago DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_pedido) REFERENCES pedidos(id_pedido) ON DELETE RESTRICT,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 CREATE TABLE asistencias (
     id_asistencia INT AUTO_INCREMENT PRIMARY KEY,
-    id_usuario    INT DEFAULT NULL,
-    fecha         DATE NOT NULL,
-    hora_entrada  TIME,
-    hora_salida   TIME,
-    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE SET NULL
+    id_usuario INT DEFAULT NULL,
+    fecha DATE NOT NULL,
+    hora_entrada TIME,
+    hora_salida TIME,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 ```
 </details>
