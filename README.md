@@ -52,13 +52,12 @@ registro claro de las ventas y
 ganancias del negocio. 
 
 <details>
-<summary>###REQUERIMIENTOS FUNCIONALES Y NO FUNCIONALES</summary>
+<summary>REQUERIMIENTOS FUNCIONALES Y NO FUNCIONALES</summary>
+
+</details>
 
 <details>
-
-<details>
-BASE DE DATOS - MYSQL
-  
+<summary>BASE DE DATOS - MYSQL</summary>
 El sistema cuenta con 7 tablas principales:
 
 <details>
