@@ -7,13 +7,6 @@
   <button><img src="https://1000logos.net/wp-content/uploads/2021/05/Trello-logo.png" width="120" height="50" style="vertical-align:middle; margin-right: 50px;">
   </button>
 </a>
-&nbsp;
-<a href="">
-  <button><img src="https://images.seeklogo.com/logo-png/45/2/draw-io-logo-png_seeklogo-451991.png" width="120" height="50" style="vertical-align:middle; margin-right: 10px;">
-  </button>
-</a> 
-
-
 
 # SISTEMA WEB DE GESTIÓN PARA UN RESTAURANTE
 
