@@ -1,6 +1,7 @@
 | <a href="https://www.figma.com/design/DI0Ip5gNiILjmSuuFt7TbY/PROYECTO-2.0?node-id=0-1&t=ObYHDFb0h2PnhTpA-1
 ">
-  <button>FIGMA</button>
+  <button><img src="https://cdn-icons-png.flaticon.com/512/5968/5968705.png" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
+</button>
 </a> | <a href="https://trello.com/invite/b/69a1f85c0ed4e45d0fc17d32/ATTIe2fd04a19811f5b4cfb389993cdd4bc18F42DF2C/restaurante-milagros-proyecto-senati">
   <button>Texto del Botón</button>
 </a> |
