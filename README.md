@@ -9,7 +9,7 @@
 </a>
 &nbsp;
 <a href="">
-  <button><img src="https://pupil-prod.s3.amazonaws.com/media/education/academictools/2022/03/11/draw-io.png" width="120" height="50" style="vertical-align:middle; margin-right: 1px;">
+  <button><img src="https://images.seeklogo.com/logo-png/45/2/draw-io-logo-png_seeklogo-451991.png" width="120" height="50" style="vertical-align:middle; margin-right: 10px;">
   </button>
 </a> 
 
