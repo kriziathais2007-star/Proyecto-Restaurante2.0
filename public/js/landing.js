@@ -1,3 +1,12 @@
+document.getElementById("playBtn").addEventListener("click", function () {
+    document.getElementById("videoBox").innerHTML = `
+        <video controls autoplay width="100%" height="100%">
+            <source src="/Proyecto-Restaurante2.0/public/recursos/demo.mp4" type="video/mp4">
+            Tu navegador no soporta videos.
+        </video>
+    `;
+});
+
 
 document.addEventListener('DOMContentLoaded', () => {
     const menuBtn         = document.getElementById('menuBtn');
@@ -163,13 +172,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    const playBtn = document.getElementById('playBtn');
-    if (playBtn) {
-        playBtn.addEventListener('click', () => {
-            // Reemplazar con apertura de modal o redirección real
-            alert('¡Abre el demo interactivo!');
-        });
-    }
 
     const fadeOverlay = document.getElementById('fadeOverlay');
     if (fadeOverlay) {
@@ -183,5 +185,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
 
 });

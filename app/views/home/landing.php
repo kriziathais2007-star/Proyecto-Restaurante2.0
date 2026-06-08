@@ -75,7 +75,7 @@
             desde una sola plataforma
         </p>
         <div class="hero-btns">
-            <a href="#" class="btn-primary">Ver Demo en Vivo</a>
+            <a href="#demo" type="video/mp4" class="btn-primary">Ver Demo en Vivo</a>
             <a href="#" class="btn-outline">Solicitar Demo</a>
         </div>
     </div>
@@ -153,13 +153,9 @@
         No necesitas registrarte.
     </p>
     <div class="demo-video-wrap" id="videoBox">
-  <button class="play-btn" id="playBtn" aria-label="Reproducir demo">
-    ▶
-  </button>
-</div>
-
-    <div class="demo-btn-wrap">
-        <a href="" class="btn-outline">Ver Demo en Vivo</a>
+        <button class="play-btn" id="playBtn" aria-label="Reproducir demo">
+        ▶
+        </button>
     </div>
 </section>
 

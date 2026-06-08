@@ -686,4 +686,30 @@ body {
 
     /* Section title más pequeño */
     .section-title { font-size: 1.2rem; }
+    .demo-video-wrap{
+    width: 100%;
+    max-width: 700px;
+    height: 280px;
+    background: #000;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.play-btn{
+    width: 80px;
+    height: 80px;
+    border: none;
+    border-radius: 50%;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.demo-video-wrap video{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 }
