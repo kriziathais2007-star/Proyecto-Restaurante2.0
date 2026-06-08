@@ -63,105 +63,100 @@ ganancias del negocio.
 | El sistema debe cerrar sesión automáticamente por inactividad | Los pedidos deben actualizarse en tiempo real | El sistema debe mostrar mensajes claros cuando ocurra un error | El sistema debe permitir futuras mejoras o actualizaciones |
 
 ## BASE DE DATOS 
-El sistema cuenta con 5 tablas principales:
+El sistema cuenta con 7 tablas principales:
 
 
 | TABLA | DESCRIPCIÓN |
 | ------------- | ------------- |
-| Usuario | Representa a las personas que utilizan el sistema, como administrador, mozo o personal de cocina. Permite identificar quién realiza acciones dentro del sistema. |
-| Asistencia | Registra la asistencia del personal, incluyendo la hora de entrada, salida y el estado (asistió, tarde o falta). |
-| Pedidos | Contiene la información de los pedidos realizados por los mozos, como la mesa, la hora y el estado del pedido. |
-| Cocina | Muestra los pedidos enviados por los mozos para su preparación. Permite actualizar el estado de los platos (pendiente, en preparación, servido). |
-| Menú | Administra los platos disponibles del restaurante, permitiendo agregar, editar o eliminar platos, así como indicar su disponibilidad. |
-<details>
+
 
 <summary> DIAGRAMA ENTIDAD RELACIÓN (DER)</summary>
 
-<img src='Recursos/entidad-relacion.png'>
+<img src=''>
 
 </details>
 
 <details>
 <summary> DIAGRAMA RELACIONAL (MR)</summary>
 
-<img src='Recursos/modelo relacional.png'>
+<img src=''>
 
 </details>
 
-## CARDINALIDADES
-### USUARIO -- ASISTENCIA (1:N)
-Un usuario puede tener muchas asistencias, y una asistencia pertenece a un solo usuario.
-### USUARIO -- PEDIDO (1:N)
-Un mozo puede registprar muchos pedidos y un pedido lo hace un solo usuario.
-### PEDIDO -- PLATO (N:M)
-Muchos pedidos puedes pertecen a varios platos, tanto como muchos platos pueden estar en muchos pedidos.
-
-## ESTO SE RESUELVE CON: 'DETALLE PEDIDO'
-- Al tener la relación muchos a muchos (N:M), se crea una entidad asociativa o tambien conocida como entidad intermedia.
-  
-### PEDIDO -- DETALLE PEDIDO (1:N)
-Un pedido puede tener varios platos, pero cada detalle pertenece a un pedido.
-### PLATO -- DETALLE_PEDIDO (1:N)
-Un plato puede estar en muchos pedidos, pero cada detalle tiene un solo plato
 
 ## BASE DE DATOS 
 ``` mysql
-CREATE DATABASE restaurante;
-USE restaurante;
+CREATE DATABASE restaurante_db;
+USE restaurante_db;
 
--- Usuarios
 CREATE TABLE usuarios (
-    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    usuario VARCHAR(50) UNIQUE NOT NULL,
-    contraseña VARCHAR(255) NOT NULL,
-    rol VARCHAR(30) NOT NULL
+    id_usuario  INT AUTO_INCREMENT PRIMARY KEY,
+    nombre      VARCHAR(100) NOT NULL,
+    usuario     VARCHAR(50) UNIQUE NOT NULL,
+    clave  VARCHAR(255) NOT NULL,
+    rol         ENUM('admin','mesero','cocina') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 CREATE TABLE entradas (
-    id_entrada INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL
+    id_entrada  INT AUTO_INCREMENT PRIMARY KEY,
+    nombre      VARCHAR(100) NOT NULL,
+    precio      DECIMAL(10,2) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+CREATE TABLE platos (
+    id_plato    INT AUTO_INCREMENT PRIMARY KEY,
+    nombre      VARCHAR(100) NOT NULL,
+    descripcion TEXT,
+    precio      DECIMAL(10,2) NOT NULL,
+    disponible  ENUM('disponible','no disponible') not null
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 CREATE TABLE pedidos (
-    id_pedido INT AUTO_INCREMENT PRIMARY KEY,
-    tipo ENUM('Mesa','Llevar') NOT NULL,
-    numero_mesa INT NULL,
-    fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
-    total DECIMAL(10,2) DEFAULT 0,
-    estado ENUM('Pendiente','Preparando','Entregado','Pagado') DEFAULT 'Pendiente'
+    id_pedido    INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario   INT DEFAULT NULL,               
+    tipo         ENUM('Mesa','Llevar') NOT NULL,
+    numero_mesa  INT NULL,                       
+    fecha        DATETIME DEFAULT CURRENT_TIMESTAMP,
+    total        DECIMAL(10,2) DEFAULT 0,
+    estado       ENUM('Pendiente','Preparando','Entregado','Pagado') DEFAULT 'Pendiente',
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 CREATE TABLE detalle_pedido (
-    id_detalle INT AUTO_INCREMENT PRIMARY KEY,
-    id_pedido INT DEFAULT NULL,
-    tipo_item ENUM('Plato','Entrada Extra') NOT NULL,
-    id_entrada INT DEFAULT NULL,
-    cantidad INT NOT NULL DEFAULT 1,
-    precio_unitario DECIMAL(10,2) NOT NULL,
-    subtotal DECIMAL(10,2) NOT NULL,
-    FOREIGN KEY (id_pedido) REFERENCES pedidos(id_pedido) ON DELETE SET NULL,
-    FOREIGN KEY (id_entrada) REFERENCES entradas(id_entrada) ON DELETE SET NULL
+    id_detalle       INT AUTO_INCREMENT PRIMARY KEY,
+    id_pedido        INT DEFAULT NULL,
+    tipo_item        ENUM('Plato','Entrada Adicional') NOT NULL,
+    id_plato         INT DEFAULT NULL,
+    id_entrada       INT DEFAULT NULL,
+    id_entrada_extra INT DEFAULT NULL,  
+    cantidad         INT NOT NULL DEFAULT 1,
+    precio_unitario  DECIMAL(10,2) NOT NULL,
+    subtotal         DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (id_pedido)        REFERENCES pedidos(id_pedido)   ON DELETE SET NULL,
+    FOREIGN KEY (id_plato)         REFERENCES platos(id_plato)     ON DELETE SET NULL,
+    FOREIGN KEY (id_entrada)       REFERENCES entradas(id_entrada) ON DELETE SET NULL,
+    FOREIGN KEY (id_entrada_extra) REFERENCES entradas(id_entrada) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 CREATE TABLE pagos (
-    id_pago INT AUTO_INCREMENT PRIMARY KEY,
-    id_pedido INT DEFAULT NULL,
-    monto DECIMAL(10,2) NOT NULL,
-    metodo_pago ENUM('Efectivo','Yape'),
-    foto_yape VARCHAR(255) DEFAULT NULL,
-    fecha_pago DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (id_pedido) REFERENCES pedidos(id_pedido) ON DELETE SET NULL
+    id_pago      INT AUTO_INCREMENT PRIMARY KEY,
+    id_pedido    INT DEFAULT NULL,
+    id_usuario   INT DEFAULT NULL,
+    monto        DECIMAL(10,2) NOT NULL,
+    metodo_pago  ENUM('Efectivo','Yape'),
+    foto_yape    VARCHAR(255) DEFAULT NULL,
+    fecha_pago   DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_pedido)  REFERENCES pedidos(id_pedido)   ON DELETE SET NULL,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 CREATE TABLE asistencias (
     id_asistencia INT AUTO_INCREMENT PRIMARY KEY,
-    id_usuario INT DEFAULT NULL,
-    fecha DATE NOT NULL,
-    hora_entrada TIME,
-    hora_salida TIME,
+    id_usuario    INT DEFAULT NULL,
+    fecha         DATE NOT NULL,
+    hora_entrada  TIME,
+    hora_salida   TIME,
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
-````
-## FIGMA
-https://www.figma.com/design/DI0Ip5gNiILjmSuuFt7TbY/PROYECTO-2.0?node-id=0-1&p=f&t=wVcbaAbDHAp3I3Lg-0
+```
+
