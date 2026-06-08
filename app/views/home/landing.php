@@ -6,7 +6,7 @@
     <title>Restowi – Sistema para Restaurantes</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>/../public/css/landing.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>/public/css/landing.css">
 </head>
 <body>
 
@@ -28,13 +28,9 @@
         <a href="#precio" class="dashboard-link">Precio</a>
         <a href="#contacto" class="dashboard-link">Contacto</a>
         <div class="dropdown">
-            <a href="#" class="dashboard-link">
-             PROBAR DEMO ▾
+            <a href="<?= BASE_URL ?>/login" class="dashboard-link">
+             PROBAR DEMO
             </a>
-        
-            <div class="dropdown-content">
-                <a href="<?= BASE_URL ?>/login">Iniciar sesión</a>
-            </div>
         </div>
     </nav>
 </aside>
@@ -54,13 +50,9 @@
         <li><a href="#precio">Precio</a></li>
         <li><a href="#contacto">Contacto</a></li>
         <li class="dropdown">
-            <a href="#" class="btn-nav">
-            Probar Demo ▾
+            <a href="<?= BASE_URL ?>/login" class="btn-primary">
+             PROBAR DEMO
             </a>
-
-             <div class="dropdown-content">
-                <a href="<?= BASE_URL ?>/login">Iniciar sesión</a>
-            </div>
         </li>
     </ul>
 
@@ -199,7 +191,7 @@
 
         <div class="footer-about">
             <div class="footer-brand">
-                <div class="brand-icon"><i class="bi bi-cup-hot-fill"></i></div>
+                <div class="brand-icon"><i class="bi bi-shop" style="color: rgb(255, 255, 255);"></i></div>
                 RESTOWI
             </div>
             <p class="footer-tagline">
@@ -225,14 +217,10 @@
                 Descubre por qué somos la mejor opción para tu restaurante.
             </p>
             <div class="dropdown">
-            <a href="#" class="btn-primary">
-             PROBAR DEMO ▾
+            <a href="<?= BASE_URL ?>/login" class="btn-primary">
+             PROBAR DEMO
             </a>
-
-            <div class="dropdown-content">
-                <a href="<?= BASE_URL ?>/login">Iniciar sesión</a>
             </div>
-        </div>
         </div>
 
 
@@ -241,6 +229,6 @@
 <?php include __DIR__ . '/../layouts/footer-home.php'; ?>
 
 <div id="fadeOverlay"></div>
-<script src="<?php echo BASE_URL; ?>/../public/js/landing.js"></script>
+<script src="<?php echo BASE_URL; ?>/public/js/landing.js"></script>
 </body>
 </html>
