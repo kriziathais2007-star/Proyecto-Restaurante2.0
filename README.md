@@ -159,6 +159,7 @@ CREATE TABLE asistencias (
 <summary>IMAGENES DEL NEGOCIO</summary>
   
 <img src="recursos-git/prueba2.jpeg" alt="Texto alternativo" width="400">
+&nbsp;
 <video src="recursos-git/prueba3.mp4" width="600" controls></video>
 
 </details>
