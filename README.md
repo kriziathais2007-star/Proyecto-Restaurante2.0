@@ -3,6 +3,7 @@
   </button>
 </a>
 &nbsp;
+&nbsp;
 <a href="https://trello.com/invite/b/69a1f85c0ed4e45d0fc17d32/ATTIe2fd04a19811f5b4cfb389993cdd4bc18F42DF2C/restaurante-milagros-proyecto-senati">
   <button><img src="https://1000logos.net/wp-content/uploads/2021/05/Trello-logo.png" width="120" height="50" style="vertical-align:middle; margin-right: 50px;">
   </button>
@@ -57,9 +58,8 @@ ganancias del negocio.
 </details>
 
 <details>
-<summary>BASE DE DATOS - MYSQL</summary>
-El sistema cuenta con 7 tablas principales:
-
+<summary>DIAGRAMAS</summary>
+  
 <details>
 <summary> DIAGRAMA ENTIDAD RELACIÓN (DER)</summary>
 <img src=''>
@@ -70,8 +70,11 @@ El sistema cuenta con 7 tablas principales:
 <img src=''>
 </details>
 
+</details>
 
-## BASE DE DATOS 
+<details>
+<summary> BASE DE DATOS </summary>
+  
 ``` mysql
 CREATE DATABASE restaurante_db;
 USE restaurante_db;
