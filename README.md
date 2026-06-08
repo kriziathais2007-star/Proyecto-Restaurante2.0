@@ -160,7 +160,7 @@ CREATE TABLE asistencias (
   
 <img src="recursos-git/prueba2.jpeg" alt="Texto alternativo" width="400">
 &nbsp;
-<video src="recursos-git/demo.mp4" width="100%" controls></video>
+<video src="C:\laragon\www\Proyecto-Restaurante2.0\recursos-git\prueba3.mp4" width="100%" controls></video>
 
 </details>
 
