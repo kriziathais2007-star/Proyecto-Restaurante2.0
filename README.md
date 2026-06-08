@@ -1,11 +1,12 @@
-<a href="https://www.figma.com/design/DI0Ip5gNiILjmSuuFt7TbY/PROYECTO-2.0?node-id=0-1&t=ObYHDFb0h2PnhTpA-1
+| <a href="https://www.figma.com/design/DI0Ip5gNiILjmSuuFt7TbY/PROYECTO-2.0?node-id=0-1&t=ObYHDFb0h2PnhTpA-1
 ">
   <button>FIGMA</button>
-</a>
+</a> | <a href="https://trello.com/invite/b/69a1f85c0ed4e45d0fc17d32/ATTIe2fd04a19811f5b4cfb389993cdd4bc18F42DF2C/restaurante-milagros-proyecto-senati">
+  <button>Texto del Botón</button>
+</a> |
+
 
 # SISTEMA WEB DE GESTIÓN PARA UN RESTAURANTE
-https://trello.com/invite/b/69a1f85c0ed4e45d0fc17d32/ATTIe2fd04a19811f5b4cfb389993cdd4bc18F42DF2C/restaurante-milagros-proyecto-senati
-<img src="Recursos/Captura de pantalla 2026-04-20 183225.png">
 
 ## DESCRIPCIÓN DEL NEGOCIO
 #### NOMBRE: 
