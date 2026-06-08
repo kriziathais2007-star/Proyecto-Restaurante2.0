@@ -51,12 +51,14 @@ personal, organizar la preparación de
 los platos en cocina y llevar un 
 registro claro de las ventas y 
 ganancias del negocio. 
-
+&nbsp;
+&nbsp;
 <details>
 <summary>REQUERIMIENTOS FUNCIONALES Y NO FUNCIONALES</summary>
 
 </details>
-
+&nbsp;
+&nbsp;
 <details>
 <summary>DIAGRAMAS</summary>
   
@@ -71,7 +73,8 @@ ganancias del negocio.
 </details>
 
 </details>
-
+&nbsp;
+&nbsp;
 <details>
 <summary> BASE DE DATOS </summary>
   
@@ -149,6 +152,11 @@ CREATE TABLE asistencias (
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 ```
+</details>
+&nbsp;
+&nbsp;
+<details>
+<summary>IMAGENES DEL NEGOCIO</summary>
 </details>
 
 
