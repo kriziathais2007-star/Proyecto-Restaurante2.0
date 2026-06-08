@@ -51,44 +51,28 @@ los platos en cocina y llevar un
 registro claro de las ventas y 
 ganancias del negocio. 
 
+<details>
 # REQUERIMIENTOS FUNCIONALES Y NO FUNCIONALES
+  
 ## REQUERIMIENTOS FUNCIONALES
 
-| USUARIO | ASISTENCIA | PEDIDOS | COCINA | MENÚ |
-| ------------- | ------------- | ------------- | ------------- | ------------- |
-| El sistema debe permitir registrar nuevos usuarios | El sistema debe registrar la hora de entrada del personal | El sistema debe permitir a los mozos registrar pedidos para las mesas | El sistema debe mostrar a cocina los pedidos enviados por los mozos | El sistema debe mostrar la lista de platos disponibles |
-| El sistema debe permitir iniciar sesión con usuario y contraseña | El sistema debe registrar la hora de salida del personal  | El sistema debe registrar automáticamente la hora en que se realizó el pedido | El sistema debe permitir cambiar el estado del plato a “servido” | El sistema debe  permitir agregar nuevos platos |
-| El sistema debe permitir editar los datos de los usuarios | El sistema debe determinar si el empleado llegó puntual o tarde | El sistema debe mostrar la lista de pedidos registrados | El sistema debe mostrar los pedidos ordenados según la hora en que se realizaron | El sistema debe permitir editar la información de los platos |
-| El sistema debe permitir eliminar usuarios del sistema | El sistema debe mostrar el historial de asistencia por empleado | El sistema debe mostrar el estado del pedido (pendiente, en preparación, servido, entregado) | El sistema debe indicar cuando un pedido está listo para entregar | El sistema debe permitir eliminar platos cuando ya no estén disponibles |
-| El sistema debe permitir cerrar sesión de forma segura |  | El sistema debe permitir que el mozo marque el pedido como entregado |  | El sistema debe indicar cuando un plato no está disponible |
-
 ## REQUERIMIENTOS NO FUNCIONALES
-| SEGURIDAD | RENDIMIENTO | USABILIDAD | MANTENIBILIDAD |
-| ------------- | ------------- | ------------- | ------------- |
-| Las contraseñas deben almacenarse cifradas en la base de datos | El sistema debe responder en menos de 3 segundos | La interfaz debe ser sencilla e intuitiva para los empleados | El sistema debe estar desarrollado bajo arquitectura MVC |
-| El sistema debe restringir el acceso según el rol (administrador, mozo, cocina) | El sistema debe permitir varios usuarios conectados al mismo tiempo | El sistema debe ser accesible desde cualquier navegador web | La base de datos debe estar normalizada |
-| El sistema debe cerrar sesión automáticamente por inactividad | Los pedidos deben actualizarse en tiempo real | El sistema debe mostrar mensajes claros cuando ocurra un error | El sistema debe permitir futuras mejoras o actualizaciones |
 
 <details>
+
+<details>
+
 ### BASE DE DATOS - MYSQL
 El sistema cuenta con 7 tablas principales:
 
-
-| TABLA | DESCRIPCIÓN |
-| ------------- | ------------- |
-
-
+<details>
 <summary> DIAGRAMA ENTIDAD RELACIÓN (DER)</summary>
-
 <img src=''>
-
 </details>
 
 <details>
 <summary> DIAGRAMA RELACIONAL (MR)</summary>
-
 <img src=''>
-
 </details>
 
 
