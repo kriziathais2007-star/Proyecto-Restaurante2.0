@@ -157,6 +157,9 @@ CREATE TABLE asistencias (
 &nbsp;
 <details>
 <summary>IMAGENES DEL NEGOCIO</summary>
+<img src="recursos/prueba2.jpeg" alt="Texto alternativo" width="400">
+<video src="recursos/prueba3.mp4" width="600" controls></video>
+
 </details>
 
 
