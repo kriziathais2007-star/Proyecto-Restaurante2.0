@@ -52,7 +52,7 @@ registro claro de las ventas y
 ganancias del negocio. 
 
 <details>
-REQUERIMIENTOS FUNCIONALES Y NO FUNCIONALES
+<summary>###REQUERIMIENTOS FUNCIONALES Y NO FUNCIONALES</summary>
 
 <details>
 
