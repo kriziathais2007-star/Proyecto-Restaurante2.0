@@ -1,7 +1,9 @@
+
 <a href="https://www.figma.com/design/DI0Ip5gNiILjmSuuFt7TbY/PROYECTO-2.0?node-id=0-1&t=ObYHDFb0h2PnhTpA-1">
   <button><img src="https://images.icon-icons.com/2699/PNG/512/figma_logo_icon_171159.png" width="120" height="50" style="vertical-align: middle; margin-right: 50px;">
   </button>
 </a>
+&nbsp;
 &nbsp;
 &nbsp;
 <a href="https://trello.com/invite/b/69a1f85c0ed4e45d0fc17d32/ATTIe2fd04a19811f5b4cfb389993cdd4bc18F42DF2C/restaurante-milagros-proyecto-senati">
@@ -155,7 +157,8 @@ CREATE TABLE asistencias (
 <details>
 <summary>IMAGENES DEL NEGOCIO</summary>
 
-<img src="recursos-git/prueba2.jpeg" alt="Texto alternativo" width="400" style="vertical-align: middle;">&nbsp;&nbsp;&nbsp;<video src="recursos-git/prueba3.mp4" width="400" controls style="vertical-align: middle;"></video>
+<img src="recursos-git/prueba2.jpeg" alt="Texto alternativo" width="400" style="vertical-align: middle;">&nbsp;&nbsp;&nbsp;
+<video src="https://github.com/user-attachments/assets/646bb3ee-729c-4340-951f-e4a97e5edfee" width="200" controls style="vertical-align: middle;"></video>
 
 </details>
 
