@@ -63,7 +63,18 @@ ganancias del negocio.
 &nbsp;
 <details>
 <summary>DIAGRAMAS</summary>
-  
+	
+### CARDINALIDADES
+- USUARIO Realiza PEDIDO (1:N) Un usuario puede hacer muchos pedidos. Cada pedido tiene exactamente un usuario (id_usuario NOT NULL en pedidos).
+- USUARIO Tiene ASISTENCIA (1:N) Un usuario tiene muchos registros de asistencia (uno por día). Cada asistencia pertenece a un solo usuario.
+- USUARIO Registra PAGO (1:N)	Un usuario (cajero/mesero) puede registrar varios pagos. Cada pago fue registrado por un solo usuario.
+- PEDIDO Tiene DETALLE_PEDIDO (1:N) Un pedido tiene uno o más ítems (platos/entradas). Cada detalle pertenece a un único pedido.
+- PEDIDO Tiene DETALLE_ENTRADA_EXTRA (1:N) Un pedido puede tener varias entradas extra adicionales. Cada extra corresponde a un solo pedido.
+- PEDIDO genera PAGO (1:N) Un pedido puede generar varios registros de pago (pagos parciales, Yape + efectivo, etc.). Cada pago referencia un solo pedido.
+- PLATO Corresponde DETALLE_PEDIDO (1:N) Un plato puede estar en muchos detalles (pedidos distintos). Cada detalle referencia un plato (id_plato en detalle_pedido).
+- ENTRADA Corresponde DETALLE_PEDIDO (1:N) Una entrada puede aparecer en varios detalles. Cada detalle puede referenciar una entrada (id_entrada nullable — un detalle puede ser solo plato).
+- ENTRADA Corresponde DETALLE_ENTRADA_EXTRA (1:N) Una entrada puede pedirse como extra en muchos pedidos. Cada registro extra referencia una sola entrada.
+
 <summary> DIAGRAMA ENTIDAD RELACIÓN (DER)</summary>
 <img src='recursos-git/modelo_entidad.jpeg'>
 
