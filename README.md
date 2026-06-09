@@ -58,6 +58,14 @@ ganancias del negocio.
 <details>
 <summary>REQUERIMIENTOS FUNCIONALES Y NO FUNCIONALES</summary>
 
+## REQUERIMIENTOS NO FUNCIONALES
+| SEGURIDAD | RENDIMIENTO | USABILIDAD | MANTENIBILIDAD |
+| ------------- | ------------- | ------------- | ------------- |
+| Las contraseñas deben almacenarse cifradas en la base de datos | El sistema debe responder en menos de 3 segundos | La interfaz debe ser sencilla e intuitiva para los empleados | El sistema debe estar desarrollado bajo arquitectura MVC |
+| El sistema debe restringir el acceso según el rol (administrador, mozo, cocina) | El sistema debe permitir varios usuarios conectados al mismo tiempo | El sistema debe ser accesible desde cualquier navegador web | La base de datos debe estar normalizada |
+| El sistema debe cerrar sesión automáticamente por inactividad | Los pedidos deben actualizarse en tiempo real | El sistema debe mostrar mensajes claros cuando ocurra un error | El sistema debe permitir futuras mejoras o actualizaciones |
+
+
 </details>
 &nbsp;
 &nbsp;
