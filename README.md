@@ -58,6 +58,12 @@ ganancias del negocio.
 <details>
 <summary>REQUERIMIENTOS FUNCIONALES Y NO FUNCIONALES</summary>
 
+## REQUERIMIENTOS FUNCIONALES
+|  UsuariosPedidos  |  Platos / Entradas  |  Detalle pedido  |  Pagos  |  Asistencia  |
+|  El sistema debe permitir registrar nuevos usuarios con nombre, usuario, clave y rol  |  El sistema debe permitir crear un pedido indicando tipo (mesa o para llevar) y número de mesa  |  El sistema debe permitir registrar platos con nombre, descripción y precio  |  El sistema debe permitir agregar platos y entradas a un pedido existente  |  El sistema debe registrar el pago de un pedido indicando monto y método de pago  |  El sistema debe registrar la hora de entrada del empleado cada día  |
+El sistema debe permitir editar los datos de un usuario existente	El sistema debe permitir cambiar el estado del pedido (pendiente, en proceso, entregado, cancelado)	El sistema debe permitir registrar entradas con nombre y precio	El sistema debe calcular automáticamente el subtotal por ítem (cantidad × precio unitario)	El sistema debe permitir registrar pagos con foto del comprobante para el método Yape	El sistema debe registrar la hora de salida del empleado
+El sistema debe permitir activar o desactivar usuarios según su estado laboral	El sistema debe calcular el total del pedido a partir de sus detalles	El sistema debe permitir activar o desactivar platos y entradas del menú	El sistema debe permitir agregar entradas extra a un pedido ya registrado	El sistema debe asociar cada pago al usuario que lo registró	El sistema debe permitir consultar el historial de asistencia por empleado y fecha
+El sistema debe autenticar al usuario con su usuario y clave para acceder al sistema	El sistema debe permitir consultar pedidos por fecha, estado o número de mesa	El sistema debe mostrar solo los platos y entradas activos al momento de crear un pedido	El sistema debe calcular el subtotal de las entradas extra por separado	El sistema debe permitir consultar todos los pagos asociados a un pedido	El sistema debe calcular el tiempo trabajado por empleado por día
 ## REQUERIMIENTOS NO FUNCIONALES
 | SEGURIDAD | RENDIMIENTO | USABILIDAD | MANTENIBILIDAD |
 | ------------- | ------------- | ------------- | ------------- |
