@@ -65,7 +65,7 @@ ganancias del negocio.
 <summary>DIAGRAMAS</summary>
   
 <summary> DIAGRAMA ENTIDAD RELACIÓN (DER)</summary>
-<img src=''>
+<img src='recursos-git/modelo-relacional.jpeg'>
 
 <summary> DIAGRAMA RELACIONAL (MR)</summary>
 <img src='recursos-git/modelo-relacional.jpeg'>
