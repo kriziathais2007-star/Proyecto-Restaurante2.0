@@ -11,7 +11,7 @@ class LoginController extends Controller {
         // Si ya hay sesión activa, no tiene sentido mostrar el login.
         // Redirigimos directo al dashboard.
         if (isset($_SESSION['usuarios'])) {
-            $destino = $_SESSION['usuario']['rol'] === 'admin' ? '/dashboard' : '/asistencias';
+            $destino = $_SESSION['usuario']['rol'] === 'admin' ? '/dashboard' : '/asistencis';
             header('Location: ' . BASE_URL . $destino);
             exit;
         }
@@ -29,7 +29,7 @@ class LoginController extends Controller {
 
             if (empty($usuario) || empty($clave)) {
                 $error = "Completa todos los campos, por favor.";
-            } else {
+            } else { 
                 // Llamamos al modelo y le pedimos que verifique las credenciales.
                 // Si son correctas, $resultado tiene los datos del usuario.
                 // Si son incorrectas, $resultado es false.

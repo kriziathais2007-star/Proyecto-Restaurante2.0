@@ -95,6 +95,13 @@ $accionActual = $segmentos[1] ?? '';
             </a>
         </li>
         <!-- ================ END USUARIOS ================ -->
+         <li>
+            <a href="<?php echo BASE_URL; ?>??"
+                class="<?php echo $rutaActual === '??' ? 'activo' : ''; ?>">
+                <i class="fa-solid fa-money-bill"></i>
+                <span>Pagos</span>
+            </a>
+        </li>
 
         <li class="nav-logout">
             <a href="<?php echo BASE_URL; ?>/logout" id="btn-logout">
