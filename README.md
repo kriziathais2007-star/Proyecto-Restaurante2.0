@@ -115,7 +115,7 @@ ganancias del negocio.
 CREATE DATABASE restaurante_db_2;
 USE restaurante_db_2;
 
-CREATE TABLE usuarios (
+CREATE TABLE usuario (
     id_usuario INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     usuario VARCHAR(50) UNIQUE NOT NULL,
@@ -123,14 +123,14 @@ CREATE TABLE usuarios (
     rol ENUM('admin','mesero','cocina') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
-CREATE TABLE entradas (
+CREATE TABLE entrada (
     id_entrada INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     precio DECIMAL(10,2) NOT NULL DEFAULT 0,
     activo BOOLEAN DEFAULT TRUE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
-CREATE TABLE platos (
+CREATE TABLE plato (
     id_plato INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     descripcion TEXT,
@@ -138,7 +138,7 @@ CREATE TABLE platos (
 	activo BOOLEAN DEFAULT TRUE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
-CREATE TABLE pedidos (
+CREATE TABLE pedido (
     id_pedido INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT DEFAULT NULL,
     tipo ENUM('Mesa','Llevar') NOT NULL,
@@ -146,7 +146,7 @@ CREATE TABLE pedidos (
     fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
     total DECIMAL(10,2) DEFAULT 0,
     estado ENUM('Pendiente','Preparando','Entregado','Pagado','Cancelado') DEFAULT 'Pendiente',
-    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE SET NULL
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 CREATE TABLE detalle_pedido (
@@ -157,9 +157,9 @@ CREATE TABLE detalle_pedido (
     cantidad INT NOT NULL DEFAULT 1,
     precio_unitario DECIMAL(10,2) NOT NULL,
     subtotal DECIMAL(10,2) NOT NULL,
-    FOREIGN KEY (id_pedido) REFERENCES pedidos(id_pedido) ON DELETE RESTRICT,
-    FOREIGN KEY (id_plato) REFERENCES platos(id_plato) ON DELETE SET NULL,
-    FOREIGN KEY (id_entrada) REFERENCES entradas(id_entrada) ON DELETE SET NULL
+    FOREIGN KEY (id_pedido) REFERENCES pedido(id_pedido) ON DELETE RESTRICT,
+    FOREIGN KEY (id_plato) REFERENCES plato(id_plato) ON DELETE SET NULL,
+    FOREIGN KEY (id_entrada) REFERENCES entrada(id_entrada) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 CREATE TABLE detalle_entrada_extra (
@@ -169,11 +169,11 @@ CREATE TABLE detalle_entrada_extra (
     cantidad INT NOT NULL DEFAULT 1,
     precio_unitario DECIMAL(10,2) NOT NULL,
     subtotal DECIMAL(10,2) NOT NULL,
-    FOREIGN KEY (id_pedido)REFERENCES pedidos(id_pedido) ON DELETE RESTRICT,
-    FOREIGN KEY (id_entrada) REFERENCES entradas(id_entrada) ON DELETE SET NULL
+    FOREIGN KEY (id_pedido)REFERENCES pedido(id_pedido) ON DELETE RESTRICT,
+    FOREIGN KEY (id_entrada) REFERENCES entrada(id_entrada) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
-CREATE TABLE pagos (
+CREATE TABLE pago (
     id_pago INT AUTO_INCREMENT PRIMARY KEY,
     id_pedido INT NOT NULL,
     id_usuario INT DEFAULT NULL,
@@ -181,17 +181,17 @@ CREATE TABLE pagos (
     metodo_pago ENUM('Efectivo','Yape') NOT NULL,
     foto_yape VARCHAR(255) DEFAULT NULL,
     fecha_pago DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (id_pedido) REFERENCES pedidos(id_pedido) ON DELETE RESTRICT,
-    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)ON DELETE SET NULL
+    FOREIGN KEY (id_pedido) REFERENCES pedido(id_pedido) ON DELETE RESTRICT,
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
-CREATE TABLE asistencias (
+CREATE TABLE asistencia (
     id_asistencia INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT DEFAULT NULL,
     fecha DATE NOT NULL,
     hora_entrada TIME,
     hora_salida TIME,
-    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)ON DELETE SET NULL
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 ```
 </details>
