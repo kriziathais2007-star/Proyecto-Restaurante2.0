@@ -210,6 +210,7 @@ CREATE TABLE asistencia (
 
 <img src="Untitled.jpg"  width="200" height="200">
 
+
 # Usuario  : admin
 &nbsp;
 # Clave    : 0305
