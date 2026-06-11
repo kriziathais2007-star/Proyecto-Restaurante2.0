@@ -8,8 +8,10 @@
   --rosa-900: #993556;
 }
 
-body { background: var(--rosa-50); }
-main { padding: 1.5rem; }
+body { 
+    background: var(--rosa-50); }
+main { 
+    padding: 1.5rem; }
 
 header {
   display: flex;
@@ -32,13 +34,31 @@ header h1 { font-size: 22px; color: var(--rosa-200); }
   cursor: pointer;
   transition: background 0.18s;
 }
-.btn-registrar:hover { background: var(--rosa-600); }
+.btn-registrar:hover { 
+    background: var(--rosa-600); 
+}
 
-/* ===== TABLA ===== */
-.table-responsive { background: #fff; border-radius: 12px; border: 0.5px solid var(--rosa-200); overflow: hidden; }
-.table { width: 100%; border-collapse: collapse; font-size: 14px; }
-.table thead tr { background: var(--rosa-100); }
-.table thead th { padding: 10px 14px; text-align: left; color: var(--rosa-900); font-weight: 500; font-size: 13px; border-bottom: 0.5px solid var(--rosa-200); }
+.table-responsive { 
+    background: #fff; 
+    border-radius: 12px; 
+    border: 0.5px solid var(--rosa-200); 
+    overflow: hidden; 
+}
+.table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    font-size: 14px; 
+}
+.table thead tr { 
+    background: var(--rosa-100); 
+}
+.table thead th { 
+    padding: 10px 14px; 
+    text-align: left; color: var(--rosa-900); 
+    font-weight: 500; 
+    font-size: 13px; 
+    border-bottom: 0.5px solid var(--rosa-200); 
+}
 .table tbody tr { border-bottom: 0.5px solid #fce8f0; transition: background 0.15s; }
 .table tbody tr:last-child { border-bottom: none; }
 .table tbody tr:hover { background: var(--rosa-50); }

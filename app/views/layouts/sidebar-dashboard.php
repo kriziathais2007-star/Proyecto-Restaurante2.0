@@ -72,8 +72,8 @@ $rol          = $_SESSION['usuario']['rol'] ?? '';
 
         <!-- ================ START PLATOS ================ -->
         <li>
-            <a href="<?php echo BASE_URL; ?>??"
-                class="<?php echo $rutaActual === '??' ? 'activo' : ''; ?>">
+            <a href="<?php echo BASE_URL; ?>/platos"
+                class="<?php echo $rutaActual === 'platos' ? 'activo' : ''; ?>">
                 <i class="fa-solid fa-utensils"></i>
                 <span>Platos</span>
             </a>
