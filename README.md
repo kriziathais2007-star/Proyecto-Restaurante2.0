@@ -210,9 +210,8 @@ CREATE TABLE asistencia (
 
 <img src="Untitled.jpg"  width="200" height="200">
 
-
-# Usuario  : admin
-# Clave    : 0305
+<h2 style="vertical-align:middle; margin-right: 50px;">Usuario  : admin</h2>
+<h2>Clave    : 0305</h2>
 
 
 
