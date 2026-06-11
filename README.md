@@ -1,4 +1,5 @@
-<img src="Untitled.jpg">
+## PRUEBA DE LA APLICACIÓN
+<img src="Untitled.jpg"  width="50" height="50">
 
 
 
