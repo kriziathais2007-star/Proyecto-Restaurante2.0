@@ -212,7 +212,6 @@ CREATE TABLE asistencia (
 
 
 # Usuario  : admin
-&nbsp;
 # Clave    : 0305
 
 
