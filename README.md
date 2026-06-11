@@ -208,7 +208,7 @@ CREATE TABLE asistencia (
 
 ## PRUEBA DE LA APLICACIÓN
 
-<img src="Untitled.jpg"  width="160" height="160">
+<img src="Untitled.jpg"  width="200" height="200">
 
 
 
