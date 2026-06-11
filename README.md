@@ -209,10 +209,10 @@ CREATE TABLE asistencia (
 ## PRUEBA DE LA APLICACIÓN
 
 <img src="Untitled.jpg"  width="200" height="200">
-<div class = "textos" style="vertical-align:middle; margin-right: 50px;">
-<h2>Usuario  : admin</h2>
-<h2>Clave    : 0305</h2>
-</div>
+
+|  Usuario  |   Clave   |
+| --------- | --------- |
+|   admin   |   1234    |
 
 
 
