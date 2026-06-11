@@ -1,7 +1,3 @@
-## PRUEBA DE LA APLICACIÓN
-<img src="Untitled.jpg"  width="100" height="100">
-
-
 
 <a href="https://www.figma.com/design/DI0Ip5gNiILjmSuuFt7TbY/PROYECTO-2.0?node-id=0-1&t=ObYHDFb0h2PnhTpA-1">
   <button><img src="https://images.icon-icons.com/2699/PNG/512/figma_logo_icon_171159.png" width="120" height="50" style="vertical-align: middle; margin-right: 50px;">
@@ -209,6 +205,9 @@ CREATE TABLE asistencia (
 <video src="https://github.com/user-attachments/assets/646bb3ee-729c-4340-951f-e4a97e5edfee" width="200" controls style="vertical-align: middle;"></video>
 
 </details>
+## PRUEBA DE LA APLICACIÓN
+<img src="Untitled.jpg"  width="140" height="140">
+
 
 
 
