@@ -1,5 +1,5 @@
 ## PRUEBA DE LA APLICACIÓN
-<img src="Untitled.jpg"  width="50" height="50">
+<img src="Untitled.jpg"  width="100" height="100">
 
 
 
