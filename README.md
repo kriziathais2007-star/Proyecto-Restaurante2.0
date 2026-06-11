@@ -212,7 +212,9 @@ CREATE TABLE asistencia (
 
 |  Usuario  |   Clave   |
 | --------- | --------- |
-|   admin   |   1234    |
+|  admin    |   0305    |
+|  mesero   |   1234    |
+| cocinero  |   2026    |
 
 
 
