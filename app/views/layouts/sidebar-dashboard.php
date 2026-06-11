@@ -93,8 +93,8 @@ $rol          = $_SESSION['usuario']['rol'] ?? '';
         <!-- ================ START PAGOS ================ -->
         <?php if (in_array($rol, ['admin', 'mesero'])): ?>
         <li>
-            <a href="<?php echo BASE_URL; ?>??"
-                class="<?php echo $rutaActual === '??' ? 'activo' : ''; ?>">
+            <a href="<?php echo BASE_URL; ?>/pagos"
+                class="<?php echo $rutaActual === 'pagos' ? 'activo' : ''; ?>">
                 <i class="fa-solid fa-money-bill"></i>
                 <span>Pagos</span>
             </a>
