@@ -41,7 +41,7 @@ $rol          = $_SESSION['usuario']['rol'] ?? '';
         <!-- ================ END DASHBOARD ================ -->
 
         <!-- ================ START PEDIDOS ================ -->
-        <?php if (in_array($rol, ['admin', 'mesero'])): ?>
+        <?php if (in_array($rol, ['admin', 'mesero', 'cocina'])): ?>
         <li class="<?php echo $rutaActual === 'pedidos' ? 'dropdown show' : 'dropdown'; ?>">
         <a href="#" class="dropbtn <?php echo $rutaActual === 'pedidos' ? 'activo' : ''; ?>">
             <i class="fa-solid fa-clipboard-list"></i>
@@ -49,18 +49,20 @@ $rol          = $_SESSION['usuario']['rol'] ?? '';
             <i class="fa-solid fa-chevron-down arrow"></i>
         </a>
         <div class="dropdown-content">
+            <?php if (in_array($rol, ['admin', 'mesero'])): ?>
             <a href="<?php echo BASE_URL; ?>/pedidos/croquis"
-                class="<?php echo ($rutaActual === 'pedidos' && $accionActual === 'croquis') ? 'activo' : ''; ?>">
-                <i class="fa-solid fa-table"></i>
+                class="<?php echo ($rutaActual === 'pedidos' && $accionActual === 'croquis') ? 'activo-sub' : ''; ?>">
+                <i class="fa-solid fa-table-cells"></i>
                 Mesa
             </a>
             <a href="<?php echo BASE_URL; ?>/pedidos/llevar"
-                class="<?php echo ($rutaActual === 'pedidos' && $accionActual === 'llevar') ? 'activo' : ''; ?>">
-                <i class="fa-solid fa-shopping-bag"></i>
+                class="<?php echo ($rutaActual === 'pedidos' && $accionActual === 'llevar') ? 'activo-sub' : ''; ?>">
+                <i class="fa-solid fa-bag-shopping"></i>
                 Llevar
             </a>
+            <?php endif; ?>
             <a href="<?php echo BASE_URL; ?>/pedidos/reportes"
-                class="<?php echo ($rutaActual === 'pedidos' && $accionActual === 'reportes') ? 'activo' : ''; ?>">
+                class="<?php echo ($rutaActual === 'pedidos' && $accionActual === 'reportes') ? 'activo-sub' : ''; ?>">
                 <i class="fa-solid fa-chart-bar"></i>
                 Reportes
             </a>

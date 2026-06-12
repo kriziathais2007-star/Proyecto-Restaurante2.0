@@ -1,211 +1,282 @@
+# 🍽️ Sistema de Restaurante — Documentación de Estudio
 
-<a href="https://www.figma.com/design/DI0Ip5gNiILjmSuuFt7TbY/PROYECTO-2.0?node-id=0-1&t=ObYHDFb0h2PnhTpA-1">
-  <button><img src="https://images.icon-icons.com/2699/PNG/512/figma_logo_icon_171159.png" width="120" height="50" style="vertical-align: middle; margin-right: 50px;">
-  </button>
-</a>
-&nbsp;
-&nbsp;
-&nbsp;
-<a href="https://trello.com/invite/b/69a1f85c0ed4e45d0fc17d32/ATTIe2fd04a19811f5b4cfb389993cdd4bc18F42DF2C/restaurante-milagros-proyecto-senati">
-  <button><img src="https://1000logos.net/wp-content/uploads/2021/05/Trello-logo.png" width="120" height="50" style="vertical-align:middle; margin-right: 50px;">
-  </button>
-</a>
+## ¿Qué es este proyecto?
 
-# SISTEMA WEB DE GESTIÓN PARA UN RESTAURANTE
+Sistema web para la gestión de un restaurante. Permite manejar pedidos de mesa y para llevar, controlar pagos, administrar la carta (platos y entradas), registrar asistencias del personal y gestionar usuarios con distintos roles.
 
-## DESCRIPCIÓN DEL NEGOCIO
-#### NOMBRE: 
-RESTAURTANTE "  "Milagros"
-#### CONTEXTO:
-La empresa se dedica al rubro gastronómico, 
-específicamente a la preparación y venta de 
-alimentos y bebidas en un restaurante pequeño. 
-Su actividad principal consiste en ofrecer distintos 
-platos a los clientes, los cuales son solicitados a 
-través de los mozos y preparados por el personal 
-de cocina para su posterior servicio en las mesas 
-del establecimiento. 
-El restaurante cuenta con personal como mozos y 
-trabajadores de cocina, quienes se encargan de 
-tomar los pedidos, preparar los alimentos y atender 
-a los clientes dentro del local.
+Está construido **sin frameworks** — PHP puro con patrón **MVC personalizado**.
 
-## IDENTIFICAR EL PROBLEMA Y SOLUCIÓN
-### PROBLEMA
-El restaurante presenta problemas de organización 
-en la gestión de pedidos, control del personal y 
-registro de ventas. Actualmente los pedidos son 
-realizados mediante WHATSAPP, pero igual se 
-genera mucha confusión entre los mozos y la 
-cocina, no existe un control claro de asistencia del 
-personal y el cajero no cuenta con un registro 
-organizado de las ganancias diarias. 
-Además, cuando un plato se termina, no existe un 
-sistema que lo elimine automáticamente de la lista 
-de pedidos, lo que puede generar errores al 
-momento de tomar las órdenes. 
+---
 
-### SOLUCIÓN
-Desarrollar un sistema digital que 
-permita gestionar los pedidos del 
-restaurante, controlar la asistencia del 
-personal, organizar la preparación de 
-los platos en cocina y llevar un 
-registro claro de las ventas y 
-ganancias del negocio. 
-&nbsp;
-&nbsp;
-<details>
-<summary>REQUERIMIENTOS FUNCIONALES Y NO FUNCIONALES</summary>
+## 🗂️ Estructura del proyecto
 
-## REQUERIMIENTOS FUNCIONALES
-|  Usuarios  |  Pedidos  |  Platos / Entradas  |  Detalle pedido  |  Pagos  |  Asistencia  |
-| ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
-|  El sistema debe permitir registrar nuevos usuarios con nombre, usuario, clave y rol  |  El sistema debe permitir crear un pedido indicando tipo (mesa o para llevar) y número de mesa  |  El sistema debe permitir registrar platos con nombre, descripción y precio  |  El sistema debe permitir agregar platos y entradas a un pedido existente  |  El sistema debe registrar el pago de un pedido indicando monto y método de pago  |  El sistema debe registrar la hora de entrada del empleado cada día  |
-|  El sistema debe permitir editar los datos de un usuario existente  |  El sistema debe permitir cambiar el estado del pedido (pendiente, en proceso, entregado, cancelado)  |  El sistema debe permitir registrar entradas con nombre y precio  |  El sistema debe calcular automáticamente el subtotal por ítem (cantidad × precio unitario)  |  El sistema debe permitir registrar pagos con foto del comprobante para el método Yape  |  El sistema debe registrar la hora de salida del empleado  |
-|  El sistema debe permitir activar o desactivar usuarios según su estado laboral  |  El sistema debe calcular el total del pedido a partir de sus detalles  |  El sistema debe permitir activar o desactivar platos y entradas del menú  |  El sistema debe permitir agregar entradas extra a un pedido ya registrado  |  El sistema debe asociar cada pago al usuario que lo registró  |  El sistema debe permitir consultar el historial de asistencia por empleado y fecha  |
-|  El sistema debe autenticar al usuario con su usuario y clave para acceder al sistema  |  El sistema debe permitir consultar pedidos por fecha, estado o número de mesa  |  El sistema debe mostrar solo los platos y entradas activos al momento de crear un pedido  |  El sistema debe calcular el subtotal de las entradas extra por separado  |  El sistema debe permitir consultar todos los pagos asociados a un pedido  |  El sistema debe calcular el tiempo trabajado por empleado por día  |
-
-## REQUERIMIENTOS NO FUNCIONALES
-| SEGURIDAD | RENDIMIENTO | USABILIDAD | MANTENIBILIDAD |
-| ------------- | ------------- | ------------- | ------------- |
-| Las contraseñas deben almacenarse cifradas en la base de datos | El sistema debe responder en menos de 3 segundos | La interfaz debe ser sencilla e intuitiva para los empleados | El sistema debe estar desarrollado bajo arquitectura MVC |
-| El sistema debe restringir el acceso según el rol (administrador, mozo, cocina) | El sistema debe permitir varios usuarios conectados al mismo tiempo | El sistema debe ser accesible desde cualquier navegador web | La base de datos debe estar normalizada |
-| El sistema debe cerrar sesión automáticamente por inactividad | Los pedidos deben actualizarse en tiempo real | El sistema debe mostrar mensajes claros cuando ocurra un error | El sistema debe permitir futuras mejoras o actualizaciones |
-
-
-</details>
-&nbsp;
-&nbsp;
-<details>
-<summary>DIAGRAMAS</summary>
-	
-### CARDINALIDADES
-- USUARIO Realiza PEDIDO (1:N) Un usuario puede hacer muchos pedidos.
-  
-- USUARIO Tiene ASISTENCIA (1:N) Un usuario tiene muchos registros de asistencia (uno por día). Cada asistencia pertenece a un solo usuario.
-  
-- USUARIO Registra PAGO (1:N)	Un usuario (mesero) puede registrar varios pagos. Cada pago fue registrado por un solo usuario.
-  
-- PEDIDO Tiene DETALLE_PEDIDO (1:N) Un pedido tiene uno o más ítems (platos/entradas). Cada detalle pertenece a un único pedido.
-  
-- PEDIDO Tiene DETALLE_ENTRADA_EXTRA (1:N) Un pedido puede tener varias entradas extra adicionales. Cada extra corresponde a un solo pedido.
-
-- PEDIDO genera PAGO (1:N) Un pedido puede generar varios registros de pago. Cada pago referencia un solo pedido.
-
-- PLATO Corresponde DETALLE_PEDIDO (1:N) Un plato puede estar en muchos detalles (pedidos distintos). Cada detalle referencia un plato.
-
-- ENTRADA Corresponde DETALLE_PEDIDO (1:N) Una entrada puede aparecer en varios detalles. Cada detalle puede referenciar una entrada.
-
-- ENTRADA Corresponde DETALLE_ENTRADA_EXTRA (1:N) Una entrada puede pedirse como extra en muchos pedidos. Cada registro extra referencia una sola entrada.
-
-<summary> DIAGRAMA ENTIDAD RELACIÓN (DER)</summary>
-<img src='recursos-git/modelo_entidad.jpeg'>
-
-<summary> DIAGRAMA RELACIONAL (MR)</summary>
-<img src='recursos-git/modelo-relacional.jpeg'>
-
-</details>
-&nbsp;
-&nbsp;
-<details>
-<summary> BASE DE DATOS </summary>
-  
-``` mysql
-CREATE DATABASE restaurante_db_2;
-USE restaurante_db_2;
-
-CREATE TABLE usuario (
-    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    usuario VARCHAR(50) UNIQUE NOT NULL,
-    clave VARCHAR(255) NOT NULL,
-    rol ENUM('admin','mesero','cocina') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
-
-CREATE TABLE entrada (
-    id_entrada INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    precio DECIMAL(10,2) NOT NULL DEFAULT 0,
-    activo BOOLEAN DEFAULT TRUE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
-
-CREATE TABLE plato (
-    id_plato INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    descripcion TEXT,
-    precio DECIMAL(10,2) NOT NULL,
-	activo BOOLEAN DEFAULT TRUE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
-
-CREATE TABLE pedido (
-    id_pedido INT AUTO_INCREMENT PRIMARY KEY,
-    id_usuario INT DEFAULT NULL,
-    tipo ENUM('Mesa','Llevar') NOT NULL,
-    numero_mesa INT NULL,
-    fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
-    total DECIMAL(10,2) DEFAULT 0,
-    estado ENUM('Pendiente','Preparando','Entregado','Pagado','Cancelado') DEFAULT 'Pendiente',
-    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario) ON DELETE SET NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
-
-CREATE TABLE detalle_pedido (
-    id_detalle INT AUTO_INCREMENT PRIMARY KEY,
-    id_pedido INT NOT NULL,
-    id_plato INT DEFAULT NULL,
-    id_entrada INT DEFAULT NULL,
-    cantidad INT NOT NULL DEFAULT 1,
-    precio_unitario DECIMAL(10,2) NOT NULL,
-    subtotal DECIMAL(10,2) NOT NULL,
-    FOREIGN KEY (id_pedido) REFERENCES pedido(id_pedido) ON DELETE RESTRICT,
-    FOREIGN KEY (id_plato) REFERENCES plato(id_plato) ON DELETE SET NULL,
-    FOREIGN KEY (id_entrada) REFERENCES entrada(id_entrada) ON DELETE SET NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
-
-CREATE TABLE detalle_entrada_extra (
-    id_detalle_extra INT AUTO_INCREMENT PRIMARY KEY,
-    id_pedido INT NOT NULL,
-    id_entrada INT DEFAULT NULL,
-    cantidad INT NOT NULL DEFAULT 1,
-    precio_unitario DECIMAL(10,2) NOT NULL,
-    subtotal DECIMAL(10,2) NOT NULL,
-    FOREIGN KEY (id_pedido)REFERENCES pedido(id_pedido) ON DELETE RESTRICT,
-    FOREIGN KEY (id_entrada) REFERENCES entrada(id_entrada) ON DELETE SET NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
-
-CREATE TABLE pago (
-    id_pago INT AUTO_INCREMENT PRIMARY KEY,
-    id_pedido INT NOT NULL,
-    id_usuario INT DEFAULT NULL,
-    monto DECIMAL(10,2) NOT NULL,
-    metodo_pago ENUM('Efectivo','Yape') NOT NULL,
-    foto_yape VARCHAR(255) DEFAULT NULL,
-    fecha_pago DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (id_pedido) REFERENCES pedido(id_pedido) ON DELETE RESTRICT,
-    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)ON DELETE SET NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
-
-CREATE TABLE asistencia (
-    id_asistencia INT AUTO_INCREMENT PRIMARY KEY,
-    id_usuario INT DEFAULT NULL,
-    fecha DATE NOT NULL,
-    hora_entrada TIME,
-    hora_salida TIME,
-    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)ON DELETE SET NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 ```
-</details>
-&nbsp;
-&nbsp;
+Proyecto-Restaurante2.0/
+├── app/
+│   ├── config/
+│   │   └── config.php         ← Constantes: BD, BASE_URL
+│   ├── core/
+│   │   ├── App.php            ← Punto de arranque (inicia sesión + llama al Router)
+│   │   ├── Router.php         ← Lee la URL y decide qué controlador/método ejecutar
+│   │   ├── Controller.php     ← Clase base con helpers: view(), soloAdmin(), etc.
+│   │   └── Database.php       ← Conexión PDO (Singleton)
+│   ├── controllers/           ← Reciben la petición y coordinan modelo + vista
+│   ├── models/                ← Hablan con la base de datos (SQL con PDO)
+│   ├── views/                 ← HTML + PHP que se muestra al usuario
+│   └── index.php              ← Único punto de entrada de la app
+├── public/
+│   ├── css/                   ← Estilos
+│   ├── js/                    ← JavaScript del cliente
+│   └── uploads/comprobantes/  ← Fotos de comprobantes Yape subidas
+├── .env                       ← Variables de entorno (BD, URL)
+├── .htaccess                  ← Redirige todas las peticiones a app/index.php
+└── README.md
+```
 
-<details>
-<summary>IMAGENES DEL NEGOCIO</summary>
+---
 
-<img src="recursos-git/prueba2.jpeg" alt="Texto alternativo" width="400" style="vertical-align: middle;">&nbsp;&nbsp;&nbsp;
-<video src="https://github.com/user-attachments/assets/646bb3ee-729c-4340-951f-e4a97e5edfee" width="200" controls style="vertical-align: middle;"></video>
+## 🔄 ¿Cómo funciona el patrón MVC?
 
-</details>
+**MVC = Modelo — Vista — Controlador**
 
+```
+Navegador  →  .htaccess  →  app/index.php  →  Router  →  Controlador  →  Modelo  →  BD
+                                                                      ↓
+                                                                    Vista  →  Navegador
+```
 
+### Flujo paso a paso con ejemplo real
 
+El usuario entra a `/pedidos/croquis`:
 
+1. **`.htaccess`** convierte la URL en `?url=pedidos/croquis` y la manda a `app/index.php`
+2. **`App.php`** inicia la sesión y llama al `Router`
+3. **`Router.php`** divide la URL: controlador = `Pedidos`, método = `croquis`
+4. Carga `PedidosController.php`, crea una instancia y llama a `->croquis()`
+5. **`PedidosController::croquis()`** llama al modelo para obtener los datos
+6. **`Pedido::obtenerEstadoMesas()`** ejecuta una query SQL y devuelve los datos
+7. El controlador llama a `$this->view('pedidos/croquis', $datos)` que renderiza la vista
+8. **`croquis.php`** genera el HTML con los datos y lo envía al navegador
+
+---
+
+## 🗃️ Base de Datos — Tablas principales
+
+| Tabla | ¿Para qué sirve? |
+|-------|-----------------|
+| `usuario` | Personas que usan el sistema (admin, mesero, cocina) |
+| `plato` | Platos del menú (precio fijo S/ 8.00) |
+| `entrada` | Entradas del menú (S/ 3.00 sueltas o incluidas con plato) |
+| `pedido` | Cada pedido creado (Mesa o Llevar, con estado y total) |
+| `detalle_pedido` | Items dentro de un pedido (qué plato, qué entrada, cantidad) |
+| `detalle_entrada_extra` | Entradas sueltas dentro de un pedido |
+| `pago` | Registro de pagos (Efectivo o Yape, con foto de comprobante) |
+| `asistencia` | Registro de entrada/salida del personal |
+
+### Relaciones clave
+
+```
+usuario ──< pedido ──< detalle_pedido >── plato
+                  ├──< detalle_entrada_extra >── entrada
+                  └──< pago
+usuario ──< asistencia
+plato >── detalle_pedido >── entrada  (entrada incluida en el plato)
+```
+
+---
+
+## 👤 Roles de usuario
+
+| Rol | ¿Qué puede hacer? |
+|-----|-----------------|
+| `admin` | Todo: pedidos, pagos, platos, usuarios, asistencias |
+| `mesero` | Pedidos (mesa y llevar), pagos, platos, asistencias |
+| `cocina` | Ver reportes de pedidos y asistencias |
+
+---
+
+## 🧩 CRUD — ¿Cómo funciona cada operación?
+
+### ¿Qué es CRUD?
+- **C**reate → Crear registros
+- **R**ead → Leer/listar registros
+- **U**pdate → Editar registros
+- **D**elete → Eliminar registros
+
+---
+
+### 📋 CRUD de Platos (`/platos`)
+
+**¿De dónde salen los datos?**
+`PlatosController::reportes()` → `Plato::obtenerTodos()` → `SELECT * FROM plato`
+
+**Crear un plato:**
+1. El usuario llena el formulario modal en la vista
+2. El JS hace `fetch POST /platos/guardar` con los datos
+3. `PlatosController::guardar()` valida los datos
+4. `Plato::guardarPlato()` ejecuta `INSERT INTO plato (...) VALUES (...)`
+5. El JS recibe `{ok: true}` y recarga la página
+
+**Editar un plato:**
+1. El usuario hace clic en el botón editar — el JS rellena el modal con `data-*` del botón
+2. El JS hace `fetch POST /platos/editar`
+3. `PlatosController::editar()` llama a `Plato::editarPlato()`
+4. Se ejecuta `UPDATE plato SET ... WHERE id_plato = ?`
+
+**Eliminar un plato:**
+1. El usuario confirma con SweetAlert
+2. `fetch POST /platos/eliminar` con `id_plato`
+3. `Plato::eliminarPlato()` ejecuta `DELETE FROM plato WHERE id_plato = ?`
+
+---
+
+### 👥 CRUD de Usuarios (`/usuarios`)
+
+Solo accesible para `admin` (verificado con `$this->soloAdmin()`).
+
+**¿De dónde salen los datos?**
+`UsuariosController::reporte()` → `Usuario::obtenerUsuarios()` → `SELECT * FROM usuario`
+
+**Crear usuario:**
+`/usuarios/guardar` → `Usuario::existeUsuario()` verifica duplicados → `Usuario::guardarUsuario()` → `INSERT INTO usuario`
+
+**Editar usuario:**
+`/usuarios/editar_usuario` → `Usuario::editarUsuario()` → `UPDATE usuario SET ... WHERE id_usuario = ?`
+
+**Eliminar usuario:**
+`/usuarios/eliminar_usuario` → `Usuario::eliminarPorIdUsuario()` → `DELETE FROM usuario WHERE id_usuario = ?`
+
+---
+
+### 🍽️ CRUD de Pedidos (`/pedidos`)
+
+**Crear pedido:**
+1. Clic en una mesa libre → `GET /pedidos/crear/Mesa/5`
+2. `PedidosController::crear()` llama a `Pedido::crearPedido()`
+3. `INSERT INTO pedido (id_usuario, tipo, numero_mesa, estado) VALUES (..., 'Pendiente')`
+4. Redirige al detalle del pedido recién creado
+
+**Agregar plato al pedido:**
+1. Formulario en detalle → `POST /pedidos/agregarPlato/{id}`
+2. `Pedido::agregarItemPlato()` → `INSERT INTO detalle_pedido`
+3. `Pedido::actualizarTotal()` → `UPDATE pedido SET total = (SUM detalle + SUM extras)`
+
+**Cambiar estado del pedido:**
+`POST /pedidos/cambiarEstado/{id}` con `estado=Preparando`
+→ `Pedido::cambiarEstado()` → `UPDATE pedido SET estado = ? WHERE id_pedido = ?`
+
+**Flujo de estados:**
+```
+Pendiente → Preparando → Entregado → Pagado
+                                 ↘ Cancelado
+```
+
+**Pagar pedido:**
+`POST /pedidos/pagar/{id}` (AJAX desde modal de mesa/llevar)
+→ `Pedido::pagarPedido()` → `INSERT INTO pago` + `UPDATE pedido SET estado = 'Pagado'`
+
+**Eliminar pedido:**
+Solo si no está `Pagado`. Elimina en cascada: `detalle_pedido` → `detalle_entrada_extra` → `pago` → `pedido`
+
+---
+
+### 💰 CRUD de Pagos (`/pagos`)
+
+**Listar pagos:**
+`PagosController::index()` → `Pago::obtenerTodos()` → `SELECT` con JOIN a `pedido` y `usuario`
+
+**Registrar pago manual:**
+`POST /pagos/guardar` → verifica con `Pago::existePagoPorPedido()` que no haya duplicado → `Pago::guardar()` → `INSERT INTO pago`
+
+Si el método es Yape, sube la foto a `public/uploads/comprobantes/` y guarda el nombre en BD.
+
+**Eliminar pago:**
+`POST /pagos/eliminar` → `Pago::eliminar()` → `DELETE FROM pago WHERE id_pago = ?`
+
+---
+
+### 📅 CRUD de Asistencias (`/asistencias`)
+
+**Registrar entrada:**
+`POST /asistencias/registrarEntrada` (AJAX) → `Asistencia::registrarEntrada()` → `INSERT INTO asistencia (id_usuario, fecha, hora_entrada)`
+
+**Registrar salida:**
+`POST /asistencias/registrarSalida` → `Asistencia::registrarSalida()` → `UPDATE asistencia SET hora_salida = ? WHERE id_usuario = ? AND fecha = ? AND hora_salida IS NULL`
+
+**Eliminar asistencia:**
+`POST /asistencias/eliminar` → `Asistencia::eliminarAsistencia()` → `DELETE FROM asistencia WHERE id_asistencia = ?`
+
+---
+
+## 🔐 Seguridad básica
+
+- **Sesiones PHP**: Cada controlador verifica `$_SESSION['usuario']` antes de mostrar datos
+- **Roles**: `$this->soloAdmin()` en `Controller.php` redirige si el rol no es `admin`
+- **PDO con parámetros**: Todas las queries usan `prepare()` + `execute([...])` para evitar SQL Injection
+- **`htmlspecialchars()`**: Usado en las vistas para evitar XSS al mostrar datos
+
+---
+
+## 🌐 ¿Cómo funciona el Router?
+
+```php
+// URL: /pedidos/croquis
+// .htaccess lo convierte en: app/index.php?url=pedidos/croquis
+
+$partes = explode('/', 'pedidos/croquis');
+// $partes[0] = 'pedidos'  → controlador: PedidosController
+// $partes[1] = 'croquis'  → método: croquis()
+// $partes[2...] = []      → parámetros: ninguno
+
+// URL con parámetro: /pedidos/crear/Mesa/5
+// $partes[0] = 'pedidos'  → PedidosController
+// $partes[1] = 'crear'    → crear()
+// $partes[2] = 'Mesa'     → $tipo
+// $partes[3] = '5'        → $numeroMesa
+```
+
+---
+
+## 🔌 ¿Cómo funciona la base de datos? (`Database.php`)
+
+Usa el patrón **Singleton** para que solo exista una conexión durante toda la petición:
+
+```php
+// Obtener la conexión (siempre la misma instancia)
+$db = Database::getConnection();
+
+// Usar la conexión con PDO
+$stmt = $db->prepare("SELECT * FROM plato WHERE id_plato = ?");
+$stmt->execute([5]);
+$plato = $stmt->fetch(PDO::FETCH_ASSOC);
+```
+
+---
+
+## 📡 Peticiones AJAX
+
+Varias acciones usan `fetch()` en JavaScript para no recargar la página:
+
+```
+Vista (JS)  →  fetch POST /ruta/accion  →  Controlador  →  Modelo  →  BD
+                                        ←  json_encode(['ok' => true])
+```
+
+El controlador responde con `header('Content-Type: application/json')` + `echo json_encode(...)`.
+
+Ejemplo: eliminar un plato, registrar un pago, cambiar estado de pedido.
+
+---
+
+## 🏗️ Archivos clave para entender el sistema
+
+| Archivo | ¿Por qué es importante? |
+|---------|------------------------|
+| `app/core/Router.php` | Decide qué código ejecutar según la URL |
+| `app/core/Database.php` | Única conexión a la BD en toda la app |
+| `app/core/Controller.php` | Clase base que heredan todos los controladores |
+| `app/controllers/PedidosController.php` | El más completo — tiene todo el flujo de pedidos |
+| `app/models/Pedido.php` | Todas las queries relacionadas a pedidos |
+| `app/views/layouts/sidebar-dashboard.php` | Layout compartido por todas las vistas del panel |
+| `.htaccess` | Redirige todo al punto de entrada único |
+| `.env` | Configuración del entorno (no subir a Git) |
