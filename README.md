@@ -109,7 +109,6 @@ ganancias del negocio.
 
 <summary> DIAGRAMA RELACIONAL (MR)</summary>
 <img src='recursos-git/modelo-relacional.jpeg'>
-
 </details>
 &nbsp;
 &nbsp;
