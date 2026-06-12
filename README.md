@@ -72,6 +72,8 @@ ganancias del negocio.
 | El sistema debe restringir el acceso según el rol (administrador, mozo, cocina) | El sistema debe permitir varios usuarios conectados al mismo tiempo | El sistema debe ser accesible desde cualquier navegador web | La base de datos debe estar normalizada |
 | El sistema debe cerrar sesión automáticamente por inactividad | Los pedidos deben actualizarse en tiempo real | El sistema debe mostrar mensajes claros cuando ocurra un error | El sistema debe permitir futuras mejoras o actualizaciones |
 
+</details>
+
 <details>
 <summary>IMAGENES DEL NEGOCIO</summary>
 
@@ -198,7 +200,6 @@ CREATE TABLE asistencia (
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 ```
-</details>
 </details>
 
 &nbsp;
