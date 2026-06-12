@@ -43,28 +43,28 @@ $rol          = $_SESSION['usuario']['rol'] ?? '';
         <!-- ================ START PEDIDOS ================ -->
         <?php if (in_array($rol, ['admin', 'mesero'])): ?>
         <li class="<?php echo $rutaActual === 'pedidos' ? 'dropdown show' : 'dropdown'; ?>">
-            <a href="#" class="dropbtn <?php echo $rutaActual === 'pedidos' ? 'activo' : ''; ?>">
-                <i class="fa-solid fa-clipboard-list"></i>
-                <span>Pedidos</span>
-                <i class="fa-solid fa-chevron-down arrow"></i>
+        <a href="#" class="dropbtn <?php echo $rutaActual === 'pedidos' ? 'activo' : ''; ?>">
+            <i class="fa-solid fa-clipboard-list"></i>
+            <span>Pedidos</span>
+            <i class="fa-solid fa-chevron-down arrow"></i>
+        </a>
+        <div class="dropdown-content">
+            <a href="<?php echo BASE_URL; ?>/pedidos/croquis"
+                class="<?php echo ($rutaActual === 'pedidos' && $accionActual === 'croquis') ? 'activo' : ''; ?>">
+                <i class="fa-solid fa-table"></i>
+                Mesa
             </a>
-            <div class="dropdown-content">
-                <a href="<?php echo BASE_URL; ?>/pedidos/mesa"
-                    class="<?php echo ($rutaActual === 'mesa' && $accionActual === 'registro') ? 'activo' : ''; ?>">
-                    <i class="fa-solid fa-table"></i>
-                    Mesa
-                </a>
-                <a href="<?php echo BASE_URL; ?>/pedidos/llevar"
-                    class="<?php echo ($rutaActual === 'llevar' && $accionActual === 'reportes') ? 'activo' : ''; ?>">
-                    <i class="fa-solid fa-clock"></i>
-                    Llevar
-                </a>
-                <a href="<?php echo BASE_URL; ?>/pedidos/reportes"
-                    class="<?php echo ($rutaActual === 'reportes' && $accionActual === 'registro') ? 'activo' : ''; ?>">
-                    <i class="fa-solid fa-chart-bar"></i>
-                    Resportes
-                </a>
-            </div>
+            <a href="<?php echo BASE_URL; ?>/pedidos/llevar"
+                class="<?php echo ($rutaActual === 'pedidos' && $accionActual === 'llevar') ? 'activo' : ''; ?>">
+                <i class="fa-solid fa-shopping-bag"></i>
+                Llevar
+            </a>
+            <a href="<?php echo BASE_URL; ?>/pedidos/reporte"
+                class="<?php echo ($rutaActual === 'pedidos' && $accionActual === 'reporte') ? 'activo' : ''; ?>">
+                <i class="fa-solid fa-chart-bar"></i>
+                Reportes
+            </a>
+        </div>
         </li>
         <?php endif; ?>
          <!-- ================ END PEDIDOS ================ -->
