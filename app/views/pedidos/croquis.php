@@ -69,21 +69,29 @@
      MODAL: Acciones sobre mesa ocupada (Editar / Pagar)
 ════════════════════════════════════════════════════════ -->
 <div class="modal-overlay" id="modalAcciones">
-    <div class="modal-content" style="max-width:400px;">
+    <div class="modal-content" style="max-width:380px;">
         <div class="modal-header">
             <h3><i class="fa-solid fa-chair"></i> Mesa <span id="modalNumMesa"></span> — Pedido #<span id="modalIdPedido"></span></h3>
             <button type="button" class="btn-cerrar-modal" onclick="cerrarModal('modalAcciones')">
                 <i class="fa-solid fa-xmark"></i>
             </button>
         </div>
-        <div class="modal-body modal-mesa-body">
-            <!-- Editar -->
-            <a href="#" id="linkEditarPedido" class="btn-modal-accion btn-editar">
-                <i class="fa-solid fa-pen"></i> Editar pedido
+        <div class="modal-acciones-body">
+            <a href="#" id="linkEditarPedido" class="modal-accion-btn modal-accion-editar">
+                <div class="modal-accion-icon"><i class="fa-solid fa-pen-to-square"></i></div>
+                <div class="modal-accion-info">
+                    <span class="modal-accion-titulo">Editar pedido</span>
+                    <span class="modal-accion-desc">Agregar o quitar items</span>
+                </div>
+                <i class="fa-solid fa-chevron-right modal-accion-arrow"></i>
             </a>
-            <!-- Pagar -->
-            <button type="button" class="btn-modal-accion btn-pagar" onclick="abrirModalPago()">
-                <i class="fa-solid fa-money-bill-wave"></i> Registrar pago
+            <button type="button" class="modal-accion-btn modal-accion-pagar" onclick="abrirModalPago()">
+                <div class="modal-accion-icon"><i class="fa-solid fa-receipt"></i></div>
+                <div class="modal-accion-info">
+                    <span class="modal-accion-titulo">Registrar pago</span>
+                    <span class="modal-accion-desc">Efectivo o Yape</span>
+                </div>
+                <i class="fa-solid fa-chevron-right modal-accion-arrow"></i>
             </button>
         </div>
     </div>
@@ -201,7 +209,14 @@ document.getElementById('btnConfirmarPago').addEventListener('click', function (
     if (metodoSeleccionado === 'Yape') {
         const foto = document.getElementById('fotoYape').files[0];
         if (!foto) {
-            alert('Por favor adjunta la foto del comprobante Yape.');
+            Swal.fire({
+                icon: 'warning',
+                title: 'Falta el comprobante',
+                text: 'Por favor adjunta la foto del comprobante Yape.',
+                confirmButtonColor: '#f3a8c2',
+                background: '#fff5f8',
+                color: '#6b3b4f'
+            });
             return;
         }
     }
@@ -223,14 +238,35 @@ document.getElementById('btnConfirmarPago').addEventListener('click', function (
     .then(r => r.json())
     .then(data => {
         if (data.success) {
-            location.reload();
+            Swal.fire({
+                icon: 'success',
+                title: '¡Pago registrado!',
+                text: 'El pago se registró correctamente.',
+                confirmButtonColor: '#f3a8c2',
+                background: '#fff5f8',
+                color: '#6b3b4f'
+            }).then(() => location.reload());
         } else {
-            alert(data.message || 'No se pudo registrar el pago.');
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: data.message || 'No se pudo registrar el pago.',
+                confirmButtonColor: '#f3a8c2',
+                background: '#fff5f8',
+                color: '#6b3b4f'
+            });
             btn.disabled = false;
         }
     })
     .catch(() => {
-        alert('Error de conexión.');
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Error de conexión.',
+            confirmButtonColor: '#f3a8c2',
+            background: '#fff5f8',
+            color: '#6b3b4f'
+        });
         btn.disabled = false;
     });
 });
