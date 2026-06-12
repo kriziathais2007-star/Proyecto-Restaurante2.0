@@ -198,6 +198,8 @@ CREATE TABLE asistencia (
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 ```
+</details>
+</details>
 
 &nbsp;
 &nbsp;
