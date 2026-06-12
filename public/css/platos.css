@@ -325,3 +325,90 @@ header h1 { font-size: 22px; font-weight: 500; color: var(--rosa-800); }
     transition: background 0.18s;
 }
 .btn-guardar:hover { background: var(--rosa-800); }
+
+/* ===== PAGOS — COMPROBANTE ===== */
+.btn-ver-comprobante {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 6px;
+    color: #3498db;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.btn-ver-comprobante:hover {
+    color: #1d6fa5;
+}
+
+/* ===== PAGOS — RESUMEN CARDS ===== */
+.resumen-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.resumen-card {
+    flex: 1;
+    min-width: 160px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 1rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.resumen-label {
+    font-size: 0.8rem;
+    color: #a98c94;
+    font-weight: 500;
+}
+
+.resumen-valor {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #5a4048;
+}
+
+.resumen-card.resumen-total {
+    background: #fde6ee;
+}
+
+.resumen-card.resumen-total .resumen-valor {
+    color: #c1496a;
+}
+
+/* ===== PAGOS — BADGES ===== */
+.metodo-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.metodo-badge.efectivo {
+    background: #d8f0d8;
+    color: #3a8c4a;
+}
+
+.metodo-badge.yape {
+    background: #e3d6f7;
+    color: #6b3fa0;
+}
+
+.tipo-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    background: #fde6ee;
+    color: #c1496a;
+}

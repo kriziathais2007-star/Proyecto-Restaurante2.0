@@ -88,6 +88,22 @@
                                         <?php endif; ?>
                                         <?php echo htmlspecialchars($pago['metodo_pago']); ?>
                                     </span>
+                                    <?php if ($pago['metodo_pago'] === 'Yape' && !empty($pago['foto_yape'])): ?>
+                                        <?php
+                                            // Normalizar: si ya tiene la ruta completa, usarla directo; si no, agregar el prefijo
+                                            $fotoYape = $pago['foto_yape'];
+                                            if (str_starts_with($fotoYape, 'public/')) {
+                                                $urlFoto = BASE_URL . '/' . $fotoYape;
+                                            } else {
+                                                $urlFoto = BASE_URL . '/public/uploads/comprobantes/' . $fotoYape;
+                                            }
+                                        ?>
+                                        <a href="#" class="btn-ver-comprobante"
+                                           data-src="<?php echo htmlspecialchars($urlFoto); ?>"
+                                           title="Ver comprobante">
+                                            <i class="fa-solid fa-image"></i>
+                                        </a>
+                                    <?php endif; ?>
                                 </td>
                                 <td><?php echo htmlspecialchars($pago['nombre_cajero'] ?? '—'); ?></td>
                                 <td><?php echo date('d/m/Y H:i', strtotime($pago['fecha_pago'])); ?></td>
@@ -155,5 +171,18 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="<?php echo BASE_URL; ?>/public/js/dashboard.js"></script>
 <script src="<?php echo BASE_URL; ?>/public/js/pagos.js"></script>
+
+<!-- MODAL VER COMPROBANTE -->
+<div class="modal-overlay" id="overlayComprobante" style="z-index:2000;">
+    <div style="background:#fff; border-radius:12px; padding:16px; max-width:90vw; max-height:90vh; position:relative; text-align:center;">
+        <button onclick="document.getElementById('overlayComprobante').style.display='none'"
+                style="position:absolute;top:8px;right:12px;background:none;border:none;font-size:1.4rem;cursor:pointer;">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <img id="imgComprobante" src="" alt="Comprobante Yape"
+             style="max-width:80vw; max-height:80vh; border-radius:8px; margin-top:16px;">
+    </div>
+</div>
+
 </body>
 </html>

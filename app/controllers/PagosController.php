@@ -22,38 +22,42 @@ class PagosController extends Controller {
     public function guardar(): void {
         header('Content-Type: application/json');
 
-        $rutaFoto = null;
+        $id_pedido = (int)($_POST['id_pedido'] ?? 0);
 
-        if (
-            isset($_FILES['foto_yape']) &&
-            $_FILES['foto_yape']['error'] === 0
-        ) {
-            $nombre = time() . "_" . basename($_FILES['foto_yape']['name']);
-
-            $rutaDestino = __DIR__ . '/../../public/uploads/comprobantes/' . $nombre;
-
-            move_uploaded_file(
-                $_FILES['foto_yape']['tmp_name'],
-                $rutaDestino
-            );
-
-            $rutaFoto = 'public/uploads/comprobantes/' . $nombre;
-        }
-
-        $datos = [
-            'id_pedido'   => (int)($_POST['id_pedido'] ?? 0),
-            'id_usuario'  => (int)($_SESSION['usuario']['id_usuario'] ?? 0),
-            'monto'       => floatval($_POST['monto'] ?? 0),
-            'metodo_pago' => trim($_POST['metodo_pago'] ?? ''),
-            'foto_yape'   => $rutaFoto
-        ];
-
-        if (!$datos['id_pedido'] || $datos['monto'] <= 0 || empty($datos['metodo_pago'])) {
-            echo json_encode(['ok' => false, 'mensaje' => 'Pedido, monto y método de pago son obligatorios.']);
+        if (!$id_pedido) {
+            echo json_encode(['ok' => false, 'mensaje' => 'Selecciona un pedido.']);
             return;
         }
 
-        $modelo    = new Pago();
+        // Verificar que el pedido no tenga ya un pago registrado
+        $modelo = new Pago();
+        if ($modelo->existePagoPorPedido($id_pedido)) {
+            echo json_encode(['ok' => false, 'mensaje' => 'Este pedido ya tiene un pago registrado.']);
+            return;
+        }
+
+        $rutaFoto = null;
+        if (isset($_FILES['foto_yape']) && $_FILES['foto_yape']['error'] === 0) {
+            $nombre      = time() . '_' . basename($_FILES['foto_yape']['name']);
+            $rutaDestino = __DIR__ . '/../../public/uploads/comprobantes/' . $nombre;
+            if (move_uploaded_file($_FILES['foto_yape']['tmp_name'], $rutaDestino)) {
+                $rutaFoto = $nombre;
+            }
+        }
+
+        $datos = [
+            'id_pedido'   => $id_pedido,
+            'id_usuario'  => (int)($_SESSION['usuario']['id_usuario'] ?? 0),
+            'monto'       => floatval($_POST['monto'] ?? 0),
+            'metodo_pago' => trim($_POST['metodo_pago'] ?? ''),
+            'foto_yape'   => $rutaFoto,
+        ];
+
+        if ($datos['monto'] <= 0 || empty($datos['metodo_pago'])) {
+            echo json_encode(['ok' => false, 'mensaje' => 'Monto y método de pago son obligatorios.']);
+            return;
+        }
+
         $resultado = $modelo->guardar($datos);
         echo json_encode($resultado
             ? ['ok' => true]

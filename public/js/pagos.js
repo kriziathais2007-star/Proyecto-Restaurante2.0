@@ -1,115 +1,107 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', function () {
 
-    // ================================================================
-    //  HELPERS
-    // ================================================================
-    function abrirModal(overlayId, modalId) {
-        document.getElementById(overlayId).classList.add("show");
-        document.getElementById(modalId).classList.add("show");
-    }
-    function cerrarModal(overlayId, modalId) {
-        document.getElementById(overlayId).classList.remove("show");
-        document.getElementById(modalId).classList.remove("show");
-    }
-
-    // ================================================================
-    document.getElementById("btnAbrirPago").addEventListener("click", () =>
-        abrirModal("overlayNuevoPago", "modalNuevoPago")
-    );
-    document.getElementById("cerrarNuevoPago").addEventListener("click", () =>
-        cerrarModal("overlayNuevoPago", "modalNuevoPago")
-    );
-    document.getElementById("overlayNuevoPago").addEventListener("click", (e) => {
-        if (e.target === document.getElementById("overlayNuevoPago"))
-            cerrarModal("overlayNuevoPago", "modalNuevoPago");
-    });
-
-    // Mostrar/ocultar campo foto_yape según método
-    document.getElementById("np-metodo").addEventListener("change", function () {
-        const grupoFoto = document.getElementById("grupoFotoYape");
-        grupoFoto.style.display = this.value === "Yape" ? "flex" : "none";
-    });
-
-    // ================================================================
-//  GUARDAR PAGO
-// ================================================================
-document.getElementById("formNuevoPago").addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    const formData = new FormData();
-
-    formData.append("id_pedido", document.getElementById("np-pedido").value);
-    formData.append("monto", document.getElementById("np-monto").value);
-    formData.append("metodo_pago", document.getElementById("np-metodo").value);
-
-    const foto = document.getElementById("np-foto").files[0];
-
-    if (foto) {
-        formData.append("foto_yape", foto);
-    }
-
-    fetch(BASE_URL + "/pagos/guardar", {
-        method: "POST",
-        body: formData
-    })
-    .then((r) => r.json())
-    .then((datos) => {
-        if (datos.ok) {
-            Swal.fire({
-                title: "¡Registrado!",
-                text: "Pago registrado correctamente.",
-                icon: "success",
-                confirmButtonText: "Aceptar"
-            }).then(() => {
-                location.reload();
-            });
-        } else {
-            Swal.fire({
-                title: "Error",
-                text: datos.mensaje || "No se pudo registrar.",
-                icon: "error",
-                confirmButtonText: "Aceptar"
-            });
-        }
-    })
-    .catch((error) => {
-        console.error(error);
-        Swal.fire({
-            title: "Error",
-            text: "Ocurrió un error al registrar el pago.",
-            icon: "error"
+    // ══════════════════════════════════════════
+    // VER COMPROBANTE YAPE
+    // ══════════════════════════════════════════
+    document.querySelectorAll('.btn-ver-comprobante').forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            const src = this.dataset.src;
+            document.getElementById('imgComprobante').src = src;
+            document.getElementById('overlayComprobante').style.display = 'flex';
         });
     });
-});
 
-    // ================================================================
-    //  ELIMINAR PAGO
-    // ================================================================
-    document.querySelectorAll(".btn-eliminar-pago").forEach((btn) => {
-        btn.addEventListener("click", () => {
+    // Cerrar modal comprobante al hacer clic fuera
+    document.getElementById('overlayComprobante')?.addEventListener('click', function (e) {
+        if (e.target === this) this.style.display = 'none';
+    });
+
+    // ══════════════════════════════════════════
+    // MODAL NUEVO PAGO
+    // ══════════════════════════════════════════
+    const overlayNuevo = document.getElementById('overlayNuevoPago');
+    const modalNuevo   = document.getElementById('modalNuevoPago');
+
+    document.getElementById('btnAbrirPago')?.addEventListener('click', function () {
+        overlayNuevo?.classList.add('show');
+        modalNuevo?.classList.add('show');
+    });
+
+    document.getElementById('cerrarNuevoPago')?.addEventListener('click', function () {
+        overlayNuevo?.classList.remove('show');
+        modalNuevo?.classList.remove('show');
+    });
+
+    overlayNuevo?.addEventListener('click', function (e) {
+        if (e.target === overlayNuevo) {
+            overlayNuevo.classList.remove('show');
+            modalNuevo?.classList.remove('show');
+        }
+    });
+
+    // Mostrar/ocultar campo foto según método
+    document.getElementById('np-metodo')?.addEventListener('change', function () {
+        const grupoFoto = document.getElementById('grupoFotoYape');
+        if (grupoFoto) {
+            grupoFoto.style.display = this.value === 'Yape' ? 'flex' : 'none';
+        }
+    });
+
+    // ══════════════════════════════════════════
+    // GUARDAR PAGO
+    // ══════════════════════════════════════════
+    document.getElementById('formNuevoPago')?.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(this);
+
+        fetch(BASE_URL + '/pagos/guardar', {
+            method: 'POST',
+            body: formData
+        })
+        .then(r => r.json())
+        .then(data => {
+            if (data.ok) {
+                Swal.fire({ icon: 'success', title: 'Registrado', text: 'Pago registrado correctamente.', confirmButtonText: 'Aceptar' })
+                    .then(() => location.reload());
+            } else {
+                Swal.fire({ icon: 'error', title: 'Error', text: data.mensaje || 'No se pudo registrar.', confirmButtonText: 'Aceptar' });
+            }
+        })
+        .catch(() => Swal.fire({ icon: 'error', title: 'Error de conexión' }));
+    });
+
+    // ══════════════════════════════════════════
+    // ELIMINAR PAGO
+    // ══════════════════════════════════════════
+    document.querySelectorAll('.btn-eliminar-pago').forEach(function (btn) {
+        btn.addEventListener('click', function () {
             Swal.fire({
-                title: "¿Eliminar pago?",
-                text: "Esta acción no se puede deshacer.",
-                icon: "warning",
+                title: '¿Eliminar pago?',
+                text: 'Esta acción no se puede deshacer.',
+                icon: 'warning',
                 showCancelButton: true,
-                confirmButtonText: "Sí, eliminar",
-                cancelButtonText: "Cancelar",
-            }).then((result) => {
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then(function (result) {
                 if (!result.isConfirmed) return;
-                fetch(BASE_URL + "/pagos/eliminar", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                    body: "id_pago=" + btn.dataset.id,
+
+                fetch(BASE_URL + '/pagos/eliminar', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: 'id_pago=' + btn.dataset.id
                 })
-                .then((r) => r.json())
-                .then((datos) => {
-                    if (datos.eliminar) {
-                        Swal.fire({ title: "¡Eliminado!", text: "Pago eliminado.", icon: "success", confirmButtonText: "Aceptar" })
-                        .then(() => location.reload());
+                .then(r => r.json())
+                .then(data => {
+                    if (data.eliminar) {
+                        Swal.fire({ icon: 'success', title: 'Eliminado', confirmButtonText: 'Aceptar' })
+                            .then(() => location.reload());
                     } else {
-                        Swal.fire({ title: "Error", text: "No se pudo eliminar el pago.", icon: "error", confirmButtonText: "Aceptar" });
+                        Swal.fire({ icon: 'error', title: 'Error', text: data.mensaje || 'No se pudo eliminar.' });
                     }
-                });
+                })
+                .catch(() => Swal.fire({ icon: 'error', title: 'Error de conexión' }));
             });
         });
     });

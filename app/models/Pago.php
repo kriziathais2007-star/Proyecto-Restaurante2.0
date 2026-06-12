@@ -58,12 +58,20 @@ class Pago {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    // Pedidos disponibles para pagar (no pagados aún)
+    // Verificar si un pedido ya tiene pago registrado
+    public function existePagoPorPedido(int $id_pedido): bool {
+        $stmt = $this->db->prepare("SELECT COUNT(*) FROM pago WHERE id_pedido = ?");
+        $stmt->execute([$id_pedido]);
+        return (int) $stmt->fetchColumn() > 0;
+    }
+
+    // Pedidos disponibles para pagar (sin pago registrado aún)
     public function obtenerPedidosPendientes(): array {
         $stmt = $this->db->prepare("
             SELECT id_pedido, tipo, numero_mesa, total, estado
             FROM pedido
             WHERE estado NOT IN ('Pagado', 'Cancelado')
+              AND id_pedido NOT IN (SELECT id_pedido FROM pago)
             ORDER BY id_pedido DESC
         ");
         $stmt->execute();
