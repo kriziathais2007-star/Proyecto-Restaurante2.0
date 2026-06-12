@@ -49,18 +49,18 @@ $rol          = $_SESSION['usuario']['rol'] ?? '';
                 <i class="fa-solid fa-chevron-down arrow"></i>
             </a>
             <div class="dropdown-content">
-                <a href="<?php echo BASE_URL; ?>??"
-                    class="<?php echo ($rutaActual === '??' && $accionActual === 'registro') ? 'activo' : ''; ?>">
+                <a href="<?php echo BASE_URL; ?>/pedidos/mesa"
+                    class="<?php echo ($rutaActual === 'mesa' && $accionActual === 'registro') ? 'activo' : ''; ?>">
                     <i class="fa-solid fa-table"></i>
                     Mesa
                 </a>
-                <a href="<?php echo BASE_URL; ?>??"
-                    class="<?php echo ($rutaActual === '??' && $accionActual === 'reportes') ? 'activo' : ''; ?>">
+                <a href="<?php echo BASE_URL; ?>/pedidos/llevar"
+                    class="<?php echo ($rutaActual === 'llevar' && $accionActual === 'reportes') ? 'activo' : ''; ?>">
                     <i class="fa-solid fa-clock"></i>
                     Llevar
                 </a>
-                <a href="<?php echo BASE_URL; ?>??"
-                    class="<?php echo ($rutaActual === '??' && $accionActual === 'registro') ? 'activo' : ''; ?>">
+                <a href="<?php echo BASE_URL; ?>/pedidos/reportes"
+                    class="<?php echo ($rutaActual === 'reportes' && $accionActual === 'registro') ? 'activo' : ''; ?>">
                     <i class="fa-solid fa-chart-bar"></i>
                     Resportes
                 </a>
@@ -68,7 +68,6 @@ $rol          = $_SESSION['usuario']['rol'] ?? '';
         </li>
         <?php endif; ?>
          <!-- ================ END PEDIDOS ================ -->
-        <!-- ================ END PEDIDOS ================ -->
 
         <!-- ================ START PLATOS ================ -->
         <li>
@@ -82,8 +81,8 @@ $rol          = $_SESSION['usuario']['rol'] ?? '';
 
         <!-- ================ START ASISTENCIA ================ -->
          <li>
-            <a href="<?php echo BASE_URL; ?>??"
-                class="<?php echo $rutaActual === '??' ? 'activo' : ''; ?>">
+            <a href="<?php echo BASE_URL; ?>/asistencias"
+                class="<?php echo $rutaActual === 'asistencias' ? 'activo' : ''; ?>">
                 <i class="fa-solid fa-calendar-check"></i>
                 <span>Asistencia</span>
             </a>

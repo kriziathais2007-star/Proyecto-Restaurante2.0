@@ -13,7 +13,6 @@ class UsuariosController extends Controller {
             header("Location: " . BASE_URL . "/login");
             exit();
         }
-        $this->soloAdmin();
 
         $modelo = new Usuario();
         $this->view('usuarios/reportes', [

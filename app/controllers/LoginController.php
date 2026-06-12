@@ -37,7 +37,6 @@ class LoginController extends Controller {
         $this->view('auth/login', ['error' => $error]);
     }
 
-    // ✅ NUEVO - centraliza la redirección por rol
     private function destinoPorRol(string $rol): string {
         return match($rol) {
             'admin'    => '/dashboard',
