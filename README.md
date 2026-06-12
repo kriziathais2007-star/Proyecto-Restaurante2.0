@@ -206,6 +206,16 @@ CREATE TABLE asistencia (
 
 </details>
 
+## PRUEBA DE LA APLICACIÓN
+
+<img src="Untitled.jpg"  width="200" height="200">
+
+|  Usuario  |   Clave   |
+| --------- | --------- |
+|  admin    |   0305    |
+|  mesero   |   1234    |
+| cocinero  |   2026    |
+
 
 
 
