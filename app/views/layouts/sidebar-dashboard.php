@@ -50,17 +50,17 @@ $rol          = $_SESSION['usuario']['rol'] ?? '';
         </a>
         <div class="dropdown-content">
             <a href="<?php echo BASE_URL; ?>/pedidos/croquis"
-                class="<?php echo ($rutaActual === 'pedidos' && $accionActual === 'croquis') ? 'activo' : ''; ?>">
+                class="<?php echo ($rutaActual === 'pedidos' && $accionActual === 'croquis') ? 'activo-sub' : ''; ?>">
                 <i class="fa-solid fa-table"></i>
                 Mesa
             </a>
             <a href="<?php echo BASE_URL; ?>/pedidos/llevar"
-                class="<?php echo ($rutaActual === 'pedidos' && $accionActual === 'llevar') ? 'activo' : ''; ?>">
+                class="<?php echo ($rutaActual === 'pedidos' && $accionActual === 'llevar') ? 'activo-sub' : ''; ?>">
                 <i class="fa-solid fa-shopping-bag"></i>
                 Llevar
             </a>
             <a href="<?php echo BASE_URL; ?>/pedidos/reportes"
-                class="<?php echo ($rutaActual === 'pedidos' && $accionActual === 'reportes') ? 'activo' : ''; ?>">
+                class="<?php echo ($rutaActual === 'pedidos' && $accionActual === 'reportes') ? 'activo-sub' : ''; ?>">
                 <i class="fa-solid fa-chart-bar"></i>
                 Reportes
             </a>
@@ -124,5 +124,4 @@ $rol          = $_SESSION['usuario']['rol'] ?? '';
 
     </ul>
 </aside>
-<script src="<?php echo BASE_URL; ?>/public/js/dashboard.js"></script>
 <script src="<?php echo BASE_URL; ?>/public/js/dropdown.js"></script>

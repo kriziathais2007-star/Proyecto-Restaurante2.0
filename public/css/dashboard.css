@@ -145,6 +145,26 @@ body {
     font-weight: 600;
 }
 
+/* Anular el activo general para links dentro del dropdown-content */
+.sidebar ul li.dropdown .dropdown-content a {
+    background: transparent;
+    color: var(--muted);
+    font-weight: 400;
+    padding: 8px 14px;
+    font-size: 0.82rem;
+}
+
+.sidebar ul li.dropdown .dropdown-content a:hover {
+    background: var(--bg);
+    color: var(--text);
+}
+
+.sidebar ul li.dropdown .dropdown-content a.activo-sub {
+    background: #620808;
+    color: #fff;
+    font-weight: 600;
+}
+
 /* ================================ START Dropdown ================================ */
 /* Dropdown container */
 .sidebar .dropdown {
@@ -168,7 +188,7 @@ body {
 .sidebar .dropdown-content {
     display: none;
     padding-left: 30px;
-    margin-top: 5px;
+    margin-top: 4px;
 }
 
 /* Mostrar dropdown cuando tiene la clase 'show' */
@@ -176,28 +196,49 @@ body {
     display: block;
 }
 
+/* En desktop, el dropdown siempre visible si está activo */
+@media (min-width: 768px) {
+    .sidebar .dropdown.show .dropdown-content {
+        display: block;
+    }
+}
+
 /* Rotar la flecha cuando está abierto */
 .sidebar .dropdown.show .arrow {
     transform: rotate(180deg);
 }
 
-/* Estilos de los items del dropdown */
-.sidebar .dropdown-content a {
-    padding: 8px 15px;
+/* Estilos de los items del dropdown — usa ul li para igualar especificidad */
+.sidebar ul li.dropdown .dropdown-content a {
+    padding: 8px 14px;
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 14px;
+    font-size: 0.82rem;
+    font-weight: 400;
+    color: var(--muted);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background 0.2s, color 0.2s;
+    background: transparent;
 }
 
-.sidebar .dropdown-content a:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 5px;
+.sidebar ul li.dropdown .dropdown-content a:hover {
+    background: var(--bg);
+    color: var(--text);
 }
 
-.sidebar .dropdown-content i {
-    width: 20px;
-    font-size: 14px;
+/* Clase separada para evitar conflicto con li a.activo principal */
+.sidebar ul li.dropdown .dropdown-content a.activo-sub {
+    background: #620808;
+    color: #fff;
+    font-weight: 600;
+    padding: 8px 14px;
+}
+
+.sidebar ul li.dropdown .dropdown-content i {
+    width: 18px;
+    font-size: 0.85rem;
 }
 /* ================================ END Dropdown ================================ */
 /* logout al fondo */

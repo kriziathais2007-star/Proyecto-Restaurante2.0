@@ -1,3 +1,137 @@
+/* ===== LEYENDA ===== */
+.croquis-legend {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.2rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    color: #6b3b4f;
+    font-weight: 600;
+}
+
+.legend-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.legend-libre { background-color: #b6e3a1; }
+.legend-ocupada { background-color: #f3a8c2; }
+
+/* ===== GRID DE MESAS ===== */
+.croquis-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 1rem;
+}
+
+.mesa-card {
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.mesa-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+}
+
+.mesa-card i {
+    font-size: 1.6rem;
+}
+
+.mesa-card.libre {
+    background-color: #d7f0c9;
+    color: #3a7a2a;
+}
+
+.mesa-card.ocupada {
+    background-color: #fcdde4;
+    color: #c1496a;
+}
+
+/* ===== LLEVAR ===== */
+.llevar-toolbar {
+    margin-bottom: 1.2rem;
+}
+
+.btn-nuevo-pedido {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #f3a8c2;
+    color: #6b3b4f;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+}
+
+.btn-nuevo-pedido:hover {
+    background-color: #ef8fb3;
+}
+
+.llevar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.llevar-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: box-shadow 0.15s ease;
+}
+
+.llevar-card:hover {
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+}
+
+.llevar-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.llevar-id {
+    font-weight: 700;
+    color: #6b3b4f;
+}
+
+.llevar-mesero {
+    font-size: 0.85rem;
+    color: #a98c94;
+    margin: 0;
+}
+
+.llevar-total {
+    font-weight: 700;
+    color: #5a4048;
+    margin: 0;
+}
 /* ===== GRUPOS DE FILTROS (label + input) ===== */
 .filtro-grupo {
     display: flex;
@@ -47,6 +181,7 @@
 .btn-filtrar:hover {
     background-color: #ef8fb3;
 }
+
 /* ===== BOTÓN PARA ABRIR/CERRAR FILTROS ===== */
 .filtros-toggle-wrapper {
     margin-bottom: 1rem;
@@ -364,7 +499,125 @@
     background-color: #fcdde4;
     color: #c1496a;
 }
+.llevar-card-wrapper {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.acciones-pedido {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+}
+.btn-cambiar-estado {
+    background: #2ecc71;
+    color: #fff;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.croquis-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+}
 
+.mesa-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 20px 10px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.15s ease;
+    border: none;
+}
+.mesa-card:hover { transform: scale(1.03); }
+.mesa-card i { font-size: 1.8rem; }
+
+.mesa-card.libre { background: #2ecc71; }
+.mesa-card.ocupada { background: #f1c40f; color: #333; }
+
+.mesa-card.ocupada.urgente {
+    background: #e74c3c;
+    color: #fff;
+    animation: pulse-urgente 1.5s infinite;
+}
+@keyframes pulse-urgente {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(231,76,60,0.6); }
+    50% { box-shadow: 0 0 0 8px rgba(231,76,60,0); }
+}
+
+.mesa-estado-badge {
+    font-size: 0.7rem;
+    opacity: 0.85;
+    text-transform: uppercase;
+}
+
+/* Leyenda */
+.croquis-legend { display: flex; gap: 16px; margin-bottom: 16px; }
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.9rem; }
+.legend-color { width: 14px; height: 14px; border-radius: 3px; display: inline-block; }
+.legend-libre { background: #2ecc71; }
+.legend-ocupada { background: #f1c40f; }
+.legend-urgente { background: #e74c3c; }
+
+/* Modal mesa: editar/pagar */
+.modal-mesa-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+}
+.btn-modal-accion {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    border-radius: 6px;
+    border: none;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    color: #fff;
+}
+.btn-modal-accion.btn-editar { background: #3498db; }
+.btn-modal-accion.btn-pagar { background: #2ecc71; }
+.btn-modal-accion:hover { opacity: 0.9; }
+.btn-cambiar-estado:hover { background: #27ae60; }
+.btn-eliminar-pedido {
+    background: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.btn-eliminar-pedido:hover { background: #c0392b; }
+.llevar-card { text-decoration: none; color: inherit; padding: 12px; }
+.btn-eliminar-pedido {
+    background: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+.btn-eliminar-pedido:hover { background: #c0392b; }
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
     .filtros-reporte {
