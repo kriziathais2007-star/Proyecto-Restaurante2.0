@@ -59,19 +59,6 @@ header h1 { font-size: 22px; color: var(--rosa-200); }
     font-size: 13px; 
     border-bottom: 0.5px solid var(--rosa-200); 
 }
-.modal-editar,
-.modal-overlay{
-    display:none;
-}
-
-.modal-editar.active{
-    display:block;
-}
-
-.modal-overlay.active{
-    display:block;
-}
-
 .table tbody tr { border-bottom: 0.5px solid #fce8f0; transition: background 0.15s; }
 .table tbody tr:last-child { border-bottom: none; }
 .table tbody tr:hover { background: var(--rosa-50); }

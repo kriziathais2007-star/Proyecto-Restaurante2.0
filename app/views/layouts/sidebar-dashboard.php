@@ -43,31 +43,32 @@ $rol          = $_SESSION['usuario']['rol'] ?? '';
         <!-- ================ START PEDIDOS ================ -->
         <?php if (in_array($rol, ['admin', 'mesero'])): ?>
         <li class="<?php echo $rutaActual === 'pedidos' ? 'dropdown show' : 'dropdown'; ?>">
-        <a href="#" class="dropbtn <?php echo $rutaActual === 'pedidos' ? 'activo' : ''; ?>">
-            <i class="fa-solid fa-clipboard-list"></i>
-            <span>Pedidos</span>
-            <i class="fa-solid fa-chevron-down arrow"></i>
-        </a>
-        <div class="dropdown-content">
-            <a href="<?php echo BASE_URL; ?>/pedidos/croquis"
-                class="<?php echo ($rutaActual === 'pedidos' && $accionActual === 'croquis') ? 'activo-sub' : ''; ?>">
-                <i class="fa-solid fa-table"></i>
-                Mesa
+            <a href="#" class="dropbtn <?php echo $rutaActual === 'pedidos' ? 'activo' : ''; ?>">
+                <i class="fa-solid fa-clipboard-list"></i>
+                <span>Pedidos</span>
+                <i class="fa-solid fa-chevron-down arrow"></i>
             </a>
-            <a href="<?php echo BASE_URL; ?>/pedidos/llevar"
-                class="<?php echo ($rutaActual === 'pedidos' && $accionActual === 'llevar') ? 'activo-sub' : ''; ?>">
-                <i class="fa-solid fa-shopping-bag"></i>
-                Llevar
-            </a>
-            <a href="<?php echo BASE_URL; ?>/pedidos/reportes"
-                class="<?php echo ($rutaActual === 'pedidos' && $accionActual === 'reportes') ? 'activo-sub' : ''; ?>">
-                <i class="fa-solid fa-chart-bar"></i>
-                Reportes
-            </a>
-        </div>
+            <div class="dropdown-content">
+                <a href="<?php echo BASE_URL; ?>??"
+                    class="<?php echo ($rutaActual === '??' && $accionActual === 'registro') ? 'activo' : ''; ?>">
+                    <i class="fa-solid fa-table"></i>
+                    Mesa
+                </a>
+                <a href="<?php echo BASE_URL; ?>??"
+                    class="<?php echo ($rutaActual === '??' && $accionActual === 'reportes') ? 'activo' : ''; ?>">
+                    <i class="fa-solid fa-clock"></i>
+                    Llevar
+                </a>
+                <a href="<?php echo BASE_URL; ?>??"
+                    class="<?php echo ($rutaActual === '??' && $accionActual === 'registro') ? 'activo' : ''; ?>">
+                    <i class="fa-solid fa-chart-bar"></i>
+                    Resportes
+                </a>
+            </div>
         </li>
         <?php endif; ?>
          <!-- ================ END PEDIDOS ================ -->
+        <!-- ================ END PEDIDOS ================ -->
 
         <!-- ================ START PLATOS ================ -->
         <li>
@@ -81,8 +82,8 @@ $rol          = $_SESSION['usuario']['rol'] ?? '';
 
         <!-- ================ START ASISTENCIA ================ -->
          <li>
-            <a href="<?php echo BASE_URL; ?>/asistencias"
-                class="<?php echo $rutaActual === 'asistencias' ? 'activo' : ''; ?>">
+            <a href="<?php echo BASE_URL; ?>??"
+                class="<?php echo $rutaActual === '??' ? 'activo' : ''; ?>">
                 <i class="fa-solid fa-calendar-check"></i>
                 <span>Asistencia</span>
             </a>
@@ -124,4 +125,5 @@ $rol          = $_SESSION['usuario']['rol'] ?? '';
 
     </ul>
 </aside>
+<script src="<?php echo BASE_URL; ?>/public/js/dashboard.js"></script>
 <script src="<?php echo BASE_URL; ?>/public/js/dropdown.js"></script>

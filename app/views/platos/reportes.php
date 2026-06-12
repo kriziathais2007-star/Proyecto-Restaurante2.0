@@ -17,7 +17,7 @@
         <h1>Carta del Menú</h1>
     </header>
 
-    <!--  SECCIÓN ENTRADAS  -->
+    <!-- ===================== SECCIÓN ENTRADAS ===================== -->
     <section class="seccion-carta">
         <div class="seccion-header">
             <div class="seccion-titulo">
@@ -74,7 +74,7 @@
             <?php endif; ?>
         </div>
     </section>
-    <!--  SECCIÓN PLATOS  -->
+    <!-- ===================== SECCIÓN PLATOS ===================== -->
     <section class="seccion-carta">
         <div class="seccion-header">
             <div class="seccion-titulo">
@@ -136,7 +136,7 @@
     </section>
 </main>
 
-<!--  MODAL NUEVO PLATO  -->
+<!-- ===== MODAL NUEVO PLATO ===== -->
 <div class="modal-overlay" id="overlayNuevoPlato"></div>
 <div class="modal-editar" id="modalNuevoPlato">
     <button class="modal-cerrar" id="cerrarNuevoPlato">&times;</button>
@@ -165,7 +165,7 @@
     </form>
 </div>
 
-<!--  MODAL EDITAR PLATO  -->
+<!-- ===== MODAL EDITAR PLATO ===== -->
 <div class="modal-overlay" id="overlayEditarPlato"></div>
 <div class="modal-editar" id="modalEditarPlato">
     <button class="modal-cerrar" id="cerrarEditarPlato">&times;</button>
@@ -220,7 +220,7 @@
     </form>
 </div>
 
-<!--  MODAL EDITAR ENTRADA  -->
+<!-- ===== MODAL EDITAR ENTRADA ===== -->
 <div class="modal-overlay" id="overlayEditarEntrada"></div>
 <div class="modal-editar" id="modalEditarEntrada">
     <button class="modal-cerrar" id="cerrarEditarEntrada">&times;</button>

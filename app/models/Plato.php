@@ -8,7 +8,7 @@ class Plato {
         $this->db = Database::getConnection();
     }
 
-    //  PLATOS 
+    // ===================== PLATOS =====================
 
     public function obtenerTodos(): array {
         $stmt = $this->db->prepare("SELECT * FROM plato ORDER BY id_plato ASC");
@@ -38,7 +38,7 @@ class Plato {
         return $stmt->rowCount() > 0;
     }
 
-    //  ENTRADAS 
+    // ===================== ENTRADAS =====================
 
     public function obtenerEntradas(): array {
         $stmt = $this->db->prepare("SELECT * FROM entrada ORDER BY id_entrada ASC");
