@@ -71,10 +71,12 @@ ganancias del negocio.
 | Las contraseñas deben almacenarse cifradas en la base de datos | El sistema debe responder en menos de 3 segundos | La interfaz debe ser sencilla e intuitiva para los empleados | El sistema debe estar desarrollado bajo arquitectura MVC |
 | El sistema debe restringir el acceso según el rol (administrador, mozo, cocina) | El sistema debe permitir varios usuarios conectados al mismo tiempo | El sistema debe ser accesible desde cualquier navegador web | La base de datos debe estar normalizada |
 | El sistema debe cerrar sesión automáticamente por inactividad | Los pedidos deben actualizarse en tiempo real | El sistema debe mostrar mensajes claros cuando ocurra un error | El sistema debe permitir futuras mejoras o actualizaciones |
-details>
+
+<details>
 <summary>IMAGENES DEL NEGOCIO</summary>
 
-<img src="recursos-git/prueba2.jpeg" alt="Texto alternativo" width="400" style="vertical-align: middle;">&nbsp;&nbsp;&nbsp;
+<img src="recursos-git/prueba4.jpeg" alt="Texto alternativo" width="400" height="400" style="vertical-align: middle;">&nbsp;&nbsp;&nbsp;
+<img src="recursos-git/prueba2.jpeg" alt="Texto alternativo" width="400" height="400" style="vertical-align: middle;">&nbsp;&nbsp;&nbsp;
 <video src="https://github.com/user-attachments/assets/646bb3ee-729c-4340-951f-e4a97e5edfee" width="200" controls style="vertical-align: middle;"></video>
 
 </details>
@@ -200,3 +202,5 @@ CREATE TABLE asistencia (
 </details>
 &nbsp;
 &nbsp;
+</details>
+
