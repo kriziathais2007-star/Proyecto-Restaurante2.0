@@ -202,5 +202,4 @@ CREATE TABLE asistencia (
 </details>
 &nbsp;
 &nbsp;
-</details>
 
