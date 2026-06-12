@@ -145,7 +145,7 @@
                 id="np-foto"
                 name="foto_yape"
                 accept="image/*"
-                capture="environment">
+              capture="environment">
         </div>
         <button type="submit" class="btn-guardar">Registrar Pago</button>
     </form>
