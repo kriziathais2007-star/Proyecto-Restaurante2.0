@@ -9,7 +9,6 @@ class PagosController extends Controller {
             header("Location: " . BASE_URL . "/login");
             exit();
         }
-        $this->soloAdmin();
 
         $modelo = new Pago();
         $this->view('pagos/index', [

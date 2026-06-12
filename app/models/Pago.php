@@ -69,19 +69,15 @@ class Pago {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
-    // Resumen del día
-    public function resumenHoy(): array {
+    public function resumenHoy(): array { 
         $stmt = $this->db->prepare("
-            SELECT
-                COUNT(*)                                      AS total_pagos,
-                COALESCE(SUM(monto), 0)                      AS total_recaudado,
-                COALESCE(SUM(metodo_pago = 'Efectivo'), 0)   AS pagos_efectivo,
-                COALESCE(SUM(metodo_pago = 'Yape'), 0)       AS pagos_yape
-            FROM pago
-            WHERE DATE(fecha_pago) = CURDATE()
-        ");
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
+        SELECT COUNT(*) AS total_pagos, 
+        COALESCE(SUM(monto), 0) 
+        AS total_recaudado, 
+        COALESCE(SUM(metodo_pago = 'Efectivo'), 0) 
+        AS pagos_efectivo, COALESCE(SUM(metodo_pago = 'Yape'), 0) 
+        AS pagos_yape FROM pago WHERE DATE(fecha_pago) = CURDATE() "); 
+        $stmt->execute(); 
+        return $stmt->fetch(PDO::FETCH_ASSOC); }
+
 }

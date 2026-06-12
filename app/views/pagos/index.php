@@ -20,7 +20,7 @@
         </button>
     </header>
 
-    <!-- ===================== RESUMEN DEL DÍA ===================== -->
+    <!--  RESUMEN DEL DÍA con card -->
     <div class="resumen-cards">
         <div class="resumen-card">
             <span class="resumen-label">Pagos hoy</span>
@@ -40,7 +40,7 @@
         </div>
     </div>
 
-    <!-- ===================== TABLA PAGOS ===================== -->
+    <!--  TABLA PAGOS  -->
     <section class="seccion-carta">
         <div class="seccion-header">
             <div class="seccion-titulo">

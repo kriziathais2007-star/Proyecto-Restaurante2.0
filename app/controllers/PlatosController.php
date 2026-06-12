@@ -13,7 +13,6 @@ class PlatosController extends Controller {
             header("Location: " . BASE_URL . "/login");
             exit();
         }
-        $this->soloAdmin();
 
         $modelo = new Plato();
         $this->view('platos/reportes', [
