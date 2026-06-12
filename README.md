@@ -73,7 +73,8 @@ ganancias del negocio.
 | El sistema debe cerrar sesión automáticamente por inactividad | Los pedidos deben actualizarse en tiempo real | El sistema debe mostrar mensajes claros cuando ocurra un error | El sistema debe permitir futuras mejoras o actualizaciones |
 
 </details>
-
+&nbsp;
+&nbsp;
 <details>
 <summary>IMAGENES DEL NEGOCIO</summary>
 
