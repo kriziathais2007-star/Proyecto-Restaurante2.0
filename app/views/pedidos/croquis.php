@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo TITLE_BUSINESS; ?> - Para Llevar</title>
+    <title><?php echo TITLE_BUSINESS; ?> - Mesas</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>/public/css/dashboard.css">
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>/public/css/pedidos.css">
@@ -15,76 +15,73 @@
 <main>
     <div class="main-content">
 
-        <!-- Botón nuevo pedido para llevar -->
-        <div class="llevar-toolbar">
-            <a href="<?php echo BASE_URL; ?>/pedidos/crear/Llevar" class="btn-nuevo-pedido">
-                <i class="fa-solid fa-plus"></i> Nuevo Pedido para Llevar
-            </a>
+        <!-- Leyenda -->
+        <div class="croquis-legend">
+            <div class="legend-item">
+                <span class="legend-color legend-libre"></span> Libre
+            </div>
+            <div class="legend-item">
+                <span class="legend-color legend-ocupada"></span> Ocupada
+            </div>
+            <div class="legend-item">
+                <span class="legend-color legend-urgente"></span> Pendiente de pago
+            </div>
         </div>
 
-        <!-- Grid de pedidos activos -->
-        <div class="llevar-grid">
-            <?php if (empty($pedidos)): ?>
-                <p class="sin-datos" style="padding:1rem 0;">No hay pedidos para llevar activos.</p>
-            <?php else: ?>
-                <?php foreach ($pedidos as $pedido): ?>
+        <!-- Grid de mesas -->
+        <div class="croquis-grid">
+            <?php foreach ($mesas as $mesa): ?>
+                <?php if ($mesa['ocupada']): ?>
 
-                    <?php if ($pedido['estado'] === 'Entregado'): ?>
-                        <!-- Pendiente de pago → abre modal -->
-                        <div class="llevar-card urgente"
-                             style="cursor:pointer; background:#fcdde4;"
-                             onclick="abrirModalAcciones(<?php echo $pedido['id_pedido']; ?>, <?php echo $pedido['total']; ?>)">
-                            <div class="llevar-card-header">
-                                <span class="llevar-id">#<?php echo $pedido['id_pedido']; ?></span>
-                                <span class="badge badge-entregado">Entregado</span>
-                            </div>
-                            <p class="llevar-mesero">
-                                <i class="fa-solid fa-user"></i>
-                                <?php echo htmlspecialchars($pedido['mesero'] ?? 'N/A'); ?>
-                            </p>
-                            <p class="llevar-total">S/ <?php echo number_format((float)$pedido['total'], 2); ?></p>
+                    <?php if ($mesa['estado'] === 'Entregado'): ?>
+                        <!-- Rojo urgente: pendiente de pago → abre modal acciones -->
+                        <div class="mesa-card ocupada urgente"
+                             onclick="abrirModalAcciones(<?php echo $mesa['id_pedido']; ?>, <?php echo $mesa['numero_mesa']; ?>, <?php echo $mesa['total']; ?>)">
+                            <i class="fa-solid fa-chair"></i>
+                            <span>Mesa <?php echo $mesa['numero_mesa']; ?></span>
+                            <span class="mesa-estado-badge"><?php echo htmlspecialchars($mesa['estado']); ?></span>
                         </div>
-
                     <?php else: ?>
-                        <!-- En proceso → ir a detalle -->
-                        <a href="<?php echo BASE_URL; ?>/pedidos/detalle/<?php echo $pedido['id_pedido']; ?>"
-                           class="llevar-card">
-                            <div class="llevar-card-header">
-                                <span class="llevar-id">#<?php echo $pedido['id_pedido']; ?></span>
-                                <span class="badge badge-<?php echo strtolower($pedido['estado']); ?>">
-                                    <?php echo htmlspecialchars($pedido['estado']); ?>
-                                </span>
-                            </div>
-                            <p class="llevar-mesero">
-                                <i class="fa-solid fa-user"></i>
-                                <?php echo htmlspecialchars($pedido['mesero'] ?? 'N/A'); ?>
-                            </p>
-                            <p class="llevar-total">S/ <?php echo number_format((float)$pedido['total'], 2); ?></p>
+                        <!-- Ocupada normal: ir a detalle -->
+                        <a href="<?php echo BASE_URL; ?>/pedidos/detalle/<?php echo $mesa['id_pedido']; ?>"
+                           class="mesa-card ocupada">
+                            <i class="fa-solid fa-chair"></i>
+                            <span>Mesa <?php echo $mesa['numero_mesa']; ?></span>
+                            <span class="mesa-estado-badge"><?php echo htmlspecialchars($mesa['estado']); ?></span>
                         </a>
                     <?php endif; ?>
 
-                <?php endforeach; ?>
-            <?php endif; ?>
+                <?php else: ?>
+                    <!-- Libre: crear pedido -->
+                    <a href="<?php echo BASE_URL; ?>/pedidos/crear/Mesa/<?php echo $mesa['numero_mesa']; ?>"
+                       class="mesa-card libre">
+                        <i class="fa-solid fa-chair"></i>
+                        <span>Mesa <?php echo $mesa['numero_mesa']; ?></span>
+                    </a>
+                <?php endif; ?>
+            <?php endforeach; ?>
         </div>
 
     </div>
 </main>
 
 <!-- ═══════════════════════════════════════════════════════
-     MODAL: Acciones sobre pedido entregado (Editar / Pagar)
+     MODAL: Acciones sobre mesa ocupada (Editar / Pagar)
 ════════════════════════════════════════════════════════ -->
 <div class="modal-overlay" id="modalAcciones">
     <div class="modal-content" style="max-width:400px;">
         <div class="modal-header">
-            <h3><i class="fa-solid fa-bag-shopping"></i> Pedido #<span id="modalIdPedido"></span></h3>
+            <h3><i class="fa-solid fa-chair"></i> Mesa <span id="modalNumMesa"></span> — Pedido #<span id="modalIdPedido"></span></h3>
             <button type="button" class="btn-cerrar-modal" onclick="cerrarModal('modalAcciones')">
                 <i class="fa-solid fa-xmark"></i>
             </button>
         </div>
         <div class="modal-body modal-mesa-body">
+            <!-- Editar -->
             <a href="#" id="linkEditarPedido" class="btn-modal-accion btn-editar">
                 <i class="fa-solid fa-pen"></i> Editar pedido
             </a>
+            <!-- Pagar -->
             <button type="button" class="btn-modal-accion btn-pagar" onclick="abrirModalPago()">
                 <i class="fa-solid fa-money-bill-wave"></i> Registrar pago
             </button>
@@ -98,7 +95,7 @@
 <div class="modal-overlay" id="modalPago">
     <div class="modal-content" style="max-width:420px;">
         <div class="modal-header">
-            <h3><i class="fa-solid fa-receipt"></i> Pagar Pedido #<span id="pagoIdPedido"></span></h3>
+            <h3><i class="fa-solid fa-receipt"></i> Pagar — Mesa <span id="pagoNumMesa"></span></h3>
             <button type="button" class="btn-cerrar-modal" onclick="cerrarModal('modalPago')">
                 <i class="fa-solid fa-xmark"></i>
             </button>
@@ -109,6 +106,7 @@
                 Monto a cobrar: <strong>S/ <span id="pagoMonto"></span></strong>
             </p>
 
+            <!-- Selector de método -->
             <div class="pago-metodo-selector">
                 <label>Método de pago:</label>
                 <div class="metodo-opciones">
@@ -121,6 +119,7 @@
                 </div>
             </div>
 
+            <!-- Foto Yape (solo visible si método = Yape) -->
             <div id="yapeWrapper" style="display:none;">
                 <label style="font-size:0.85rem; font-weight:600; color:#8a6a73;">
                     <i class="fa-solid fa-camera"></i> Foto del comprobante:
@@ -139,37 +138,51 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-const BASE_URL         = "<?php echo BASE_URL; ?>";
-let pedidoActivo       = null;
-let montoActivo        = null;
-let metodoSeleccionado = 'Efectivo';
+const BASE_URL          = "<?php echo BASE_URL; ?>";
+let pedidoActivo        = null;
+let mesaActiva          = null;
+let montoActivo         = null;
+let metodoSeleccionado  = 'Efectivo';
 
-function abrirModalAcciones(idPedido, monto) {
+// ── Abrir modal de acciones ──────────────────────────
+function abrirModalAcciones(idPedido, numMesa, monto) {
     pedidoActivo = idPedido;
+    mesaActiva   = numMesa;
     montoActivo  = monto;
-    document.getElementById('modalIdPedido').textContent  = idPedido;
-    document.getElementById('linkEditarPedido').href      = BASE_URL + '/pedidos/detalle/' + idPedido;
+
+    document.getElementById('modalNumMesa').textContent  = numMesa;
+    document.getElementById('modalIdPedido').textContent = idPedido;
+    document.getElementById('linkEditarPedido').href     = BASE_URL + '/pedidos/detalle/' + idPedido;
+
     abrirModal('modalAcciones');
 }
 
+// ── Abrir modal de pago ──────────────────────────────
 function abrirModalPago() {
     cerrarModal('modalAcciones');
-    document.getElementById('pagoIdPedido').textContent = pedidoActivo;
-    document.getElementById('pagoMonto').textContent    = parseFloat(montoActivo).toFixed(2);
+    document.getElementById('pagoNumMesa').textContent = mesaActiva;
+    document.getElementById('pagoMonto').textContent   = parseFloat(montoActivo).toFixed(2);
     setMetodo('Efectivo');
     document.getElementById('fotoYape').value = '';
     abrirModal('modalPago');
 }
 
-function abrirModal(id) { document.getElementById(id).style.display = 'flex'; }
-function cerrarModal(id) { document.getElementById(id).style.display = 'none'; }
+// ── Helpers abrir / cerrar ───────────────────────────
+function abrirModal(id) {
+    document.getElementById(id).style.display = 'flex';
+}
+function cerrarModal(id) {
+    document.getElementById(id).style.display = 'none';
+}
 
+// Cerrar al hacer clic en el overlay
 document.querySelectorAll('.modal-overlay').forEach(function (overlay) {
     overlay.addEventListener('click', function (e) {
         if (e.target === overlay) overlay.style.display = 'none';
     });
 });
 
+// ── Selector de método ───────────────────────────────
 function setMetodo(metodo) {
     metodoSeleccionado = metodo;
     document.querySelectorAll('.btn-metodo').forEach(b => b.classList.remove('activo'));
@@ -181,12 +194,16 @@ document.querySelectorAll('.btn-metodo').forEach(function (btn) {
     btn.addEventListener('click', () => setMetodo(btn.dataset.metodo));
 });
 
+// ── Confirmar pago ───────────────────────────────────
 document.getElementById('btnConfirmarPago').addEventListener('click', function () {
     if (!pedidoActivo) return;
 
-    if (metodoSeleccionado === 'Yape' && !document.getElementById('fotoYape').files[0]) {
-        alert('Por favor adjunta la foto del comprobante Yape.');
-        return;
+    if (metodoSeleccionado === 'Yape') {
+        const foto = document.getElementById('fotoYape').files[0];
+        if (!foto) {
+            alert('Por favor adjunta la foto del comprobante Yape.');
+            return;
+        }
     }
 
     const btn = this;

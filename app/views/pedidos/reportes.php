@@ -16,14 +16,6 @@
 
 <!-- CONTENIDO PRINCIPAL -->
 <main>
-    <nav class="breadcrumb">
-        <span>Inicio</span>
-        <i class="fa-solid fa-chevron-right"></i>
-        <span>Pedidos</span>
-        <i class="fa-solid fa-chevron-right"></i>
-        <span id="breadcrumb-page">Reportes</span>
-    </nav>
-
     <div class="main-content">
 
     <!-- RESUMEN -->
