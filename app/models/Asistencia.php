@@ -1,7 +1,9 @@
 <?php
+
 require_once __DIR__ . '/../core/Database.php';
 
 class Asistencia {
+
     private PDO $db;
 
     public function __construct() {
@@ -9,47 +11,61 @@ class Asistencia {
     }
 
     public function obtenerAsistencias(): array {
+
         $stmt = $this->db->prepare("
             SELECT a.*, u.nombre
             FROM asistencia a
             LEFT JOIN usuario u
-            ON a.id_usuario = u.id_usuario
+                ON a.id_usuario = u.id_usuario
             ORDER BY a.fecha DESC
         ");
+
         $stmt->execute();
+
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function obtenerAsistenciaPorId(int $id_asistencia): array|false {
+
         $stmt = $this->db->prepare("
-            SELECT *
-            FROM asistencia
-            WHERE id_asistencia = ?
+            SELECT a.*, u.nombre
+            FROM asistencia a
+            LEFT JOIN usuario u
+                ON a.id_usuario = u.id_usuario
+            WHERE a.id_asistencia = ?
         ");
+
         $stmt->execute([$id_asistencia]);
+
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     public function obtenerAsistenciasPorUsuario(int $id_usuario): array {
+
         $stmt = $this->db->prepare("
             SELECT *
             FROM asistencia
             WHERE id_usuario = ?
             ORDER BY fecha DESC
         ");
+
         $stmt->execute([$id_usuario]);
+
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function obtenerAsistenciasPorFecha(string $fecha): array {
+
         $stmt = $this->db->prepare("
             SELECT a.*, u.nombre
             FROM asistencia a
             LEFT JOIN usuario u
-            ON a.id_usuario = u.id_usuario
+                ON a.id_usuario = u.id_usuario
             WHERE a.fecha = ?
         ");
+
         $stmt->execute([$fecha]);
+
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -60,21 +76,19 @@ class Asistencia {
     ): bool {
 
         $stmt = $this->db->prepare("
-            INSERT INTO asistencia(
+            INSERT INTO asistencia (
                 id_usuario,
                 fecha,
                 hora_entrada
             )
-            VALUES(?,?,?)
+            VALUES (?, ?, ?)
         ");
 
-        $stmt->execute([
+        return $stmt->execute([
             $id_usuario,
             $fecha,
             $hora_entrada
         ]);
-
-        return $stmt->rowCount() > 0;
     }
 
     public function registrarSalida(
@@ -88,36 +102,34 @@ class Asistencia {
             SET hora_salida = ?
             WHERE id_usuario = ?
             AND fecha = ?
+            AND hora_salida IS NULL
         ");
 
-        $stmt->execute([
+        return $stmt->execute([
             $hora_salida,
             $id_usuario,
             $fecha
         ]);
-
-        return $stmt->rowCount() > 0;
     }
 
     public function guardarAsistencia(array $datos): bool {
+
         $stmt = $this->db->prepare("
-            INSERT INTO asistencia(
+            INSERT INTO asistencia (
                 id_usuario,
                 fecha,
                 hora_entrada,
                 hora_salida
             )
-            VALUES(?,?,?,?)
+            VALUES (?, ?, ?, ?)
         ");
 
-        $stmt->execute([
+        return $stmt->execute([
             $datos['id_usuario'],
             $datos['fecha'],
-            $datos['hora_entrada'],
-            $datos['hora_salida']
+            $datos['hora_entrada'] ?? null,
+            $datos['hora_salida'] ?? null
         ]);
-
-        return $stmt->rowCount() > 0;
     }
 
     public function editarAsistencia(
@@ -135,33 +147,33 @@ class Asistencia {
             WHERE id_asistencia = ?
         ");
 
-        $stmt->execute([
+        return $stmt->execute([
             $fecha,
             $hora_entrada,
             $hora_salida,
             $id_asistencia
         ]);
-
-        return $stmt->rowCount() > 0;
     }
 
     public function eliminarAsistencia(int $id_asistencia): bool {
+
         $stmt = $this->db->prepare("
             DELETE FROM asistencia
             WHERE id_asistencia = ?
         ");
 
-        $stmt->execute([$id_asistencia]);
-
-        return $stmt->rowCount() > 0;
+        return $stmt->execute([$id_asistencia]);
     }
 
     public function contarAsistencias(): int {
+
         $stmt = $this->db->query("
-            SELECT COUNT(*) total
+            SELECT COUNT(*) AS total
             FROM asistencia
         ");
 
-        return (int)$stmt->fetch(PDO::FETCH_ASSOC)['total'];
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return (int) $resultado['total'];
     }
 }

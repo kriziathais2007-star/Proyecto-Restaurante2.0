@@ -59,8 +59,8 @@ $rol          = $_SESSION['usuario']['rol'] ?? '';
                 <i class="fa-solid fa-shopping-bag"></i>
                 Llevar
             </a>
-            <a href="<?php echo BASE_URL; ?>/pedidos/reporte"
-                class="<?php echo ($rutaActual === 'pedidos' && $accionActual === 'reporte') ? 'activo' : ''; ?>">
+            <a href="<?php echo BASE_URL; ?>/pedidos/reportes"
+                class="<?php echo ($rutaActual === 'pedidos' && $accionActual === 'reportes') ? 'activo' : ''; ?>">
                 <i class="fa-solid fa-chart-bar"></i>
                 Reportes
             </a>
