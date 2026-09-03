@@ -31,54 +31,53 @@ class AsistenciasController extends Controller {
     }
 
     public function registrarEntrada(): void {
-
         header('Content-Type: application/json');
 
         if (!isset($_SESSION['usuario'])) {
-            echo json_encode([
-                'success' => false,
-                'message' => 'No hay sesión activa'
-            ]);
+            echo json_encode(['success' => false, 'message' => 'No hay sesión activa']);
             return;
         }
 
         $id_usuario = $_SESSION['usuario']['id_usuario'];
 
-        $ok = $this->asistenciaModel->registrarEntrada(
-            $id_usuario,
-            date('Y-m-d'),
-            date('H:i:s')
-        );
+        if ($this->asistenciaModel->yaRegistroEntradaHoy($id_usuario)) {
+            echo json_encode(['success' => false, 'message' => 'Ya registraste tu entrada hoy.']);
+            return;
+        }
+
+        $ok = $this->asistenciaModel->registrarEntrada($id_usuario, date('Y-m-d'), date('H:i:s'));
 
         echo json_encode([
             'success' => $ok,
-            'message' => $ok ? 'Entrada registrada' : 'Error al registrar entrada'
+            'message' => $ok ? 'Entrada registrada correctamente.' : 'Error al registrar entrada.'
         ]);
     }
 
     public function registrarSalida(): void {
-
         header('Content-Type: application/json');
 
         if (!isset($_SESSION['usuario'])) {
-            echo json_encode([
-                'success' => false,
-                'message' => 'No hay sesión activa'
-            ]);
+            echo json_encode(['success' => false, 'message' => 'No hay sesión activa']);
             return;
         }
 
         $id_usuario = $_SESSION['usuario']['id_usuario'];
 
-        $ok = $this->asistenciaModel->registrarSalida(
-            $id_usuario,
-            date('Y-m-d'),
-            date('H:i:s')
-        );
+        if (!$this->asistenciaModel->yaRegistroEntradaHoy($id_usuario)) {
+            echo json_encode(['success' => false, 'message' => 'Primero debes registrar tu entrada.']);
+            return;
+        }
+
+        if ($this->asistenciaModel->yaRegistroSalidaHoy($id_usuario)) {
+            echo json_encode(['success' => false, 'message' => 'Ya registraste tu salida hoy.']);
+            return;
+        }
+
+        $ok = $this->asistenciaModel->registrarSalida($id_usuario, date('Y-m-d'), date('H:i:s'));
 
         echo json_encode([
             'success' => $ok,
-            'message' => $ok ? 'Salida registrada' : 'Error al registrar salida'
+            'message' => $ok ? 'Salida registrada correctamente.' : 'Error al registrar salida.'
         ]);
     }
 

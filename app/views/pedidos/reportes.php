@@ -46,10 +46,15 @@
         </div>
 
         <!-- BOTÓN PARA ABRIR EL MODAL DE FILTROS -->
-<div class="filtros-toggle-wrapper">
+<div class="filtros-toggle-wrapper" style="display:flex; gap:10px; flex-wrap:wrap;">
     <button type="button" id="btnToggleFiltros" class="btn-toggle-filtros">
         <i class="fa-solid fa-filter"></i> Filtros
     </button>
+    <?php if (($_SESSION['usuario']['rol'] ?? '') === 'admin'): ?>
+    <button type="button" id="btnVaciarTodo" class="btn-toggle-filtros" style="border-color:#ffcdd2; color:#c62828;">
+        <i class="fa-solid fa-trash-can"></i> Vaciar todo
+    </button>
+    <?php endif; ?>
 </div>
 
 
@@ -150,6 +155,47 @@
 </main>
 <script src="<?php echo BASE_URL; ?>/public/js/panel.js"></script>
 <script src="<?php echo BASE_URL; ?>/public/js/dashboard.js"></script>
-</body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+const BASE_URL = "<?php echo BASE_URL; ?>";
 
+// Vaciar todo
+const btnVaciar = document.getElementById('btnVaciarTodo');
+if (btnVaciar) {
+    btnVaciar.addEventListener('click', function () {
+        Swal.fire({
+            title: '¿Vaciar todos los pedidos?',
+            text: 'Se eliminarán TODOS los pedidos, detalles y pagos. Esta acción no se puede deshacer.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, vaciar todo',
+            cancelButtonText: 'Cancelar',
+            confirmButtonColor: '#c62828',
+            background: '#fff8f8',
+            color: '#1a1a1a'
+        }).then(result => {
+            if (!result.isConfirmed) return;
+            fetch(BASE_URL + '/pedidos/vaciarTodo', {
+                method: 'POST',
+                headers: { 'X-Requested-With': 'XMLHttpRequest' }
+            })
+            .then(r => r.json())
+            .then(data => {
+                if (data.success) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Vaciado',
+                        text: 'Todos los registros fueron eliminados.',
+                        confirmButtonColor: '#388e3c'
+                    }).then(() => location.reload());
+                } else {
+                    Swal.fire({ icon: 'error', title: 'Error', text: data.message || 'No se pudo vaciar.', confirmButtonColor: '#388e3c' });
+                }
+            })
+            .catch(() => Swal.fire({ icon: 'error', title: 'Error de conexión', confirmButtonColor: '#388e3c' }));
+        });
+    });
+}
+</script>
+</body>
 </html>

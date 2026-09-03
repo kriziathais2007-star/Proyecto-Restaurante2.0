@@ -1,65 +1,77 @@
-/* CONTENEDOR RESPONSIVE */
-
-.table-responsive{
+/* ══════════════════════════════════════════
+   TABLA RESPONSIVE — aplicada globalmente
+══════════════════════════════════════════ */
+.table-responsive {
     width: 100%;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     border-radius: 10px;
 }
 
-/* TABLA */
-
-table{
+table {
     width: 100%;
     border-collapse: collapse;
-    min-width: 700px;
-    background: white;
+    min-width: 480px;
+    background: #fff;
 }
 
-/* ENCABEZADO */
+thead { background: #000; color: #fff; }
 
-thead{
-    background: #000000;
-    color: white;
-}
-
-thead th{
-    padding: 15px;
+thead th {
+    padding: 12px 14px;
     text-align: left;
-    font-size: 16px;
-    font-weight: 400;
+    font-size: 0.82rem;
+    font-weight: 500;
+    white-space: nowrap;
 }
 
-/* FILAS */
-
-tbody tr{
+tbody tr {
     border-bottom: 1px solid #e2e8f0;
-    transition: 0.3s;
+    transition: background 0.2s;
 }
+tbody tr:hover { background: #f8fafc; }
+tbody tr:last-child { border-bottom: none; }
 
-tbody tr:hover{
-    background: #f8fafc;
-}
-
-/* CELDAS */
-
-tbody td{
-    padding: 14px;
-    font-size: 16px;
+tbody td {
+    padding: 11px 14px;
+    font-size: 0.85rem;
     color: #334155;
+    vertical-align: middle;
 }
 
-/* RESPONSIVE */
-
-@media(max-width: 768px){
-
-    table{
-        min-width: 600px;
-    }
-
+/* ══════════════════════════════════════════
+   MÓVIL (< 600px)
+══════════════════════════════════════════ */
+@media (max-width: 599px) {
     thead th,
-    tbody td{
-        padding: 12px;
-        font-size: 13px;
+    tbody td {
+        padding: 9px 10px;
+        font-size: 0.78rem;
     }
 
+    table { min-width: 420px; }
+}
+
+/* ══════════════════════════════════════════
+   TABLET (600px – 899px)
+══════════════════════════════════════════ */
+@media (min-width: 600px) and (max-width: 899px) {
+    thead th,
+    tbody td {
+        padding: 10px 12px;
+        font-size: 0.82rem;
+    }
+}
+
+/* ══════════════════════════════════════════
+   DESKTOP (≥ 900px)
+══════════════════════════════════════════ */
+@media (min-width: 900px) {
+    thead th,
+    tbody td {
+        padding: 13px 16px;
+        font-size: 0.875rem;
+    }
+
+    table { min-width: 600px; }
 }

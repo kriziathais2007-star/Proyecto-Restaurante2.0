@@ -772,16 +772,106 @@
 }
 
 /* ══════════════════════════════════════════════════
-   RESPONSIVE
+   CARTA — layout de items (reemplaza tabla en detalle)
 ══════════════════════════════════════════════════ */
-@media (max-width: 768px) {
-    .croquis-grid { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 0.7rem; }
-    .filtro-grupo { flex: 1 1 100%; }
-    .resumen-cards { flex-direction: column; }
-    .tabla-datos { display: block; overflow-x: auto; white-space: nowrap; }
-    .llevar-grid { grid-template-columns: 1fr 1fr; }
+.carta-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
 }
 
+.carta-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--rosa-borde, #f8d3e0);
+    flex-wrap: wrap;
+}
+
+.carta-item:last-child { border-bottom: none; }
+
+.carta-item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    min-width: 80px;
+}
+
+.carta-item-nombre {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #5a4048;
+}
+
+.carta-item-desc {
+    font-size: 0.75rem;
+    color: #a98c94;
+}
+
+.carta-item-precio {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #c1496a;
+}
+
+.carta-item-form {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+/* Móvil: form debajo del nombre */
 @media (max-width: 480px) {
+    .carta-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .carta-item-form {
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .select-entrada {
+        flex: 1;
+        min-width: 0;
+    }
+}
+
+/* Móvil (< 600px) */
+@media (max-width: 599px) {
+    .croquis-grid { grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
+    .mesa-card { padding: 12px 6px; font-size: 0.75rem; }
+    .mesa-card i { font-size: 1.3rem; }
     .llevar-grid { grid-template-columns: 1fr; }
+    .detalle-layout { grid-template-columns: 1fr; }
+    .resumen-cards { flex-direction: column; }
+    .filtro-grupo { flex: 1 1 100%; }
+    .tabla-datos { display: block; overflow-x: auto; white-space: nowrap; }
+    .card-resumen { min-width: unset; }
+    .modal-content { width: 96% !important; }
+    .modal-acciones-body { padding: 0.9rem 1rem; }
+}
+
+/* Tablet (600px – 899px) */
+@media (min-width: 600px) and (max-width: 899px) {
+    .croquis-grid { grid-template-columns: repeat(4, 1fr); gap: 0.8rem; }
+    .llevar-grid { grid-template-columns: repeat(2, 1fr); }
+    .detalle-layout { grid-template-columns: 1fr; }
+    .resumen-cards { flex-wrap: wrap; }
+    .card-resumen { flex: 1 1 calc(50% - 0.5rem); }
+    .filtro-grupo { flex: 1 1 calc(50% - 0.5rem); }
+}
+
+/* Desktop (≥ 900px) */
+@media (min-width: 900px) {
+    .croquis-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); }
+    .llevar-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+    .detalle-layout { grid-template-columns: 1fr 290px; }
+    .resumen-cards { flex-wrap: nowrap; }
 }

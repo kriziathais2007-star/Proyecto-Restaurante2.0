@@ -69,6 +69,26 @@ class Asistencia {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // Verifica si el usuario ya registró entrada hoy
+    public function yaRegistroEntradaHoy(int $id_usuario): bool {
+        $stmt = $this->db->prepare("
+            SELECT COUNT(*) FROM asistencia
+            WHERE id_usuario = ? AND fecha = CURDATE()
+        ");
+        $stmt->execute([$id_usuario]);
+        return (int) $stmt->fetchColumn() > 0;
+    }
+
+    // Verifica si el usuario ya registró salida hoy
+    public function yaRegistroSalidaHoy(int $id_usuario): bool {
+        $stmt = $this->db->prepare("
+            SELECT COUNT(*) FROM asistencia
+            WHERE id_usuario = ? AND fecha = CURDATE() AND hora_salida IS NOT NULL
+        ");
+        $stmt->execute([$id_usuario]);
+        return (int) $stmt->fetchColumn() > 0;
+    }
+
     public function registrarEntrada(
         int $id_usuario,
         string $fecha,

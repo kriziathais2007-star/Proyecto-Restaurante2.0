@@ -8,6 +8,16 @@ class Pedido {
         $this->db = $db;
     }
 
+    // Elimina pedidos en estado Pendiente que no tienen ningún item
+    // (quedaron huérfanos cuando el usuario entró y salió sin pedir nada)
+    public function limpiarPendientesVacios(): void {
+        $sql = "DELETE FROM pedido
+                WHERE estado = 'Pendiente'
+                  AND id_pedido NOT IN (SELECT DISTINCT id_pedido FROM detalle_pedido)
+                  AND id_pedido NOT IN (SELECT DISTINCT id_pedido FROM detalle_entrada_extra)";
+        $this->db->exec($sql);
+    }
+
     // ══════════════════════════════════════════
     // CROQUIS — estado de las 21 mesas
     // ══════════════════════════════════════════
@@ -175,6 +185,37 @@ class Pedido {
         $this->actualizarTotal($id_pedido);
     }
 
+    public function eliminarItemPlato(int $id_detalle): bool {
+        // Obtener el id_pedido antes de eliminar para actualizar el total
+        $stmt = $this->db->prepare("SELECT id_pedido FROM detalle_pedido WHERE id_detalle = ?");
+        $stmt->execute([$id_detalle]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (!$row) return false;
+
+        $stmt = $this->db->prepare("DELETE FROM detalle_pedido WHERE id_detalle = ?");
+        $stmt->execute([$id_detalle]);
+        if ($stmt->rowCount() > 0) {
+            $this->actualizarTotal($row['id_pedido']);
+            return true;
+        }
+        return false;
+    }
+
+    public function eliminarItemExtra(int $id_detalle_extra): bool {
+        $stmt = $this->db->prepare("SELECT id_pedido FROM detalle_entrada_extra WHERE id_detalle_extra = ?");
+        $stmt->execute([$id_detalle_extra]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (!$row) return false;
+
+        $stmt = $this->db->prepare("DELETE FROM detalle_entrada_extra WHERE id_detalle_extra = ?");
+        $stmt->execute([$id_detalle_extra]);
+        if ($stmt->rowCount() > 0) {
+            $this->actualizarTotal($row['id_pedido']);
+            return true;
+        }
+        return false;
+    }
+
     public function actualizarTotal(int $id_pedido): void {
         $stmt = $this->db->prepare("
             UPDATE pedido SET total = (
@@ -208,6 +249,23 @@ class Pedido {
             return true;
         } catch (Exception $e) {
             $this->db->rollBack();
+            return false;
+        }
+    }
+
+    public function vaciarTodo(): bool {
+        try {
+            $this->db->exec("DELETE FROM pago");
+            $this->db->exec("DELETE FROM detalle_entrada_extra");
+            $this->db->exec("DELETE FROM detalle_pedido");
+            $this->db->exec("DELETE FROM pedido");
+            // Reiniciar auto_increment
+            $this->db->exec("ALTER TABLE pago AUTO_INCREMENT = 1");
+            $this->db->exec("ALTER TABLE detalle_entrada_extra AUTO_INCREMENT = 1");
+            $this->db->exec("ALTER TABLE detalle_pedido AUTO_INCREMENT = 1");
+            $this->db->exec("ALTER TABLE pedido AUTO_INCREMENT = 1");
+            return true;
+        } catch (Exception $e) {
             return false;
         }
     }

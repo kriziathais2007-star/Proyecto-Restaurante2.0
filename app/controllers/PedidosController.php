@@ -26,6 +26,10 @@ class PedidosController extends Controller {
     public function croquis(): void {
         $this->verificarSesion();
         $pedidoModel = new Pedido($this->db);
+
+        // Limpiar pedidos pendientes vacíos que quedaron sin confirmar
+        $pedidoModel->limpiarPendientesVacios();
+
         $mesas = $pedidoModel->obtenerEstadoMesas(21);
         $this->view('pedidos/croquis', [
             'usuario' => $_SESSION['usuario'],
@@ -36,6 +40,10 @@ class PedidosController extends Controller {
     public function llevar(): void {
         $this->verificarSesion();
         $pedidoModel = new Pedido($this->db);
+
+        // Limpiar pedidos pendientes vacíos que quedaron sin confirmar
+        $pedidoModel->limpiarPendientesVacios();
+
         $pedidos = $pedidoModel->obtenerPedidosLlevarActivos();
         $this->view('pedidos/llevar', [
             'usuario' => $_SESSION['usuario'],
@@ -170,6 +178,64 @@ class PedidosController extends Controller {
         } else {
             echo json_encode(['success' => false, 'message' => 'Cambio de estado no permitido']);
         }
+        exit;
+    }
+
+    public function eliminarItem($id_detalle): void {
+        header('Content-Type: application/json');
+        $pedidoModel = new Pedido($this->db);
+        $id_detalle  = (int) $id_detalle;
+        $ok = $pedidoModel->eliminarItemPlato($id_detalle);
+        echo json_encode(['success' => $ok]);
+        exit;
+    }
+
+    public function eliminarExtra($id_detalle_extra): void {
+        header('Content-Type: application/json');
+        $pedidoModel      = new Pedido($this->db);
+        $id_detalle_extra = (int) $id_detalle_extra;
+        $ok = $pedidoModel->eliminarItemExtra($id_detalle_extra);
+        echo json_encode(['success' => $ok]);
+        exit;
+    }
+
+    public function cancelarSiVacio($id_pedido): void {
+        header('Content-Type: application/json');
+        $this->verificarSesion();
+        $pedidoModel = new Pedido($this->db);
+        $id_pedido   = (int) $id_pedido;
+
+        $pedido = $pedidoModel->obtenerPorId($id_pedido);
+
+        // Solo eliminar si está Pendiente y sin items
+        if ($pedido && $pedido['estado'] === 'Pendiente') {
+            $items  = $pedidoModel->obtenerItemsPedido($id_pedido);
+            $extras = $pedidoModel->obtenerExtrasPedido($id_pedido);
+
+            if (empty($items) && empty($extras)) {
+                $pedidoModel->eliminarPedido($id_pedido);
+                echo json_encode(['eliminado' => true]);
+                exit;
+            }
+        }
+
+        echo json_encode(['eliminado' => false]);
+        exit;
+    }
+
+    public function vaciarTodo(): void {
+        header('Content-Type: application/json');
+        $this->verificarSesion();
+
+        // Solo admin puede vaciar todo
+        if (($_SESSION['usuario']['rol'] ?? '') !== 'admin') {
+            echo json_encode(['success' => false, 'message' => 'Sin permisos.']);
+            exit;
+        }
+
+        $pedidoModel = new Pedido($this->db);
+        $ok = $pedidoModel->vaciarTodo();
+        echo json_encode(['success' => $ok, 'message' => $ok ? 'OK' : 'Error al vaciar.']);
         exit;
     }
 
